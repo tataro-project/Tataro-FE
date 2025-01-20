@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import '@/styles/globals.css';
+import Providers from '@/components/providers/Providers';
 
 export const metadata: Metadata = {
   title: '하쿠나마타타로',
@@ -18,7 +19,9 @@ const RootLayout = ({
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </head>
       <body>
-        <main>{children}</main>
+        <Providers>
+          <main>{children}</main>
+        </Providers>
       </body>
     </html>
   );
