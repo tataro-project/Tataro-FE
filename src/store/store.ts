@@ -1,7 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
+import layerPopup from './slices/layerPopupSlice';
 
 export const store = configureStore({
-  reducer: {},
+  reducer: {
+    layerPopup,
+  },
 });
 
 export type AppStore = typeof store;
