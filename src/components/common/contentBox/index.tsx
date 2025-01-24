@@ -1,7 +1,7 @@
 import { twMerge } from 'tailwind-merge';
-import FrameProps from './types';
+import ContentBoxProps from './types';
 
-const Frame: React.FC<FrameProps> = ({ children, size, className }) => {
+const ContentBox: React.FC<ContentBoxProps> = ({ children, size, layout }) => {
   return (
     <div
       className={twMerge(
@@ -12,7 +12,7 @@ const Frame: React.FC<FrameProps> = ({ children, size, className }) => {
       <div
         className={twMerge(
           'flex flex-col justify-center items-center gap-10 absolute bottom-2 right-2 -z-10 w-full h-full bg-softPink border border-purple',
-          className,
+          layout,
         )}
       >
         {children}
@@ -21,4 +21,4 @@ const Frame: React.FC<FrameProps> = ({ children, size, className }) => {
   );
 };
 
-export default Frame;
+export default ContentBox;
