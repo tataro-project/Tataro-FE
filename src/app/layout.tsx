@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import '@/styles/globals.css';
 import Providers from '@/components/providers/Providers';
-import LayerPopup from '@/components/common/layerPopup/LayerPopup';
+import LayerPopup from '@common/layerPopup';
 
 export const metadata: Metadata = {
   title: '하쿠나마타타로',
@@ -21,7 +21,10 @@ const RootLayout = ({
       </head>
       <body>
         <Providers>
-          <main>{children}</main>
+          <div className="fixed top-0 left-0 z-50 w-screen h-screen bg-texture bg-cover bg-no-repeat opacity-10 pointer-events-none" />
+          <main className="flex justify-center items-center w-full h-full bg-softBlue p-4">
+            {children}
+          </main>
           <LayerPopup />
         </Providers>
       </body>
