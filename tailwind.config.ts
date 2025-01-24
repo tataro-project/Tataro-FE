@@ -19,10 +19,17 @@ const config: Config = {
         deepBlue: '#6F9AF9',
         blueGray: '#4E5F73',
         cream: '#F9E3DF',
+        kakao: '#FEE500',
+        naver: '#03C75A',
+        kakaoText: '#000000D9',
       },
       fontFamily: {
         menu: ['Lilita One'],
         batang: ['Gowun Batang'],
+      },
+      backgroundImage: {
+        texture: 'url(/images/texture.svg)',
+        logo: 'url(/images/logo.svg)',
       },
     },
   },
