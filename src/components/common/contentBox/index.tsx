@@ -1,24 +1,18 @@
-import { twMerge } from 'tailwind-merge';
+import React from 'react';
 import ContentBoxProps from './types';
+import { twMerge } from 'tailwind-merge';
+import { contentBoxBaseStyles, contentBoxShadowStyles } from './contentBoxStyles';
 
-const ContentBox: React.FC<ContentBoxProps> = ({ children, size, layout }) => {
-  return (
-    <div
-      className={twMerge(
-        'relative top-1 left-1 w-full h-full bg-deepPink border z-10 border-purple',
-        size,
-      )}
-    >
-      <div
-        className={twMerge(
-          'flex flex-col justify-center items-center gap-10 absolute bottom-2 right-2 -z-10 w-full h-full bg-softPink border border-purple',
-          layout,
-        )}
-      >
-        {children}
+const ContentBox = React.forwardRef<HTMLDivElement, ContentBoxProps>(
+  ({ children, variant = 'default', size, layout }, ref) => {
+    return (
+      <div ref={ref} className={twMerge(contentBoxShadowStyles({ variant }), size)}>
+        <div className={twMerge(contentBoxBaseStyles({ variant }), layout)}>{children}</div>
       </div>
-    </div>
-  );
-};
+    );
+  },
+);
+
+ContentBox.displayName = 'ContentBox';
 
 export default ContentBox;

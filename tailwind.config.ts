@@ -19,6 +19,7 @@ const config: Config = {
         deepBlue: '#6F9AF9',
         blueGray: '#4E5F73',
         cream: '#F9E3DF',
+        lightYellow: '#FFE599',
         kakao: '#FEE500',
         naver: '#03C75A',
         kakaoText: '#000000D9',
