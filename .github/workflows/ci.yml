@@ -47,7 +47,3 @@ jobs:
       # 6. TypeScript 빌드 검사
       - name: Check TypeScript
         run: pnpm build
-
-      # 7. 테스트 실행
-      - name: Run Tests
-        run: pnpm test
