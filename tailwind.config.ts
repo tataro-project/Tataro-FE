@@ -24,7 +24,7 @@ const config: Config = {
         kakaoText: '#000000D9',
       },
       fontFamily: {
-        menu: ['Lilita One'],
+        lilita: ['Lilita One'],
         batang: ['Gowun Batang'],
       },
       backgroundImage: {
