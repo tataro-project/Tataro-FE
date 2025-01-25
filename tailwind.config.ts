@@ -27,6 +27,9 @@ const config: Config = {
       fontFamily: {
         lilita: ['Lilita One'],
         batang: ['Gowun Batang'],
+        gBold: ['gmarketBold'],
+        gMedium: ['gmarketMedium'],
+        gLight: ['gmarketLight'],
       },
       backgroundImage: {
         texture: 'url(/images/texture.svg)',
@@ -37,7 +40,7 @@ const config: Config = {
   plugins: [
     plugin(({ addComponents }) => {
       addComponents({
-        '.text-stroke': {
+        '.stroke': {
           '-webkit-text-stroke': '1px #53265F',
           'text-stroke': '1px #53265F',
         },
