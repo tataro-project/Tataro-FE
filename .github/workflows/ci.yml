@@ -21,33 +21,33 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # 2. Node.js 설정
+      # 2. Node.js 및 pnpm 설정
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 20
-          cache: 'pnpm'
 
-      # 3. pnpm 설치
-      - name: Install pnpm
-        run: npm install -g pnpm
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 9
 
-      # 4. 의존성 설치
+      # 3. 의존성 설치
       - name: Install dependencies
         run: pnpm install
 
-      # 5. Prettier 검사
+      # 4. Prettier 검사
       - name: Run Prettier Check
         run: pnpm format --check
 
-      # 6. ESLint로 코드 검사
+      # 5. ESLint로 코드 검사
       - name: Run ESLint
         run: pnpm lint
 
-      # 7. TypeScript 빌드 검사
+      # 6. TypeScript 빌드 검사
       - name: Check TypeScript
         run: pnpm build
 
-      # 8. 테스트 실행
+      # 7. 테스트 실행
       - name: Run Tests
         run: pnpm test
