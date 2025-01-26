@@ -35,6 +35,10 @@ const config: Config = {
         texture: 'url(/images/texture.svg)',
         logo: 'url(/images/logo.svg)',
       },
+      dropShadow: {
+        px: '1px 1px 0 #53265F',
+        2: '2px 2px 0 #53265F',
+      },
     },
   },
   plugins: [
