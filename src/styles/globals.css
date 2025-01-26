@@ -19,6 +19,11 @@
 @tailwind components;
 @tailwind utilities;
 
+html,
 body {
-  @apply w-screen h-screen;
+  @apply w-full h-full;
+}
+
+body {
+  @apply bg-softBlue;
 }
