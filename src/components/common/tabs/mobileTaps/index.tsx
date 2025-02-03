@@ -22,7 +22,10 @@ const MobileTabs: React.FC<{ children: React.ReactElement<TabProps>[] }> = ({ ch
             onClick={() => setActiveTab(index)}
             className={clsx(
               'flex justify-center flex-grow py-4 border border-t-0 border-purple font-lilita text-sm text-cream stroke',
-              activeTab === index ? 'relative -left-2 bottom-2 z-30 bg-softPink' : 'bg-deepPink',
+              activeTab === index
+                ? 'relative -left-[7px] bottom-2 z-30 bg-softPink'
+                : 'bg-deepPink',
+              activeTab === children.length - 1 ? '-left-[9px]' : '',
             )}
           >
             {child.props.label}
