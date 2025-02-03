@@ -19,13 +19,18 @@ const MobileTabs: React.FC<{ children: React.ReactElement<TabProps>[] }> = ({ ch
         {children.map((child, index) => (
           <button
             key={index}
-            onClick={() => setActiveTab(index)}
+            onClick={() => {
+              setActiveTab(index);
+              (child.props.onClick as () => void)?.();
+            }}
             className={clsx(
               'flex justify-center flex-grow py-4 border border-t-0 border-purple font-lilita text-sm text-cream stroke',
               activeTab === index
                 ? 'relative -left-[7px] bottom-2 z-30 bg-softPink'
                 : 'bg-deepPink',
               activeTab === children.length - 1 ? '-left-[9px]' : '',
+              activeTab === 0 && 'last:border-l-0',
+              activeTab === children.length - 1 && 'first:border-r-0',
             )}
           >
             {child.props.label}
