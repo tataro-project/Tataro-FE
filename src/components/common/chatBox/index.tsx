@@ -1,4 +1,4 @@
-import ChatBoxProps from './types';
+import ChatBoxProps from '@/components/common/chatBox/types';
 
 const ChatBox: React.FC<ChatBoxProps> = ({ message, isChatbot }) => {
   return (
