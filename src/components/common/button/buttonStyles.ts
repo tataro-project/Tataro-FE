@@ -15,8 +15,7 @@ const buttonStyles = cva(
         priceTag: 'bg-cream font-gBold text-purple',
         chatroom: 'bg-lightPink font-gMedium text-purple',
         sendButton: 'flex justify-center items-center border-blueGray bg-lightBlue',
-        editAndDeleteButton:
-          'border-none bg-purple font-gMedium text-cream',
+        editAndDeleteButton: 'border-none bg-purple font-gMedium text-cream',
       },
       isSelected: {
         true: null,
@@ -58,15 +57,22 @@ const buttonStyles = cva(
       { variant: 'startButton', isMobile: true, class: 'w-44 h-10 text-white text-base' },
       { variant: 'menuButton', isMobile: false, class: 'w-48 h-10 text-2xl' },
       { variant: 'menuButton', isMobile: true, class: 'w-36 h-8 text-xl' },
-      { variant: 'submenuButton', isMobile: false, class: 'w-52 h-10 text-2xl hover:rotate-1' },
-      { variant: 'submenuButton', isMobile: true, class: 'w-fit h-8 px-2 text-sm' },
+      {
+        variant: 'submenuButton',
+        isMobile: false,
+        class: 'w-64 h-12 px-7 text-3xl text-start hover:rotate-1',
+      },
       { variant: 'priceTag', isMobile: false, class: `w-24 h-9 text-sm ${HOVER_AND_ACTIVE_STYLE}` },
       { variant: 'priceTag', isMobile: true, class: 'w-20 h-8 text-xs' },
       { variant: 'chatroom', isMobile: false, class: `px-4 h-9 text-sm ${HOVER_AND_ACTIVE_STYLE}` },
       { variant: 'chatroom', isMobile: true, class: 'px-3 h-7 text-xs' },
       { variant: 'sendButton', isMobile: false, class: `size-9 ${HOVER_AND_ACTIVE_STYLE}` },
       { variant: 'sendButton', isMobile: true, class: 'size-8' },
-      { variant: 'editAndDeleteButton', isMobile: false, class: 'w-16 h-8 text-sm hover:text-white active:brightness-125' },
+      {
+        variant: 'editAndDeleteButton',
+        isMobile: false,
+        class: 'w-16 h-8 text-sm hover:text-white active:brightness-125',
+      },
       { variant: 'editAndDeleteButton', isMobile: true, class: 'w-12 h-7 text-xs' },
 
       { variant: 'simple', isReviewed: true, class: 'bg-softPink' },
