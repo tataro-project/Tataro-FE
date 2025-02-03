@@ -2,9 +2,7 @@
 
 import { useMemo } from 'react';
 import { ChevronsLeft, ChevronsRight, ChevronLeft, ChevronRight } from 'lucide-react';
-
 import clsx from 'clsx';
-import { twMerge } from 'tailwind-merge';
 import { PAGE_GROUP_SIZE } from './constants';
 
 interface PaginationProps {
