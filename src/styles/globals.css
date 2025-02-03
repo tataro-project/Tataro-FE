@@ -1,9 +1,29 @@
 @import url('https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@700&family=Lilita+One&display=swap');
+@font-face {
+  font-family: 'gmarketBold';
+  src: url('/fonts/GmarketSansTTFBold.ttf') format('truetype');
+  font-style: normal;
+}
+@font-face {
+  font-family: 'gmarketMedium';
+  src: url('/fonts/GmarketSansTTFMedium.ttf') format('truetype');
+  font-style: normal;
+}
+@font-face {
+  font-family: 'gmarketLight';
+  src: url('/fonts/GmarketSansTTFLight.ttf') format('truetype');
+  font-style: normal;
+}
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+html,
 body {
-  @apply w-screen h-screen;
+  @apply w-full h-full;
+}
+
+body {
+  @apply bg-softBlue;
 }

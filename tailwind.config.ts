@@ -27,17 +27,24 @@ const config: Config = {
       fontFamily: {
         lilita: ['Lilita One'],
         batang: ['Gowun Batang'],
+        gBold: ['gmarketBold'],
+        gMedium: ['gmarketMedium'],
+        gLight: ['gmarketLight'],
       },
       backgroundImage: {
         texture: 'url(/images/texture.svg)',
         logo: 'url(/images/logo.svg)',
+      },
+      dropShadow: {
+        px: '1px 1px 0 #53265F',
+        2: '2px 2px 0 #53265F',
       },
     },
   },
   plugins: [
     plugin(({ addComponents }) => {
       addComponents({
-        '.text-stroke': {
+        '.stroke': {
           '-webkit-text-stroke': '1px #53265F',
           'text-stroke': '1px #53265F',
         },
