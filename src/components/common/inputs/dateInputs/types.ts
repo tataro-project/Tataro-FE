@@ -4,8 +4,8 @@ type DateInputProps = Omit<
 > & {
   id?: string;
   label?: string;
-  value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  value?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 export default DateInputProps;
