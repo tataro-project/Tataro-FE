@@ -22,7 +22,7 @@ const RootLayout = ({
       <body>
         <Providers>
           <div className="fixed top-0 left-0 z-50 w-screen h-screen bg-texture bg-cover bg-no-repeat opacity-10 pointer-events-none" />
-          <main className="w-full h-full p-4">{children}</main>
+          <main className="flex justify-center items-center w-full h-full p-4">{children}</main>
           <LayerPopup />
         </Providers>
       </body>
