@@ -2,5 +2,9 @@ export type MyPageSubmenus = 'Profile' | 'Assessment' | 'Payment' | 'Chat Histor
 
 export type Submenus = {
   submenu: MyPageSubmenus;
-  content: () => JSX.Element;
+  content: () => JSX.Element | null;
+};
+
+export type ChargeOptionsProps = {
+  close: () => void;
 };
