@@ -71,8 +71,8 @@ const buttonStyles = cva(
       { variant: 'priceTag', isMobile: true, class: 'w-20 h-8 text-sm' },
       { variant: 'chatroom', isMobile: false, class: `px-4 h-9 text-sm ${HOVER_AND_ACTIVE_STYLE}` },
       { variant: 'chatroom', isMobile: true, class: 'px-3 h-7 text-xs' },
-      { variant: 'sendButton', isMobile: false, class: `size-9 ${HOVER_AND_ACTIVE_STYLE}` },
-      { variant: 'sendButton', isMobile: true, class: 'size-8' },
+      { variant: 'sendButton', isMobile: false, class: `size-11 ${HOVER_AND_ACTIVE_STYLE}` },
+      { variant: 'sendButton', isMobile: true, class: 'size-10' },
       {
         variant: 'editAndDeleteButton',
         isMobile: false,

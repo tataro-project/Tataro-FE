@@ -3,6 +3,7 @@ type TextInputProps = Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type'> 
   label?: string;
   type?: 'text' | 'tel';
   value?: string | number;
+  error?: string;
 };
 
 export default TextInputProps;

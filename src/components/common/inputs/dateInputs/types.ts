@@ -6,6 +6,7 @@ type DateInputProps = Omit<
   label?: string;
   value?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  error?: string;
 };
 
 export default DateInputProps;
