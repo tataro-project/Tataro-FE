@@ -11,7 +11,7 @@ const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
     if (isMobile === null) return null;
     return (
       <InputWrapper id={id} label={label} isMobile={isMobile}>
-        <div className={twMerge('flex gap-4', isMobile ? 'w-full' : 'w-96')}>
+        <div className={twMerge('flex gap-4', isMobile ? 'w-full sm:w-96' : 'w-96')}>
           <input
             id={id}
             type={type}

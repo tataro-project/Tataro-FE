@@ -5,7 +5,7 @@ export const textInputStyles = cva(
   {
     variants: {
       isMobile: {
-        true: 'w-full flex-1 text-sm',
+        true: 'w-full flex-1 text-sm sm:w-96 sm:text-xl',
         false: null,
       },
     },

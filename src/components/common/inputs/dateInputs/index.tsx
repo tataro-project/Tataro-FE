@@ -13,14 +13,14 @@ const DateInput = React.forwardRef<HTMLInputElement, DateInputProps>(
       <InputWrapper id={id} label={label} isMobile={isMobile}>
         <div
           className={twMerge(
-            'w-96 flex gap-2',
-            isMobile ? 'flex flex-col w-full gap-0 items-center' : '',
+            'w-96 flex ',
+            isMobile ? 'flex flex-col w-full sm:w-96 gap-0 items-start' : 'gap-2',
           )}
         >
           <input
             id={id}
             type="date"
-            value={value as string}
+            value={value}
             ref={ref}
             onChange={onChange}
             className={twMerge(dateInputStyles({ isMobile }), className)}

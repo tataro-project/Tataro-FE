@@ -3,7 +3,7 @@ import { cva } from 'class-variance-authority';
 export const radioGroupStyles = cva('flex gap-6', {
   variants: {
     isMobile: {
-      true: 'w-full',
+      true: 'w-full sm:w-96',
       false: 'w-96',
     },
   },
@@ -14,7 +14,7 @@ export const radioItemStyles = cva(
   {
     variants: {
       isMobile: {
-        true: 'text-sm',
+        true: 'text-sm sm:text-xl',
         false: null,
       },
     },
@@ -26,7 +26,7 @@ export const radioCheckboxStyles = cva(
   {
     variants: {
       isMobile: {
-        true: 'w-5 h-5',
+        true: 'w-5 h-5 sm:w-6 sm:h-6',
         false: null,
       },
     },
