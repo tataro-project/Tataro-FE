@@ -3,7 +3,8 @@
 import { useMemo } from 'react';
 import { ChevronsLeft, ChevronsRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import clsx from 'clsx';
-import { PAGE_GROUP_SIZE } from './constants';
+import { twMerge } from 'tailwind-merge';
+import { DISABLED_PAGE_BUTTON_STYLES, PAGE_BUTTON_STYLES, PAGE_GROUP_SIZE } from './constants';
 
 interface PaginationProps {
   totalResults: number;
@@ -49,11 +50,21 @@ export default function Pagination({
   return (
     <div className="flex justify-center items-center gap-4 py-3">
       <button onClick={() => handleGroupChange('prev')} disabled={currentPage === 1}>
-        <ChevronsLeft className="w-5 h-5" />
+        <ChevronsLeft
+          className={twMerge(
+            clsx(PAGE_BUTTON_STYLES, currentPage === 1 && DISABLED_PAGE_BUTTON_STYLES),
+            'w-5 h-5',
+          )}
+        />
       </button>
 
       <button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>
-        <ChevronLeft className="w-5 h-5" />
+        <ChevronLeft
+          className={twMerge(
+            clsx(PAGE_BUTTON_STYLES, currentPage === 1 && DISABLED_PAGE_BUTTON_STYLES),
+            'w-5 h-5',
+          )}
+        />
       </button>
 
       <div className="flex gap-6">
@@ -61,7 +72,7 @@ export default function Pagination({
           <button
             key={page}
             className={clsx(
-              'w-2',
+              PAGE_BUTTON_STYLES,
               currentPage === page && 'text-deepPink font-gBold',
               page > totalPages && 'hidden',
             )}
@@ -76,11 +87,21 @@ export default function Pagination({
         onClick={() => handlePageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
       >
-        <ChevronRight className="w-5 h-5" />
+        <ChevronRight
+          className={twMerge(
+            clsx(PAGE_BUTTON_STYLES, totalPages === currentPage && DISABLED_PAGE_BUTTON_STYLES),
+            'w-5 h-5',
+          )}
+        />
       </button>
 
       <button onClick={() => handleGroupChange('next')} disabled={currentPage === totalPages}>
-        <ChevronsRight className="w-5 h-5" />
+        <ChevronsRight
+          className={twMerge(
+            clsx(PAGE_BUTTON_STYLES, totalPages === currentPage && DISABLED_PAGE_BUTTON_STYLES),
+            'w-5 h-5',
+          )}
+        />
       </button>
     </div>
   );
