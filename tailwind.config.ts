@@ -1,5 +1,6 @@
 import type { Config } from 'tailwindcss';
 import plugin from 'tailwindcss/plugin';
+import scrollbarHide from 'tailwind-scrollbar-hide';
 
 const config: Config = {
   content: [
@@ -50,6 +51,7 @@ const config: Config = {
         },
       });
     }),
+    scrollbarHide,
   ],
 };
 export default config;
