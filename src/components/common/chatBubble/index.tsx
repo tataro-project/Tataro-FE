@@ -1,6 +1,6 @@
-import ChatBoxProps from './types';
+import ChatBubbleProps from './types';
 
-const ChatBox: React.FC<ChatBoxProps> = ({ message, isChatbot }) => {
+const ChatBubble: React.FC<ChatBubbleProps> = ({ message, isChatbot }) => {
   return (
     <div className={`flex ${isChatbot ? 'justify-start' : 'justify-end'} my-2`}>
       <div
@@ -14,4 +14,4 @@ const ChatBox: React.FC<ChatBoxProps> = ({ message, isChatbot }) => {
   );
 };
 
-export default ChatBox;
+export default ChatBubble;
