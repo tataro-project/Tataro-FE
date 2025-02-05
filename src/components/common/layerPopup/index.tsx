@@ -4,7 +4,11 @@ import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { hideLayerPopup, showLayerPopup } from '@/store/slices/layerPopupSlice';
 import { RootState, store } from '@/store/store';
 import { LayerPopupType } from '@/components/common/layerPopup/types';
-import { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
+import Button from '@common/button';
+import { FocusTrap } from 'focus-trap-react';
+import ContentBox from '@common/contentBox';
+import { twMerge } from 'tailwind-merge';
 
 let confirmHandler: (() => void) | null = null;
 
@@ -13,16 +17,14 @@ export const layerPopup = ({ type = 'info', content, onConfirmClick }: LayerPopu
   if (onConfirmClick) confirmHandler = onConfirmClick;
 };
 
+const BUTTON_STYLE = 'h-9 md:h-10 font-gMedium !text-purple stroke-none';
+
 const LayerPopup = () => {
   const dispatch = useAppDispatch();
   const {
     isVisible,
     layerPopup: { type, content },
   } = useAppSelector((state: RootState) => state.layerPopup);
-
-  const previousFocusRef = useRef<HTMLElement | null>(null);
-  const cancelButtonRef = useRef<HTMLButtonElement | null>(null);
-  const confirmButtonRef = useRef<HTMLButtonElement | null>(null);
 
   const handleConfirmClick = () => {
     if (confirmHandler) {
@@ -45,6 +47,7 @@ const LayerPopup = () => {
         e.preventDefault();
         handleCancelClick();
         break;
+
       case 'Enter':
         if (type !== 'confirm') {
           e.preventDefault();
@@ -52,32 +55,15 @@ const LayerPopup = () => {
           handleConfirmClick();
         }
         break;
-      case 'Tab':
-        e.preventDefault();
-
-        if (type === 'confirm') {
-          if (document.activeElement !== confirmButtonRef.current)
-            confirmButtonRef.current?.focus();
-          else cancelButtonRef.current?.focus();
-        } else confirmButtonRef.current?.focus();
-
-        break;
     }
   };
 
   useEffect(() => {
     if (isVisible) {
       document.body.style.overflow = 'hidden';
-
-      previousFocusRef.current = document.activeElement as HTMLElement;
-      confirmButtonRef.current?.focus();
-
       document.addEventListener('keydown', handleKeyDown);
     } else {
       document.body.style.overflow = '';
-
-      previousFocusRef.current?.focus();
-
       document.removeEventListener('keydown', handleKeyDown);
     }
 
@@ -91,37 +77,46 @@ const LayerPopup = () => {
   if (!isVisible) return null;
 
   return (
-    <div className="flex justify-center items-center fixed top-0 left-0 z-50 w-screen h-screen bg-zinc-950 bg-opacity-20">
-      <div
-        className="flex flex-col items-center w-full max-w-md h-52 p-4 border border-zinc-900 rounded-2xl bg-zinc-50"
-        role={type === 'alert' ? 'alertdialog' : 'dialog'}
-        aria-modal={true}
-        aria-describedby="popup-content"
-      >
-        <p id="popup-content" className="grow content-center">
-          {content}
-        </p>
+    <FocusTrap active={isVisible} focusTrapOptions={{ initialFocus: false }}>
+      <div className="flex justify-center items-center fixed top-0 left-0 z-50 w-screen h-screen px-4 bg-purple bg-opacity-10">
+        <ContentBox
+          variant="layerPopup"
+          size="max-w-md h-48 md:h-52"
+          layout="p-5"
+          role={type === 'alert' ? 'alertdialog' : 'dialog'}
+          aria-modal={true}
+          aria-describedby="popup-content"
+        >
+          <p
+            id="popup-content"
+            className="flex flex-col gap-1 grow self-start font-gMedium text-sm md:text-base text-purple"
+          >
+            {content.map(line => (
+              <span key={line}>{line}</span>
+            ))}
+          </p>
 
-        <div className="flex justify-center gap-3">
-          {type === 'confirm' && (
-            <>
-              <button ref={cancelButtonRef} onClick={handleCancelClick}>
+          <div className="flex justify-center gap-3 self-end">
+            {type === 'confirm' && (
+              <Button
+                variant="simple"
+                onClick={handleCancelClick}
+                className={twMerge(BUTTON_STYLE, 'bg-gray-300')}
+              >
                 취소
-              </button>
-              <button ref={confirmButtonRef} onClick={handleConfirmClick}>
-                확인
-              </button>
-            </>
-          )}
-
-          {type !== 'confirm' && (
-            <button ref={confirmButtonRef} onClick={handleConfirmClick}>
+              </Button>
+            )}
+            <Button
+              variant="simple"
+              onClick={handleConfirmClick}
+              className={twMerge(BUTTON_STYLE, 'bg-softBlue')}
+            >
               확인
-            </button>
-          )}
-        </div>
+            </Button>
+          </div>
+        </ContentBox>
       </div>
-    </div>
+    </FocusTrap>
   );
 };
 

@@ -1,5 +1,5 @@
 export type LayerPopupType = {
   type?: 'info' | 'confirm' | 'alert';
-  content: React.ReactNode;
+  content: string[];
   onConfirmClick?: () => void;
 };
