@@ -10,7 +10,7 @@ import Sidebar from '@common/sidebar';
 const Header = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
   const { isMobile } = useIsMobile();
-  console.log(isSidebarOpen);
+
   if (isMobile === null) return null;
 
   return (
