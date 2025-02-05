@@ -10,7 +10,7 @@ export const radioGroupStyles = cva('flex gap-6', {
 });
 
 export const radioItemStyles = cva(
-  'relative flex items-center gap-2 cursor-pointer text-purple font-gMedium text-xl',
+  'flex items-center gap-2 relative text-purple font-gMedium text-xl cursor-pointer',
   {
     variants: {
       isMobile: {
@@ -22,11 +22,11 @@ export const radioItemStyles = cva(
 );
 
 export const radioCheckboxStyles = cva(
-  'w-6 h-6 border-2 border-purple rounded-sm transition-all bg-cream',
+  'w-6 h-6 border-2 border-purple rounded-sm bg-cream transition-all',
   {
     variants: {
       isMobile: {
-        true: 'w-5 h-5 sm:w-6 sm:h-6',
+        true: 'w-5 sm:w-6 h-5 sm:h-6',
         false: null,
       },
     },
