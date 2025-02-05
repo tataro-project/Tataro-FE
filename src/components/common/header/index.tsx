@@ -6,26 +6,30 @@ import Link from 'next/link';
 import clsx from 'clsx';
 import { useState } from 'react';
 import Sidebar from '@common/sidebar';
+import { usePathname } from 'next/navigation';
 
 const Header = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
   const { isMobile } = useIsMobile();
+  const pathname = usePathname();
 
   if (isMobile === null) return null;
 
   return (
     <>
       <nav className="flex justify-between items-start fixed z-30 top-0 left-0 w-full p-4">
-        <Link href="/">
-          <div
-            className={clsx(
-              'bg-logo bg-center bg-contain bg-no-repeat',
-              isMobile ? 'w-24 h-12' : 'w-32 h-16',
-            )}
-            aria-label="로고"
-          />
-        </Link>
-        <div className="flex gap-8">
+        {pathname !== '/' && (
+          <Link href="/">
+            <div
+              className={clsx(
+                'bg-logo bg-center bg-contain bg-no-repeat',
+                isMobile ? 'w-24 h-12' : 'w-32 h-16',
+              )}
+              aria-label="로고"
+            />
+          </Link>
+        )}
+        <div className={clsx('flex gap-8', pathname === '/' && 'ml-auto')}>
           <Link href="/login">
             <LogIn
               className={clsx('text-blueGray', isMobile ? 'w-5 h-5' : 'w-6 h-6')}
