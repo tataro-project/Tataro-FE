@@ -20,7 +20,7 @@ const RadioInput: React.FC<RadioInputProps> = ({
   if (isMobile === null) return null;
 
   return (
-    <InputWrapper id={id} label={label} isMobile={isMobile}>
+    <InputWrapper id={id} label={label} isRadioButton={true}>
       <div className={twMerge(radioGroupStyles({ isMobile }), className)}>
         {options.map(option => (
           <label key={option.value} className={twMerge(radioItemStyles({ isMobile }))}>
