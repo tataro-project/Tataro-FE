@@ -1,6 +1,6 @@
 import useIsMobile from '@/hooks/useIsMobile';
 import { twMerge } from 'tailwind-merge';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import ChatInputProps from './types';
 
 const ChatInput: React.FC<ChatInputProps> = ({ value = '', onChange, onSend, className }) => {
@@ -9,14 +9,15 @@ const ChatInput: React.FC<ChatInputProps> = ({ value = '', onChange, onSend, cla
   const [isComposing, setIsComposing] = useState(false);
   const MAX_HEIGHT = 80;
 
-  const adjustHeight = () => {
+  const adjustHeight = useCallback(() => {
     if (textareaRef.current) {
       textareaRef.current.style.height = 'auto';
       const scrollHeight = textareaRef.current.scrollHeight;
-      textareaRef.current.style.height = `${Math.min(scrollHeight, MAX_HEIGHT)}px`;
+      const newHeight = Math.max(isMobile ? 40 : 44, Math.min(scrollHeight, MAX_HEIGHT));
+      textareaRef.current.style.height = `${newHeight}px`;
       textareaRef.current.style.overflowY = scrollHeight > MAX_HEIGHT ? 'auto' : 'hidden';
     }
-  };
+  }, [isMobile]);
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Enter' && e.shiftKey) {
@@ -29,7 +30,7 @@ const ChatInput: React.FC<ChatInputProps> = ({ value = '', onChange, onSend, cla
       if (value.trim()) {
         onSend();
         if (textareaRef.current) {
-          textareaRef.current.style.height = 'auto';
+          textareaRef.current.style.height = isMobile ? '40px' : '44px';
         }
       }
     }
@@ -48,7 +49,7 @@ const ChatInput: React.FC<ChatInputProps> = ({ value = '', onChange, onSend, cla
 
   useEffect(() => {
     adjustHeight();
-  }, [value]);
+  }, [value, isMobile, adjustHeight]);
 
   return (
     <textarea
