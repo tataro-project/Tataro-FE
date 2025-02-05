@@ -10,8 +10,8 @@ const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
     const { isMobile } = useIsMobile();
     if (isMobile === null) return null;
     return (
-      <InputWrapper id={id} label={label} isMobile={isMobile} error={error}>
-        <div className={twMerge('w-96 ', isMobile && 'w-full sm:w-96')}>
+      <InputWrapper id={id} label={label} error={error}>
+        <div className="w-full sm:w-96">
           <div className="flex flex-col">
             <input
               id={id}
@@ -23,7 +23,9 @@ const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
               {...rest}
             />
             {error && (
-              <span className="text-red-500 text-sm mt-2  max-sm:hidden block ">{error}</span>
+              <span className="font-gMedium text-red-600 text-sm mt-2 max-sm:hidden block">
+                {error}
+              </span>
             )}
           </div>
         </div>
