@@ -1,6 +1,6 @@
 type ContentBoxProps = React.HTMLAttributes<HTMLDivElement> & {
   children: React.ReactNode;
-  variant?: 'default' | 'price' | 'layerCard';
+  variant?: 'default' | 'price' | 'layerCard' | 'layerPopup';
   size?: string;
   layout?: string;
 };
