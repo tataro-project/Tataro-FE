@@ -48,7 +48,7 @@ export default function Pagination({
   };
 
   return (
-    <div className="flex justify-center items-center gap-4 py-3">
+    <div className="flex justify-center items-center gap-4 py-3 text-purple">
       <button onClick={() => handleGroupChange('prev')} disabled={currentPage === 1}>
         <ChevronsLeft
           className={twMerge(
