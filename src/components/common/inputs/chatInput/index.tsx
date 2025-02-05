@@ -45,7 +45,7 @@ const ChatInput: React.FC<ChatInputProps> = ({ value = '', onChange, onSend, cla
       onChange={onChange}
       onKeyDown={handleKeyDown}
       className={twMerge(
-        'w-full resize-none overflow-hidden rounded-3xl border border-blueGray bg-lightBlue px-4 py-2 scrollbar-hide',
+        'w-full resize-none overflow-hidden rounded-3xl border border-blueGray bg-lightBlue px-4 py-2 scrollbar-hide focus:outline-blueGray',
         isMobile ? 'min-h-10 text-sm' : 'min-h-11 text-base',
         className,
       )}
