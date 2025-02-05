@@ -9,7 +9,6 @@ const ReviewCard: React.FC<ReviewCardProps> = ({
   nickname,
   createdAt,
   updatedAt,
-  imgUrl,
   viewCount,
 }) => {
   return (
