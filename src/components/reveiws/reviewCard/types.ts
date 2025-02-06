@@ -1,4 +1,4 @@
-type ReviewCardProps = {
+export type BaseReviewProps = {
   title: string;
   content: string;
   nickname: string;
@@ -8,4 +8,8 @@ type ReviewCardProps = {
   viewCount: number;
 };
 
-export default ReviewCardProps;
+export type ReviewCardProps = BaseReviewProps;
+
+export type ReviewDetailProps = BaseReviewProps & {
+  close: () => void;
+};

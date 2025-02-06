@@ -19,7 +19,7 @@ const Reviews = () => {
 
   return (
     <>
-      <div className="relative w-full max-w-5xl h-full">
+      <div className="relative w-full max-w-5xl h-full ">
         <div className="flex justify-start items-center h-full">
           {!isMobile && (
             <>
