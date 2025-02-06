@@ -1,6 +1,8 @@
 import { z } from 'zod';
-import profileSchema from './schemas';
+import { profileFormSchema } from './schemas';
 
-type ProfileData = z.infer<typeof profileSchema>;
+export type ProfileFormType = z.infer<typeof profileFormSchema>;
 
-export default ProfileData;
+export type ProfileFormProps = {
+  isEditMode?: boolean;
+};

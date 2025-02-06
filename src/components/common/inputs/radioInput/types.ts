@@ -8,6 +8,7 @@ type RadioInputProps = Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type' 
   label?: string;
   options: Option[];
   value?: 'male' | 'female';
+  error: string;
 };
 
 export default RadioInputProps;
