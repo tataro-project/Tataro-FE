@@ -21,6 +21,7 @@
     "react-dom": "^18",
     "react-hook-form": "^7.54.2",
     "react-redux": "^9.2.0",
+    "swiper": "^11.2.2",
     "tailwind-merge": "^2.6.0",
     "tailwind-scrollbar-hide": "^2.0.0",
     "zod": "^3.24.1"
