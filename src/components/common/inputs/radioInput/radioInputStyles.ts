@@ -1,6 +1,6 @@
 import { cva } from 'class-variance-authority';
 
-export const radioGroupStyles = cva('flex gap-6', {
+export const radioGroupStyles = cva('flex flex-col', {
   variants: {
     isMobile: {
       true: 'w-full sm:w-96',
