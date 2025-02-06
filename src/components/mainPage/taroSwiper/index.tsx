@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Magician from '@images/Magician.svg';
 import Thefool from '@images/TheFool.svg';
 import Empress from '@images/Empress.svg';
-import CardBack from '@images/CardBack.svg';
+import TarotBack from '@images/tarotBack.svg';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
@@ -52,7 +52,7 @@ const TaroSwiper = () => {
             isActive || isNext || isPrev ? (
               <Image src={img} alt={`card-${index}`} className="h-[370px]" />
             ) : (
-              <Image src={CardBack} alt="card-back" />
+              <Image src={TarotBack} alt="card-back" />
             )
           }
         </SwiperSlide>
