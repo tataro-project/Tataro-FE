@@ -1,10 +1,11 @@
 import Pagination from '@common/pagination';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { mockReviews } from '../mockReviews';
 import ReviewCard from '../reviewCard';
 
 const BestReviews = () => {
   const [currentPage, setCurrentPage] = useState(1);
+  const containerRef = useRef<HTMLDivElement>(null);
   const perPage = 3;
 
   const sortedReviews = useMemo(() => {
@@ -17,6 +18,7 @@ const BestReviews = () => {
 
   const handlePageChange = (newPage: number) => {
     setCurrentPage(newPage);
+    containerRef.current?.focus();
   };
 
   useEffect(() => {
@@ -24,9 +26,15 @@ const BestReviews = () => {
   }, [currentPage]);
 
   return (
-    <div className="flex flex-col justify-center items-center gap-8 w-full px-16">
-      <h1 className="text-4xl font-lilita text-cream stroke">Best Review</h1>
-      <div className="flex flex-col justify-start items-center gap-4 w-full min-h-[416px]">
+    <div
+      ref={containerRef}
+      className="flex flex-col justify-center items-center gap-8 w-full px-16 focus:outline-none"
+      tabIndex={-1}
+    >
+      <h1 className="text-4xl font-lilita text-cream stroke" tabIndex={-1}>
+        Best Review
+      </h1>
+      <ul className="flex flex-col justify-start items-center gap-4 w-full min-h-[416px]">
         {currentReviews.map(review => (
           <ReviewCard
             key={review.id}
@@ -39,7 +47,7 @@ const BestReviews = () => {
             viewCount={review.view_count}
           />
         ))}
-      </div>
+      </ul>
       <Pagination
         totalResults={mockReviews.length}
         currentPage={currentPage}
