@@ -6,20 +6,28 @@ import { textInputStyles } from './textInputStyles';
 import InputWrapper from '../inputWrapper';
 
 const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
-  ({ id, label, type = 'text', value, className, ...rest }, ref) => {
+  ({ id, label, type = 'text', value, className, error, ...rest }, ref) => {
     const { isMobile } = useIsMobile();
     if (isMobile === null) return null;
     return (
-      <InputWrapper id={id} label={label} isMobile={isMobile}>
-        <div className={twMerge('flex gap-4', isMobile ? 'w-full' : 'w-96')}>
-          <input
-            id={id}
-            type={type}
-            value={value}
-            ref={ref}
-            className={twMerge(textInputStyles({ isMobile }), className)}
-            {...rest}
-          />
+      <InputWrapper id={id} label={label} error={error}>
+        <div className="w-full sm:w-96">
+          <div className="flex flex-col">
+            <input
+              id={id}
+              type={type}
+              value={value}
+              ref={ref}
+              autoComplete="off"
+              className={twMerge(textInputStyles({ isMobile }), className)}
+              {...rest}
+            />
+            {error && (
+              <span className="block max-sm:hidden mt-2 font-gMedium text-red-600 text-sm">
+                {error}
+              </span>
+            )}
+          </div>
         </div>
       </InputWrapper>
     );

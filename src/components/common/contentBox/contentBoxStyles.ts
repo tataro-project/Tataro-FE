@@ -6,6 +6,7 @@ export const contentBoxShadowStyles = cva('relative top-1 left-1 z-10 w-full h-f
       default: 'bg-deepPink border-purple',
       price: 'bg-purple border-purple',
       layerCard: 'bg-lightYellow border-blueGray',
+      layerPopup: 'bg-deepBlue border-blueGray',
     },
   },
 });
@@ -18,6 +19,7 @@ export const contentBoxBaseStyles = cva(
         default: 'bg-softPink border-purple',
         price: 'bg-cream border-purple',
         layerCard: 'bg-cream border-blueGray',
+        layerPopup: 'bg-lightBlue border-blueGray',
       },
     },
   },

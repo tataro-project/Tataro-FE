@@ -1,11 +1,11 @@
 import { cva } from 'class-variance-authority';
 
 export const textInputStyles = cva(
-  'text-center text-purple font-gMedium text-xl w-96 bg-transparent border-purple border-b-2 border-solid',
+  'text-purple font-gMedium text-xl w-96 bg-transparent border-purple border-b border-solid outline-none',
   {
     variants: {
       isMobile: {
-        true: 'w-full flex-1 text-sm',
+        true: 'w-full flex-1 text-sm sm:w-96 sm:text-xl',
         false: null,
       },
     },

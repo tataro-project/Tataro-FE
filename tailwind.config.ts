@@ -1,5 +1,6 @@
 import type { Config } from 'tailwindcss';
 import plugin from 'tailwindcss/plugin';
+import scrollbarHide from 'tailwind-scrollbar-hide';
 
 const config: Config = {
   content: [
@@ -48,8 +49,13 @@ const config: Config = {
           '-webkit-text-stroke': '1px #53265F',
           'text-stroke': '1px #53265F',
         },
+        '.stroke-none': {
+          '-webkit-text-stroke': '0px',
+          'text-stroke': '0px',
+        },
       });
     }),
+    scrollbarHide,
   ],
 };
 export default config;

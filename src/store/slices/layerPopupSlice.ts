@@ -9,7 +9,7 @@ type LayerPopupState = {
 
 const DEFAULT_LAYER_POPUP: Omit<LayerPopupType, 'onConfirmClick'> = {
   type: 'info',
-  content: '',
+  content: [],
 } as const;
 
 const initialState: LayerPopupState = {

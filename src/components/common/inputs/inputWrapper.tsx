@@ -1,24 +1,34 @@
 import { twMerge } from 'tailwind-merge';
 import { labelStyles } from './labelStyles';
+import useIsMobile from '@/hooks/useIsMobile';
 
 type InputWrapperProps = {
   id?: string;
   label?: string;
-  isMobile: boolean;
   children: React.ReactNode;
+  error?: string;
 };
 
-const InputWrapper = ({ id, label, isMobile, children }: InputWrapperProps) => (
-  <div className={twMerge('flex justify-center items-center w-full', isMobile ? 'gap-3' : 'gap-6')}>
-    <div className="w-28 flex justify-end">
-      {label && (
-        <label htmlFor={id} className={twMerge(labelStyles({ isMobile }))}>
-          {label}
-        </label>
-      )}
+const InputWrapper = ({ id, label, children, error }: InputWrapperProps) => {
+  const { isMobile } = useIsMobile();
+
+  if (isMobile === null) return null;
+
+  return (
+    <div className="flex flex-col sm:flex-row justify-center items-start gap-1 sm:gap-6 w-full sm:h-16">
+      <div className="flex justify-end items-center gap-4 max-sm:flex-1 sm:w-28">
+        {label && (
+          <label htmlFor={id} className={twMerge(labelStyles({ isMobile }))}>
+            {label}
+          </label>
+        )}
+        {error && (
+          <span className="hidden max-sm:block font-gMedium text-red-600 text-xs">{error}</span>
+        )}
+      </div>
+      {children}
     </div>
-    {children}
-  </div>
-);
+  );
+};
 
 export default InputWrapper;
