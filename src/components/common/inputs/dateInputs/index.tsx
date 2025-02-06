@@ -16,7 +16,7 @@ const DateInput = React.forwardRef<HTMLInputElement, DateInputProps>(
               ref={ref}
               onChange={onChange}
               className={twMerge(
-                'w-full max-w-72 sm:w-fit px-6 sm:px-2 py-1 sm:py-0 border-purple border-2 border-solid bg-cream text-purple font-gMedium text-sm sm:text-xl outline-none',
+                'w-full max-w-72 sm:w-fit px-6 sm:px-2 py-1 sm:py-0 border-purple border bg-cream text-purple font-gMedium text-sm sm:text-xl outline-none',
                 className,
               )}
               {...rest}

@@ -1,7 +1,7 @@
 import { cva } from 'class-variance-authority';
 
 export const textInputStyles = cva(
-  'text-purple font-gMedium text-xl w-96 bg-transparent border-purple border-b-2 border-solid outline-none',
+  'text-purple font-gMedium text-xl w-96 bg-transparent border-purple border-b border-solid outline-none',
   {
     variants: {
       isMobile: {

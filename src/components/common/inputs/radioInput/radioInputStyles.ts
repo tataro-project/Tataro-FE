@@ -22,7 +22,7 @@ export const radioItemStyles = cva(
 );
 
 export const radioCheckboxStyles = cva(
-  'w-6 h-6 border-2 border-purple rounded-sm bg-cream transition-all',
+  'flex justify-center items-center w-6 h-6 border border-purple rounded-sm bg-cream transition-all',
   {
     variants: {
       isMobile: {
