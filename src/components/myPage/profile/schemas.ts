@@ -34,7 +34,7 @@ export const profileFormSchema = z.object({
 
   phone: z
     .string()
-    .transform(value => value.replace(/\D/g, '') || undefined)
+    .transform(value => value.replace(/\D/g, ''))
     .superRefine((value, ctx) => {
       if (!value) {
         ctx.addIssue({ code: z.ZodIssueCode.custom, message: '휴대폰 번호를 입력해 주세요.' });
@@ -63,8 +63,31 @@ export const profileFormSchema = z.object({
     }
   }),
 
-  gender: z.enum(['male', 'female'], {
-    required_error: '성별을 선택해 주세요.',
-    invalid_type_error: '성별을 선택해 주세요.',
-  }),
+  gender: z
+    .enum(['male', 'female'], {
+      required_error: '성별을 선택해 주세요.',
+      invalid_type_error: '성별을 선택해 주세요.',
+    })
+    .optional(),
 });
+
+const consentSchema = z.object({
+  requiredTerms: z
+    .boolean({
+      required_error: '필수 이용약관에 동의해 주세요.',
+    })
+    .refine(val => val === true, {
+      message: '필수 이용약관에 동의해 주세요.',
+    }),
+  requiredPrivacy: z
+    .boolean({
+      required_error: '필수 개인정보 수집 및 이용에 동의해 주세요.',
+    })
+    .refine(val => val === true, {
+      message: '필수 개인정보 수집 및 이용에 동의해 주세요.',
+    }),
+  optionalPrivacy: z.boolean(),
+  optionalMarketing: z.boolean(),
+});
+
+export const signUpFormSchema = profileFormSchema.merge(consentSchema);
