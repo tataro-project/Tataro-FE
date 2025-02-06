@@ -23,7 +23,7 @@ const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
               {...rest}
             />
             {error && (
-              <span className="font-gMedium text-red-600 text-sm mt-2 max-sm:hidden block">
+              <span className="block max-sm:hidden mt-2 font-gMedium text-red-600 text-sm">
                 {error}
               </span>
             )}
