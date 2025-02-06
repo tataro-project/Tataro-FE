@@ -1,15 +1,15 @@
 import TaroSwiper from '@/components/mainPage/taroSwiper';
 import moon from '@images/moon.svg';
 import logo from '@images/logo.svg';
-import blueCloud from '@images/blueCloud.png';
-import pinkCloud from '@images/pinkcloud.png';
+import blueCloud from '@images/blueCloud.svg';
+import pinkCloud from '@images/pinkCloud.svg';
 import Image from 'next/image';
 import Button from '@common/button';
 import Link from 'next/link';
 
 const Home = () => {
   return (
-    <div className=" flex flex-col items-center h-full w-full gap-24">
+    <div className=" flex flex-col items-center h-full w-full gap-20">
       <div className="">
         <Image
           src={moon}
@@ -25,10 +25,10 @@ const Home = () => {
       <Image
         src={blueCloud}
         alt="blue-cloud"
-        className="absolute left-0 md:translate-y-[460px] translate-y-[700px] z-20 md:w-[700px] w-[300px]"
+        className="absolute left-0 md:translate-y-[400px] translate-y-[700px] z-20 md:w-[700px] w-[300px]"
       />
-      <Link href={'tarotReading'}>
-        <Button variant="startButton" className="md:text-2xl text-xl z-50">
+      <Link href={'tarotReading'} className="z-50">
+        <Button variant="startButton" className="md:text-2xl text-xl ">
           상담 시작 하기
         </Button>
       </Link>
@@ -46,9 +46,8 @@ const Home = () => {
       </div>
       <Image
         src={pinkCloud}
-        alt="logo"
+        alt="pink-cloud"
         width={600}
-        height={200}
         className="absolute right-0 translate-y-[1100px] "
       />
     </div>
