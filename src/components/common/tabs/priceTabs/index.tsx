@@ -8,7 +8,7 @@ const PriceTabs: React.FC<{ children: React.ReactElement<TabProps>[] }> = ({ chi
   const [activeTab, setActiveTab] = useState(0);
 
   return (
-    <div className="w-full font-gMedium text-sm md:text-base">
+    <div className="flex flex-col w-full h-full font-gMedium text-sm md:text-base scrollable overflow-y-auto">
       <div className="flex">
         {children.map((child, index) => (
           <button
@@ -26,7 +26,7 @@ const PriceTabs: React.FC<{ children: React.ReactElement<TabProps>[] }> = ({ chi
         ))}
         <div className="flex-grow border-b border-purple"></div>
       </div>
-      <div className="w-full h-96 p-4 border border-t-0 border-purple bg-lightPink text-purple">
+      <div className="grow w-full px-4 py-2 border border-t-0 border-purple bg-lightPink text-purple overflow-y-auto">
         {children[activeTab]}
       </div>
     </div>
@@ -34,7 +34,7 @@ const PriceTabs: React.FC<{ children: React.ReactElement<TabProps>[] }> = ({ chi
 };
 
 const PriceTab: React.FC<TabProps> = ({ children }) => {
-  return <div>{children}</div>;
+  return <div className="">{children}</div>;
 };
 
 export { PriceTabs, PriceTab };

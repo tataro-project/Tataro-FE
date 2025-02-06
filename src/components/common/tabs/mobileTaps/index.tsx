@@ -42,7 +42,7 @@ const MobileTabs: React.FC<{ children: React.ReactElement<TabProps>[] }> = ({ ch
 };
 
 const MobileTab: React.FC<TabProps> = ({ children }) => {
-  return <div>{children}</div>;
+  return <div className="w-full h-full p-6">{children}</div>;
 };
 
 export { MobileTabs, MobileTab };
