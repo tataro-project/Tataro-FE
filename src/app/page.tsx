@@ -4,28 +4,34 @@ import logo from '@images/logo.svg';
 import blueCloud from '@images/blueCloud.png';
 import pinkCloud from '@images/pinkcloud.png';
 import Image from 'next/image';
+import Button from '@common/button';
+import Link from 'next/link';
 
 const Home = () => {
   return (
-    <div className=" flex flex-col items-center h-full w-full gap-40">
+    <div className=" flex flex-col items-center h-full w-full gap-24">
       <div className="">
         <Image
           src={moon}
           alt="moon"
-          width={150}
-          height={70}
-          className="absolute -translate-x-[100px] translate-y-[50px] "
+          width={80}
+          className="absolute -translate-x-[80px] translate-y-[25px] "
         />
-        <Image src={logo} alt="logo" width={500} height={150} />
+        <Image src={logo} alt="logo" width={320} />
       </div>
-      <div className="flex max-w-5xl  h-[500px]">
+      <div className="max-w-4xl">
         <TaroSwiper />
       </div>
       <Image
         src={blueCloud}
         alt="blue-cloud"
-        className="absolute left-0 md:translate-y-[600px] translate-y-[700px] z-50 md:w-[700px] w-[300px] "
+        className="absolute left-0 md:translate-y-[460px] translate-y-[700px] z-20 md:w-[700px] w-[300px] "
       />
+      <Link href={'tarotReading'}>
+        <Button variant="startButton" className="md:text-2xl text-xl z-50">
+          상담 시작 하기
+        </Button>
+      </Link>
       <div className="flex flex-col h-full p-20 text-center text-purple font-gMedium ">
         <p>운명적인 사랑을 찾는 첫걸음, 당신만의 타로 이야기</p>
         <br />

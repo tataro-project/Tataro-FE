@@ -39,6 +39,7 @@ const TaroSwiper = () => {
       centeredSlides={true}
       effect={'coverflow'}
       grabCursor={true}
+      autoHeight={false}
       coverflowEffect={{
         rotate: 0,
         slideShadows: false,
@@ -49,7 +50,7 @@ const TaroSwiper = () => {
         <SwiperSlide key={index}>
           {({ isActive, isNext, isPrev }) =>
             isActive || isNext || isPrev ? (
-              <Image src={img} alt={`card-${index}`} sizes="100vw" />
+              <Image src={img} alt={`card-${index}`} className="h-[370px]" />
             ) : (
               <Image src={CardBack} alt="card-back" />
             )
