@@ -2,12 +2,12 @@ import { X } from 'lucide-react';
 import { NUMBER_OF_HEARTS_FOR_SALE } from '../../constants';
 import HeartPriceTag from './HeartPriceTag';
 import { ChargeOptionsProps } from '../../types';
-import useIsMobile from '@/hooks/useIsMobile';
+import useScreenWidth from '@/hooks/useScreenWidth';
 import { useEffect } from 'react';
 import { FocusTrap } from 'focus-trap-react';
 
 const ChargeOptions = ({ close }: ChargeOptionsProps) => {
-  const { isMobile } = useIsMobile(640);
+  const { isInit, isCustomWidth } = useScreenWidth(640);
 
   useEffect(() => {
     const handleClose = (e: KeyboardEvent) => {
@@ -19,7 +19,7 @@ const ChargeOptions = ({ close }: ChargeOptionsProps) => {
     return () => document.removeEventListener('keydown', handleClose);
   }, [close]);
 
-  if (isMobile === null) return null;
+  if (!isInit) return null;
 
   return (
     <FocusTrap active={true} focusTrapOptions={{ initialFocus: false }}>
@@ -32,7 +32,7 @@ const ChargeOptions = ({ close }: ChargeOptionsProps) => {
           onClick={() => close()}
           tabIndex={0}
         />
-        {!isMobile && (
+        {!isCustomWidth && (
           <div className="flex justify-evenly w-full bg-purple">
             <div>
               {NUMBER_OF_HEARTS_FOR_SALE.slice(0, 5).map(heart => (
@@ -47,7 +47,7 @@ const ChargeOptions = ({ close }: ChargeOptionsProps) => {
           </div>
         )}
 
-        {isMobile && (
+        {isCustomWidth && (
           <div className="flex flex-col items-center w-full bg-purple scrollable overflow-y-scroll">
             {NUMBER_OF_HEARTS_FOR_SALE.map(heart => (
               <HeartPriceTag key={`${heart}개 ${heart * 100}원`} heart={heart} />

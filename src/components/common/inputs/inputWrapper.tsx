@@ -1,6 +1,6 @@
 import { twMerge } from 'tailwind-merge';
 import { labelStyles } from './labelStyles';
-import useIsMobile from '@/hooks/useIsMobile';
+import useScreenWidth from '@/hooks/useScreenWidth';
 
 type InputWrapperProps = {
   id?: string;
@@ -10,7 +10,7 @@ type InputWrapperProps = {
 };
 
 const InputWrapper = ({ id, label, children, error }: InputWrapperProps) => {
-  const { isMobile } = useIsMobile();
+  const { isMobile } = useScreenWidth();
 
   if (isMobile === null) return null;
 

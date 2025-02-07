@@ -1,9 +1,9 @@
-import useIsMobile from '@/hooks/useIsMobile';
+import useScreenWidth from '@/hooks/useScreenWidth';
 import ChatBubbleProps from './types';
 import { twMerge } from 'tailwind-merge';
 
 const ChatBubble: React.FC<ChatBubbleProps> = ({ message, isChatbot }) => {
-  const { isMobile } = useIsMobile();
+  const { isMobile } = useScreenWidth();
 
   return (
     <div className={twMerge(`flex`, isChatbot ? 'justify-start' : 'justify-end')}>

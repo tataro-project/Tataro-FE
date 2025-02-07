@@ -2,26 +2,26 @@
 
 import SUBMENUS from '@/components/myPage/constants';
 import { MyPageSubmenus } from '@/components/myPage/types';
-import useIsMobile from '@/hooks/useIsMobile';
+import useScreenWidth from '@/hooks/useScreenWidth';
 import Button from '@common/button';
 import ContentBox from '@common/contentBox';
 import { MobileTab, MobileTabs } from '@common/tabs/mobileTaps';
 import { useState } from 'react';
 
 const MyPage = () => {
-  const { isMobile } = useIsMobile(1056);
+  const { isInit, isCustomWidth } = useScreenWidth(1056);
   const [submenu, setSubmenu] = useState('Profile');
 
   const handleClickSubmenu = (selectedSubmenu: MyPageSubmenus) =>
     selectedSubmenu !== submenu && setSubmenu(selectedSubmenu);
 
-  if (isMobile === null) return null;
+  if (!isInit) return null;
 
   return (
     <>
       <div className="relative w-full max-w-5xl h-full">
         <div className="flex justify-start items-center h-full">
-          {!isMobile && (
+          {!isCustomWidth && (
             <>
               <div className="absolute top-1/2 right-12 z-20 -translate-y-[384px]">
                 <ContentBox size="w-64 h-[512px]" layout="justify-start gap-6 pt-8">
@@ -54,7 +54,7 @@ const MyPage = () => {
               )}
             </>
           )}
-          {isMobile && (
+          {isCustomWidth && (
             <div className="flex justify-center items-center w-full h-full">
               <div className="w-full max-w-3xl h-full max-h-[672px]">
                 <MobileTabs>

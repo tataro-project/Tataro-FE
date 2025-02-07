@@ -1,10 +1,10 @@
-import useIsMobile from '@/hooks/useIsMobile';
+import useScreenWidth from '@/hooks/useScreenWidth';
 import { twMerge } from 'tailwind-merge';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import ChatInputProps from './types';
 
 const ChatInput: React.FC<ChatInputProps> = ({ value = '', onChange, onSend, className }) => {
-  const { isMobile } = useIsMobile();
+  const { isMobile } = useScreenWidth();
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [isComposing, setIsComposing] = useState(false);
   const MAX_HEIGHT = 80;

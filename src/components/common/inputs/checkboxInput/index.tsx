@@ -1,13 +1,13 @@
 import React from 'react';
 import CheckboxInputProps from './types';
 import { Check } from 'lucide-react';
-import useIsMobile from '@/hooks/useIsMobile';
+import useScreenWidth from '@/hooks/useScreenWidth';
 
 const CheckboxInput = React.forwardRef<HTMLInputElement, CheckboxInputProps>(
   ({ label, value, error, ...props }, ref) => {
-    const { isMobile } = useIsMobile();
+    const { isInit, isMobile } = useScreenWidth();
 
-    if (isMobile === null) return null;
+    if (!isInit) return null;
 
     return (
       <div className="flex gap-2">
