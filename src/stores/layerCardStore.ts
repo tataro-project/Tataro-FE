@@ -1,0 +1,22 @@
+import LayerCardType from '@common/layerCard/types';
+import { create } from 'zustand';
+
+type LayerCardState = {
+  layerCardData: LayerCardType;
+  showLayerCard: (layerCardData: LayerCardType) => void;
+  hideLayerCard: () => void;
+  isVisible: boolean;
+};
+
+const DEFAULT_LAYER_CARD_DATA: LayerCardType = {
+  content: '',
+};
+
+const useLayerCardStore = create<LayerCardState>(set => ({
+  layerCardData: DEFAULT_LAYER_CARD_DATA,
+  isVisible: false,
+  showLayerCard: (layerCardData: LayerCardType) => set({ layerCardData, isVisible: true }),
+  hideLayerCard: () => set({ layerCardData: DEFAULT_LAYER_CARD_DATA, isVisible: false }),
+}));
+
+export default useLayerCardStore;
