@@ -1,9 +1,8 @@
 'use client';
 
 import useLayerCardStore from '@/stores/layerCardStore';
-import LayerCardType from './types';
 import ContentBox from '@common/contentBox';
-import { useEffect } from 'react';
+import LayerCardType from './types';
 import clsx from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
@@ -20,24 +19,14 @@ export const layerCard = ({
 const LayerCard = () => {
   const {
     layerCardData: { content, variant, position, size },
-    hideLayerCard,
-    isVisible,
   } = useLayerCardStore();
 
-  useEffect(() => {
-    return () => hideLayerCard();
-  }, [hideLayerCard]);
-
   return (
-    <>
-      {isVisible && (
-        <div className="fixed top-0 left-0 z-30 w-screen h-screen px-4 bg-purple bg-opacity-10">
-          <div className={twMerge(clsx('fixed w-full h-full px-2', position, size))}>
-            <ContentBox variant={variant}>{content}</ContentBox>
-          </div>
-        </div>
-      )}
-    </>
+    <div className="fixed top-0 left-0 z-40 w-screen h-screen px-4 bg-purple bg-opacity-10">
+      <div className={twMerge(clsx('fixed w-full h-full px-2', position, size))}>
+        <ContentBox variant={variant}>{content}</ContentBox>
+      </div>
+    </div>
   );
 };
 

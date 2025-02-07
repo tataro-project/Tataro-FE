@@ -1,12 +1,12 @@
 'use client';
 
-import { LayerPopupType } from '@/components/common/layerPopup/types';
 import React, { useEffect } from 'react';
-import Button from '@common/button';
-import { FocusTrap } from 'focus-trap-react';
-import ContentBox from '@common/contentBox';
-import { twMerge } from 'tailwind-merge';
 import useLayerPopupStore from '@/stores/layerPopupStore';
+import Button from '@common/button';
+import ContentBox from '@common/contentBox';
+import { FocusTrap } from 'focus-trap-react';
+import { twMerge } from 'tailwind-merge';
+import { LayerPopupType } from '@/components/common/layerPopup/types';
 
 export const layerPopup = ({ type = 'info', content, onConfirmClick }: LayerPopupType) => {
   const store = useLayerPopupStore.getState();
@@ -66,12 +66,6 @@ const LayerPopup = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isVisible]);
 
-  useEffect(() => {
-    return () => hideLayerPopup();
-  }, [hideLayerPopup]);
-
-  if (!isVisible) return null;
-
   return (
     <FocusTrap active={isVisible} focusTrapOptions={{ initialFocus: false }}>
       <div className="flex justify-center items-center fixed top-0 left-0 z-50 w-screen h-screen px-4 bg-purple bg-opacity-10">
@@ -87,7 +81,7 @@ const LayerPopup = () => {
             id="popup-content"
             className="flex flex-col gap-1 grow self-start font-gMedium text-sm md:text-base text-purple"
           >
-            {content}{' '}
+            {content}
           </p>
 
           <div className="flex justify-center gap-3 self-end">
