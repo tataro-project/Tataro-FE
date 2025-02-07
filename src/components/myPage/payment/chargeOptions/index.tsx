@@ -1,7 +1,7 @@
 import { X } from 'lucide-react';
-import { NUMBER_OF_HEARTS_FOR_SALE } from '../../constants';
+import { NUMBER_OF_HEARTS_FOR_SALE } from '../constants';
 import HeartPriceTag from './HeartPriceTag';
-import { ChargeOptionsProps } from '../../types';
+import { ChargeOptionsProps } from '../types';
 import useScreenWidth from '@/hooks/useScreenWidth';
 import { useEffect } from 'react';
 import { FocusTrap } from 'focus-trap-react';

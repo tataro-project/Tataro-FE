@@ -4,7 +4,3 @@ export type Submenus = {
   submenu: MyPageSubmenus;
   content: () => JSX.Element | null;
 };
-
-export type ChargeOptionsProps = {
-  close: () => void;
-};
