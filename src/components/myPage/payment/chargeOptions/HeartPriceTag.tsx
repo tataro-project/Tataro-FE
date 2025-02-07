@@ -1,7 +1,8 @@
-import Button from '@common/button';
 import { Heart } from 'lucide-react';
+import { HeartPriceTagProps } from '../types';
+import Button from '@common/button';
 
-const HeartPriceTag = ({ heart }: { heart: number }) => {
+const HeartPriceTag = ({ heart }: HeartPriceTagProps) => {
   return (
     <div className="flex justify-center items-center px-4 py-6 border-b border-cream last:border-none">
       <div className="flex items-center gap-2 min-w-28">
