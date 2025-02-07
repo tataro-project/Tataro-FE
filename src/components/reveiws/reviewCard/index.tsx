@@ -1,12 +1,10 @@
 import Image from 'next/image';
 import TheFool from '@images/TheFool.svg';
 import { Eye } from 'lucide-react';
-import { useState } from 'react';
 import ReviewDetail from '../reviewDetail';
-import { createPortal } from 'react-dom';
-import ContentBox from '@common/contentBox';
-import useOutsideClick from '@/hooks/useOutsideClick';
 import { ReviewCardProps } from './types';
+import { layerCard } from '@common/layerCard';
+import useLayerCardStore from '@/stores/layerCardStore';
 
 const ReviewCard: React.FC<ReviewCardProps> = ({
   title,
@@ -16,15 +14,30 @@ const ReviewCard: React.FC<ReviewCardProps> = ({
   updatedAt,
   viewCount,
 }) => {
-  const [isOpenDetail, setIsOpenDetail] = useState(false);
-  const main = document.querySelector('main') as HTMLElement;
+  const { hideLayerCard } = useLayerCardStore();
 
-  const ref = useOutsideClick(() => setIsOpenDetail(false));
+  const showLayerCard = () => {
+    layerCard({
+      content: (
+        <ReviewDetail
+          title={title}
+          content={content}
+          nickname={nickname}
+          imgUrl={TheFool}
+          createdAt={createdAt}
+          updatedAt={updatedAt}
+          viewCount={viewCount}
+          close={() => hideLayerCard()}
+        />
+      ),
+      size: 'max-w-5xl max-h-[768px]',
+    });
+  };
 
   return (
     <li>
       <button
-        onClick={() => setIsOpenDetail(true)}
+        onClick={showLayerCard}
         className="flex items-center gap-10 w-full h-32 px-6 py-4 border border-purple bg-lightPink hover:-translate-y-0.5 hover:shadow-md transition-all duration-200 hover:cursor-pointer"
         aria-label={`${title} 리뷰 상세보기`}
       >
@@ -46,24 +59,6 @@ const ReviewCard: React.FC<ReviewCardProps> = ({
           </div>
         </div>
       </button>
-      {isOpenDetail &&
-        createPortal(
-          <div className="fixed z-20 w-full h-full max-w-[1000px] max-h-[750px] px-2">
-            <ContentBox variant="layerCard" ref={ref}>
-              <ReviewDetail
-                title={title}
-                content={content}
-                nickname={nickname}
-                imgUrl={TheFool}
-                createdAt={createdAt}
-                updatedAt={updatedAt}
-                viewCount={viewCount}
-                close={() => setIsOpenDetail(false)}
-              />
-            </ContentBox>
-          </div>,
-          main,
-        )}
     </li>
   );
 };

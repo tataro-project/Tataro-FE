@@ -1,42 +1,34 @@
 'use client';
 
-import { useAppDispatch, useAppSelector } from '@/store/hooks';
-import { hideLayerPopup, showLayerPopup } from '@/store/slices/layerPopupSlice';
-import { RootState, store } from '@/store/store';
-import { LayerPopupType } from '@/components/common/layerPopup/types';
 import React, { useEffect } from 'react';
+import useLayerPopupStore from '@/stores/layerPopupStore';
 import Button from '@common/button';
-import { FocusTrap } from 'focus-trap-react';
 import ContentBox from '@common/contentBox';
+import { FocusTrap } from 'focus-trap-react';
 import { twMerge } from 'tailwind-merge';
-
-let confirmHandler: (() => void) | null = null;
+import { LayerPopupType } from '@/components/common/layerPopup/types';
 
 export const layerPopup = ({ type = 'info', content, onConfirmClick }: LayerPopupType) => {
-  store.dispatch(showLayerPopup({ type, content }));
-  if (onConfirmClick) confirmHandler = onConfirmClick;
+  const store = useLayerPopupStore.getState();
+  store.showLayerPopup({ type, content, onConfirmClick });
 };
 
 const BUTTON_STYLE = 'h-9 md:h-10 font-gMedium !text-purple stroke-none';
 
 const LayerPopup = () => {
-  const dispatch = useAppDispatch();
   const {
+    layerPopupData: { type, content, onConfirmClick },
     isVisible,
-    layerPopup: { type, content },
-  } = useAppSelector((state: RootState) => state.layerPopup);
+    hideLayerPopup,
+  } = useLayerPopupStore();
 
   const handleConfirmClick = () => {
-    if (confirmHandler) {
-      confirmHandler();
-      confirmHandler = null;
-    }
-    dispatch(hideLayerPopup());
+    if (onConfirmClick) onConfirmClick();
+    hideLayerPopup();
   };
 
   const handleCancelClick = () => {
-    dispatch(hideLayerPopup());
-    confirmHandler = null;
+    hideLayerPopup();
   };
 
   const handleKeyDown = (e: globalThis.KeyboardEvent) => {
@@ -74,8 +66,6 @@ const LayerPopup = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isVisible]);
 
-  if (!isVisible) return null;
-
   return (
     <FocusTrap active={isVisible} focusTrapOptions={{ initialFocus: false }}>
       <div className="flex justify-center items-center fixed top-0 left-0 z-50 w-screen h-screen px-4 bg-purple bg-opacity-10">
@@ -91,9 +81,7 @@ const LayerPopup = () => {
             id="popup-content"
             className="flex flex-col gap-1 grow self-start font-gMedium text-sm md:text-base text-purple"
           >
-            {content.map(line => (
-              <span key={line}>{line}</span>
-            ))}
+            {content}
           </p>
 
           <div className="flex justify-center gap-3 self-end">
