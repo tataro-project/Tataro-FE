@@ -35,6 +35,10 @@ const config: Config = {
       backgroundImage: {
         texture: 'url(/images/texture.svg)',
         logo: 'url(/images/logo.svg)',
+        theFool: 'url(/images/TheFool.svg)',
+        empress: 'url(/images/Empress.svg)',
+        magician: 'url(/images/Magician.svg)',
+        cardBack: 'url(/images/CardBack.svg)',
       },
       dropShadow: {
         px: '1px 1px 0 #53265F',
