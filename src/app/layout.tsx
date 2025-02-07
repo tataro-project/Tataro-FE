@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import '@/styles/globals.css';
 import Header from '@common/header';
+import Providers from '@/providers';
 
 export const metadata: Metadata = {
   title: '하쿠나마타타로',
@@ -19,9 +20,13 @@ const RootLayout = ({
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </head>
       <body>
-        <Header />
-        <div className="fixed top-0 left-0 z-50 w-screen h-screen bg-texture bg-cover bg-no-repeat opacity-10 pointer-events-none" />
-        <main className="flex justify-center items-center w-full h-full p-4 pt-24">{children}</main>
+        <Providers>
+          <Header />
+          <div className="fixed top-0 left-0 z-50 w-screen h-screen bg-texture bg-cover bg-no-repeat opacity-10 pointer-events-none" />
+          <main className="flex justify-center items-center w-full h-full p-4 pt-24">
+            {children}
+          </main>
+        </Providers>
       </body>
     </html>
   );
