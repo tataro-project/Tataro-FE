@@ -10,6 +10,9 @@ type LayerCardState = {
 
 const DEFAULT_LAYER_CARD_DATA: LayerCardType = {
   content: '',
+  variant: undefined,
+  position: undefined,
+  size: '',
 };
 
 const useLayerCardStore = create<LayerCardState>(set => ({
