@@ -1,14 +1,16 @@
 import React from 'react';
 import { twMerge } from 'tailwind-merge';
-import useIsMobile from '@/hooks/useIsMobile';
+import useScreenWidth from '@/hooks/useScreenWidth';
 import TextInputProps from './types';
 import { textInputStyles } from './textInputStyles';
 import InputWrapper from '../inputWrapper';
 
 const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
   ({ id, label, type = 'text', value, className, error, ...rest }, ref) => {
-    const { isMobile } = useIsMobile();
-    if (isMobile === null) return null;
+    const { isInit, isMobile } = useScreenWidth();
+
+    if (!isInit) return null;
+
     return (
       <InputWrapper id={id} label={label} error={error}>
         <div className="w-full sm:w-96">

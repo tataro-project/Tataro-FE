@@ -1,11 +1,13 @@
 'use client';
+
 import TarotChatroom from '@/components/tarotReading/tarotChatroom';
-import useIsMobile from '@/hooks/useIsMobile';
+import useScreenWidth from '@/hooks/useScreenWidth';
 import ContentBox from '@common/contentBox';
 import { twMerge } from 'tailwind-merge';
 
 const TarotReading = () => {
-  const { isMobile } = useIsMobile();
+  const { isMobile } = useScreenWidth();
+
   return (
     <div className="flex justify-center items-center w-full h-full">
       <ContentBox size="max-w-[640px] h-full max-h-[784px]" layout="gap-10">

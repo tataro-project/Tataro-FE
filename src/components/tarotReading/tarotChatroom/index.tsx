@@ -1,4 +1,4 @@
-import useIsMobile from '@/hooks/useIsMobile';
+import useScreenWidth from '@/hooks/useScreenWidth';
 import Button from '@common/button';
 import ChatBubble from '@common/chatBubble';
 import ChatInput from '@common/inputs/chatInput';
@@ -6,7 +6,7 @@ import { ArrowUp } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 
 const TarotChatroom = () => {
-  const { isMobile } = useIsMobile();
+  const { isMobile } = useScreenWidth();
   const [message, setMessage] = useState('');
   const [chatHistory, setChatHistory] = useState<{ message: string; isChatbot: boolean }[]>([]);
   const chatEndRef = useRef<HTMLDivElement>(null);
