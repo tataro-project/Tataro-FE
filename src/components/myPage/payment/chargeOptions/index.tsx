@@ -48,7 +48,7 @@ const ChargeOptions = ({ close }: ChargeOptionsProps) => {
         )}
 
         {isCustomWidth && (
-          <div className="flex flex-col items-center w-full bg-purple scrollable overflow-y-scroll">
+          <div className="flex flex-col items-center w-full bg-purple overflow-y-scroll scrollbar-hide">
             {NUMBER_OF_HEARTS_FOR_SALE.map(heart => (
               <HeartPriceTag key={`${heart}개 ${heart * 100}원`} heart={heart} />
             ))}
