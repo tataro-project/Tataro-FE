@@ -3,14 +3,14 @@
 import { ChevronsLeft, ChevronsRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import clsx from 'clsx';
 import { twMerge } from 'tailwind-merge';
-import { DISABLED_PAGE_BUTTON_STYLES, PAGE_BUTTON_STYLES, PAGE_GROUP_SIZE } from './constants';
 import { PaginationProps } from './types';
+import { DISABLED_PAGE_BUTTON_STYLES, PAGE_BUTTON_STYLES, PAGE_GROUP_SIZE } from './constants';
 
 export default function Pagination({
-  totalResults, // 전체 결과 수
-  currentPage, // 현재 페이지 번호
-  setPage, // 페이지 변경 함수
-  perPage, // 한 페이지당 표시할 아이템 갯수
+  totalResults,
+  currentPage,
+  setPage,
+  perPage,
 }: PaginationProps) {
   const lastPage = Math.ceil(totalResults / perPage);
 
