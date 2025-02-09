@@ -8,7 +8,6 @@ import useScreenWidth from '@/hooks/useScreenWidth';
 import useOutsideClick from '@/hooks/useOutsideClick';
 
 const ReviewDetail: React.FC<ReviewDetailProps> = ({
-  id,
   title,
   content,
   nickname,
