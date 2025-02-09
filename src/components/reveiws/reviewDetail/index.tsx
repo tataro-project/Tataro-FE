@@ -8,13 +8,14 @@ import useScreenWidth from '@/hooks/useScreenWidth';
 import useOutsideClick from '@/hooks/useOutsideClick';
 
 const ReviewDetail: React.FC<ReviewDetailProps> = ({
+  id,
   title,
   content,
   nickname,
-  imgUrl,
-  createdAt,
-  updatedAt,
-  viewCount,
+  img_url,
+  created_at,
+  updated_at,
+  view_count,
   close,
 }) => {
   const { isCustomWidth } = useScreenWidth(640);
@@ -48,24 +49,26 @@ const ReviewDetail: React.FC<ReviewDetailProps> = ({
             items-center justify-between border-b border-purple`}
         >
           <h3 className={`${isCustomWidth ? 'text-xl' : 'text-3xl'}`}>{title}</h3>
-          <p className="font-gMedium">조회수: {viewCount}회</p>
+          <p className="font-gMedium">조회수: {view_count}회</p>
         </header>
 
         <div className={`flex items-center justify-between ${isCustomWidth ? 'px-4' : 'px-8'}`}>
           <p>{nickname}</p>
           <time
             dateTime={
-              updatedAt || createdAt ? new Date(updatedAt || createdAt).toISOString() : undefined
+              updated_at || created_at
+                ? new Date(updated_at || created_at).toISOString()
+                : undefined
             }
           >
-            {updatedAt
-              ? new Date(updatedAt).toLocaleDateString()
-              : new Date(createdAt).toLocaleDateString()}
+            {updated_at
+              ? new Date(updated_at).toLocaleDateString()
+              : new Date(created_at).toLocaleDateString()}
           </time>
         </div>
 
         <section className="flexf flex-1 flex-col justify-between gap-4 overflow-y-auto scrollbar-hide">
-          <Image src={imgUrl} alt="타로카드" width={120} className="m-auto" />
+          <Image src={img_url} alt="타로카드" width={120} className="m-auto" />
           <div className={`flex-1 ${isCustomWidth ? 'max-h-60' : 'max-h-64'} py-8`}>{content}</div>
         </section>
 

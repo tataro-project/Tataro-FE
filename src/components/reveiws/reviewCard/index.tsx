@@ -8,12 +8,13 @@ import { ReviewCardProps } from '../types';
 import useScreenWidth from '@/hooks/useScreenWidth';
 
 const ReviewCard: React.FC<ReviewCardProps> = ({
+  id,
   title,
   content,
   nickname,
-  createdAt,
-  updatedAt,
-  viewCount,
+  created_at,
+  updated_at,
+  view_count,
 }) => {
   const { hideLayerCard } = useLayerCardStore();
   const { isCustomWidth } = useScreenWidth(640);
@@ -22,13 +23,14 @@ const ReviewCard: React.FC<ReviewCardProps> = ({
     layerCard({
       content: (
         <ReviewDetail
+          id={id}
           title={title}
           content={content}
           nickname={nickname}
-          imgUrl={TheFool}
-          createdAt={createdAt}
-          updatedAt={updatedAt}
-          viewCount={viewCount}
+          img_url={TheFool}
+          created_at={created_at}
+          updated_at={updated_at}
+          view_count={view_count}
           close={() => hideLayerCard()}
         />
       ),
@@ -61,10 +63,10 @@ const ReviewCard: React.FC<ReviewCardProps> = ({
               {content}
             </p>
             <div className="flex justify-between items-center text-xs">
-              <p>{updatedAt ? updatedAt : createdAt}</p>
+              <p>{updated_at ? updated_at : created_at}</p>
               <p className="flex items-center gap-1">
                 <Eye className="w-4" />
-                {viewCount}
+                {view_count}
               </p>
             </div>
           </div>

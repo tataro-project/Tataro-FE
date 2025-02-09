@@ -5,18 +5,19 @@ export type Submenus = {
   content: () => JSX.Element | null;
 };
 
-export type BaseReviewProps = {
+export type Review = {
+  id: number;
   title: string;
   content: string;
   nickname: string;
-  createdAt: string;
-  updatedAt: string | null;
-  imgUrl: string;
-  viewCount: number;
+  created_at: string;
+  updated_at: string | null;
+  img_url: string;
+  view_count: number;
 };
 
-export type ReviewCardProps = BaseReviewProps;
+export type ReviewCardProps = Review;
 
-export type ReviewDetailProps = BaseReviewProps & {
+export type ReviewDetailProps = Review & {
   close: () => void;
 };
