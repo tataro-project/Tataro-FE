@@ -4,6 +4,7 @@ import ChatBubble from '@common/chatBubble';
 import ChatInput from '@common/inputs/chatInput';
 import { ArrowUp } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
+import { chatbotMessages } from '../constants';
 
 const TarotChatroom = () => {
   const { isMobile } = useScreenWidth();
@@ -13,28 +14,16 @@ const TarotChatroom = () => {
   const hasMounted = useRef(false);
 
   useEffect(() => {
-    const chatbotMessages = [
-      {
-        message: '어서와~ 타타로를 만나러 와줘서 고마워',
-        isChatbot: true,
-      },
-      {
-        message: '어떤 고민이 있어서 왔니?',
-        isChatbot: true,
-      },
-    ];
-
     if (hasMounted.current) return;
     hasMounted.current = true;
 
-    let delay = 500;
-
-    chatbotMessages.forEach(chat => {
-      setTimeout(() => {
-        setChatHistory(prev => [...prev, chat]);
-      }, delay);
-
-      delay += 1000;
+    chatbotMessages.forEach((chat, index) => {
+      setTimeout(
+        () => {
+          setChatHistory(prev => [...prev, chat]);
+        },
+        500 + index * 1000,
+      );
     });
   }, []);
 
