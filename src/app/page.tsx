@@ -6,8 +6,11 @@ import pinkCloud from '@images/pinkCloud.svg';
 import Image from 'next/image';
 import Button from '@common/button';
 import Link from 'next/link';
+import ReviewBox from '@/components/mainPage/reviewBox';
+import { mockReviews } from '@/components/reveiws/mockReviews';
 
 const Home = () => {
+  const bestReviews = mockReviews;
   return (
     <div className=" flex flex-col items-center h-full w-full gap-20">
       <div className="">
@@ -19,7 +22,7 @@ const Home = () => {
         />
         <Image src={logo} alt="logo" width={320} />
       </div>
-      <div className="max-w-4xl">
+      <div className="md:max-w-4xl max-w-md">
         <TaroSwiper />
       </div>
       <Image
@@ -48,8 +51,22 @@ const Home = () => {
         src={pinkCloud}
         alt="pink-cloud"
         width={600}
-        className="absolute right-0 translate-y-[1100px] "
+        className="absolute right-0 translate-y-[1100px] md:w-[700px] w-[300px] "
       />
+      <div className="grid grid-cols-2 gap-4 mt-96 p-10">
+        {bestReviews.map(review => (
+          <ReviewBox
+            key={review.id}
+            title={review.title}
+            content={review.content}
+            nickname={review.nickname}
+            createdAt={review.created_at}
+            updatedAt={review.updated_at}
+            imgUrl={review.img_url}
+            viewCount={review.view_count}
+          />
+        ))}
+      </div>
     </div>
   );
 };

@@ -13,7 +13,17 @@ import { Autoplay, EffectCoverflow } from 'swiper/modules';
 import clsx from 'clsx';
 
 const TaroSwiper = () => {
-  const cards = ['Magician', 'Thefool', 'Empress', 'Magician', 'Thefool', 'Empress', 'Magician'];
+  const cards = [
+    'Magician',
+    'Thefool',
+    'Empress',
+    'Magician',
+    'Thefool',
+    'Empress',
+    'Magician',
+    'Thefool',
+    'Empress',
+  ];
   return (
     <Swiper
       modules={[Autoplay, EffectCoverflow]}
@@ -21,8 +31,8 @@ const TaroSwiper = () => {
         delay: 3000,
         disableOnInteraction: false,
       }}
-      slidesPerView={4.286}
-      spaceBetween={0}
+      slidesPerView={4.284}
+      spaceBetween={2}
       speed={1700}
       centeredSlides={true}
       effect={'coverflow'}
@@ -32,7 +42,7 @@ const TaroSwiper = () => {
         rotate: 0,
         slideShadows: false,
       }}
-      loop={true}
+      loop
     >
       {cards.map((img, index) => (
         <SwiperSlide key={index}>

@@ -1,6 +1,6 @@
 'use client';
 
-import useIsMobile from '@/hooks/useIsMobile';
+import useScreenWidth from '@/hooks/useScreenWidth';
 import { LogIn, Menu, UserRound, BellDot } from 'lucide-react';
 import Link from 'next/link';
 import clsx from 'clsx';
@@ -10,10 +10,10 @@ import { usePathname } from 'next/navigation';
 
 const Header = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
-  const { isMobile } = useIsMobile();
+  const { isInit, isMobile } = useScreenWidth();
   const pathname = usePathname();
 
-  if (isMobile === null) return null;
+  if (!isInit) return null;
 
   return (
     <>

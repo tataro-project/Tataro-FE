@@ -1,10 +1,10 @@
-import useIsMobile from '@/hooks/useIsMobile';
+import useScreenWidth from '@/hooks/useScreenWidth';
 import { mockPurchaseData } from '../mockData';
 
 const HeartChargeHistory = () => {
-  const { isMobile } = useIsMobile(640);
+  const { isInit, isCustomWidth } = useScreenWidth(640);
 
-  if (isMobile === null) return null;
+  if (!isInit) return null;
 
   return (
     <>
@@ -20,7 +20,7 @@ const HeartChargeHistory = () => {
             <td>
               <strong>결제금액</strong>
             </td>
-            {!isMobile && (
+            {!isCustomWidth && (
               <td>
                 <strong>결제수단</strong>
               </td>
@@ -39,7 +39,7 @@ const HeartChargeHistory = () => {
               <td>{purchaseDate.split('T')[0].replaceAll('-', '.')}</td>
               <td>{quantity}개</td>
               <td>{totalPrice}원</td>
-              {!isMobile && <td>{paymentMethod}</td>}
+              {!isCustomWidth && <td>{paymentMethod}</td>}
               <td>
                 <button>취소</button>
               </td>

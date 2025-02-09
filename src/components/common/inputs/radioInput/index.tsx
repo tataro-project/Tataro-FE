@@ -1,6 +1,6 @@
 import React from 'react';
 import { twMerge } from 'tailwind-merge';
-import useIsMobile from '@/hooks/useIsMobile';
+import useScreenWidth from '@/hooks/useScreenWidth';
 import { Check } from 'lucide-react';
 import RadioInputProps from './types';
 import InputWrapper from '../inputWrapper';
@@ -8,8 +8,9 @@ import { radioCheckboxStyles, radioGroupStyles, radioItemStyles } from './radioI
 
 const RadioInput = React.forwardRef<HTMLInputElement, RadioInputProps>(
   ({ id, label, options, value, onChange, name, className, error, ...rest }, ref) => {
-    const { isMobile } = useIsMobile();
-    if (isMobile === null) return null;
+    const { isInit, isMobile } = useScreenWidth();
+
+    if (!isInit) return null;
 
     return (
       <InputWrapper id={id} label={label} error={error}>
