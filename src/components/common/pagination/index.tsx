@@ -2,7 +2,6 @@
 
 import { ChevronsLeft, ChevronsRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import clsx from 'clsx';
-import { twMerge } from 'tailwind-merge';
 import { PaginationProps } from './types';
 import { DISABLED_PAGE_BUTTON_STYLES, PAGE_BUTTON_STYLES, PAGE_GROUP_SIZE } from './constants';
 
@@ -41,8 +40,9 @@ export default function Pagination({
     <div className="flex justify-center items-center gap-4 py-3 text-purple select-none">
       <button onClick={() => handleGroupChange('prev')} disabled={currentPage === 1}>
         <ChevronsLeft
-          className={twMerge(
-            clsx(PAGE_BUTTON_STYLES, currentPage === 1 && DISABLED_PAGE_BUTTON_STYLES),
+          className={clsx(
+            PAGE_BUTTON_STYLES,
+            currentPage === 1 && DISABLED_PAGE_BUTTON_STYLES,
             'w-5 h-5',
           )}
         />
@@ -50,8 +50,9 @@ export default function Pagination({
 
       <button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>
         <ChevronLeft
-          className={twMerge(
-            clsx(PAGE_BUTTON_STYLES, currentPage === 1 && DISABLED_PAGE_BUTTON_STYLES),
+          className={clsx(
+            PAGE_BUTTON_STYLES,
+            currentPage === 1 && DISABLED_PAGE_BUTTON_STYLES,
             'w-5 h-5',
           )}
         />
@@ -75,8 +76,9 @@ export default function Pagination({
 
       <button onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === lastPage}>
         <ChevronRight
-          className={twMerge(
-            clsx(PAGE_BUTTON_STYLES, lastPage === currentPage && DISABLED_PAGE_BUTTON_STYLES),
+          className={clsx(
+            PAGE_BUTTON_STYLES,
+            lastPage === currentPage && DISABLED_PAGE_BUTTON_STYLES,
             'w-5 h-5',
           )}
         />
@@ -84,8 +86,9 @@ export default function Pagination({
 
       <button onClick={() => handleGroupChange('next')} disabled={currentPage === lastPage}>
         <ChevronsRight
-          className={twMerge(
-            clsx(PAGE_BUTTON_STYLES, lastPage === currentPage && DISABLED_PAGE_BUTTON_STYLES),
+          className={clsx(
+            PAGE_BUTTON_STYLES,
+            lastPage === currentPage && DISABLED_PAGE_BUTTON_STYLES,
             'w-5 h-5',
           )}
         />
