@@ -2,10 +2,12 @@ import Pagination from '@common/pagination';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { mockReviews } from '../mockReviews';
 import ReviewCard from '../reviewCard';
+import useScreenWidth from '@/hooks/useScreenWidth';
 
 const BestReviews = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const containerRef = useRef<HTMLDivElement>(null);
+  const { isCustomWidth } = useScreenWidth(640);
   const perPage = 3;
 
   const sortedReviews = useMemo(() => {
@@ -28,13 +30,18 @@ const BestReviews = () => {
   return (
     <div
       ref={containerRef}
-      className="flex flex-col justify-center items-center gap-8 w-full px-16 focus:outline-none"
+      className={`flex flex-col justify-around items-center w-full h-full focus:outline-none ${isCustomWidth ? '' : 'px-14'}`}
       tabIndex={-1}
     >
-      <h1 className="text-4xl font-lilita text-cream stroke" tabIndex={-1}>
+      <h1 className={`font-lilita text-cream stroke ${isCustomWidth ? 'text-3xl' : 'text-4xl'}`}>
         Best Review
       </h1>
-      <ul className="flex flex-col justify-start items-center gap-4 w-full min-h-[416px]">
+      <ul
+        className={`
+          flex flex-col justify-between items-center
+          ${isCustomWidth ? 'min-h-[350px]' : 'min-h-[410px]'}
+        `}
+      >
         {currentReviews.map(review => (
           <ReviewCard
             key={review.id}
