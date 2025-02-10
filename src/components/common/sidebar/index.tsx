@@ -8,10 +8,11 @@ import useOutsideClick from '@/hooks/useOutsideClick';
 import SidebarProps from './types';
 
 const Sidebar = ({ isOpen, close }: SidebarProps) => {
+  const router = useRouter();
+
   const ref = useOutsideClick(() => {
     if (isOpen) close();
   });
-  const router = useRouter();
 
   const handleMenuClick = (path: string) => {
     router.push(path);
@@ -36,7 +37,7 @@ const Sidebar = ({ isOpen, close }: SidebarProps) => {
             !isOpen && 'opacity-0 translate-x-72 md:translate-x-80',
           )}
         >
-          <button onClick={close} className="absolute top-1 left-1">
+          <button tabIndex={isOpen ? 0 : -1} onClick={close} className="absolute top-1 left-1">
             <X strokeWidth={1.5} className="text-purple" />
           </button>
 
@@ -47,14 +48,23 @@ const Sidebar = ({ isOpen, close }: SidebarProps) => {
               </Button>
               <div className="flex flex-col gap-5 grow">
                 {SIDEBAR_MENUS.map(({ menu, path }) => (
-                  <Button key={menu} variant="menuButton" onClick={() => handleMenuClick(path)}>
+                  <Button
+                    key={menu}
+                    tabIndex={isOpen ? 0 : -1}
+                    variant="menuButton"
+                    onClick={() => handleMenuClick(path)}
+                  >
                     {menu}
                   </Button>
                 ))}
               </div>
             </div>
 
-            <Button variant="simple" className="self-end font-lilita text-lg md:text-xl">
+            <Button
+              tabIndex={isOpen ? 0 : -1}
+              variant="simple"
+              className="self-end font-lilita text-lg md:text-xl"
+            >
               Logout
             </Button>
           </div>

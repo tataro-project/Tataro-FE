@@ -12,8 +12,7 @@ const buttonStyles = cva(
         simple: `h-8 md:h-9 px-4 bg-deepPink font-gBold text-sm md:text-base text-white md:text-cream stroke hover:text-white ${HOVER_AND_ACTIVE_STYLE}`,
         startButton:
           'w-44 md:w-72 h-10 md:h-14 bg-deepPink font-gBold text-base md:text-xl text-white md:text-cream stroke transition-all duration-500 hover:text-white hover:drop-shadow-2 hover:-translate-x-0.5 hover:-translate-y-0.5 active:drop-shadow-none active:translate-x-0 active:translate-y-0',
-        menuButton:
-          'w-56 md:w-60 h-9 md:h-10 bg-deepPink font-lilita text-2xl md:text-3xl text-cream stroke',
+        menuButton: 'h-9 md:h-10 bg-deepPink font-lilita text-2xl md:text-3xl text-cream stroke',
         submenuButton: 'w-64 h-12 px-7 text-3xl text-start hover:rotate-1 font-lilita stroke',
         priceTag: `w-20 md:w-28 h-8 md:h-9 bg-cream font-gBold text-sm md:text-base text-purple ${HOVER_AND_ACTIVE_STYLE}`,
         chatroom: ` px-4 py-1 bg-lightPink font-gMedium text-sm md:text-base text-purple ${HOVER_AND_ACTIVE_STYLE}`,
@@ -46,7 +45,7 @@ const buttonStyles = cva(
       {
         variant: 'menuButton',
         disabled: false,
-        class: 'hover:brightness-105 active:bg-cream active:text-deepPink',
+        class: 'w-56 md:w-60 hover:brightness-105 active:bg-cream active:text-deepPink',
       },
 
       {
