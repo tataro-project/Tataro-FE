@@ -45,9 +45,8 @@ const Home = () => {
         </Button>
       </Link>
       <div
-        className="flex flex-col h-full p-20 text-center text-purple font-gMedium"
-        data-aos="fade-up"
-        data-aos-easing="200"
+        className="flex flex-col h-full p-20 text-center text-purple font-gMedium delay-[300ms] duration-[600ms] taos:translate-y-[100%] taos:opacity-0"
+        data-taos-offset="300"
       >
         <p>운명적인 사랑을 찾는 첫걸음, 당신만의 타로 이야기</p>
         <br />

@@ -28,7 +28,6 @@
     "swiper": "^11.2.2",
     "tailwind-merge": "^2.6.0",
     "tailwind-scrollbar-hide": "^2.0.0",
-    "taos": "^1.0.5",
     "zod": "^3.24.1"
   },
   "devDependencies": {
