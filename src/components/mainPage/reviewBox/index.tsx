@@ -7,16 +7,17 @@ import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import ContentBox from '@common/contentBox';
 import useOutsideClick from '@/hooks/useOutsideClick';
-import { ReviewCardProps } from '@/components/reveiws/reviewCard/types';
-import ReviewDetail from '@/components/reveiws/reviewDetail';
+import { ReviewCardProps } from '@/components/reviews/types';
+import ReviewDetail from '@/components/reviews/reviewDetail';
 
 const ReviewBox: React.FC<ReviewCardProps> = ({
+  id,
   title,
   content,
   nickname,
-  createdAt,
-  updatedAt,
-  viewCount,
+  created_at,
+  updated_at,
+  view_count,
 }) => {
   const [isOpenDetail, setIsOpenDetail] = useState(false);
   const [mainEl, setMainEl] = useState<HTMLElement | null>(null);
@@ -44,10 +45,10 @@ const ReviewBox: React.FC<ReviewCardProps> = ({
 
           <p className="text-sm text-left line-clamp-2">{content}</p>
           <div className="flex justify-between items-center text-xs">
-            <p>{updatedAt ? updatedAt : createdAt}</p>
+            <p>{updated_at ? updated_at : created_at}</p>
             <p className="flex items-center gap-1">
               <Eye className="w-4" />
-              {viewCount}
+              {view_count}
             </p>
           </div>
         </div>
@@ -58,13 +59,14 @@ const ReviewBox: React.FC<ReviewCardProps> = ({
           <div className="fixed z-20 w-full h-full max-w-[1000px] max-h-[750px] px-2">
             <ContentBox variant="layerCard" ref={ref}>
               <ReviewDetail
+                id={id}
                 title={title}
                 content={content}
                 nickname={nickname}
-                imgUrl={TheFool}
-                createdAt={createdAt}
-                updatedAt={updatedAt}
-                viewCount={viewCount}
+                img_url={TheFool}
+                created_at={created_at}
+                updated_at={updated_at}
+                view_count={view_count}
                 close={() => setIsOpenDetail(false)}
               />
             </ContentBox>

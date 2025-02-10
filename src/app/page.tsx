@@ -85,13 +85,14 @@ const Home = () => {
         {bestReviews.map(review => (
           <ReviewBox
             key={review.id}
+            id={review.id}
             title={review.title}
             content={review.content}
             nickname={review.nickname}
-            createdAt={review.created_at}
-            updatedAt={review.updated_at}
-            imgUrl={review.img_url}
-            viewCount={review.view_count}
+            created_at={review.created_at}
+            updated_at={review.updated_at}
+            img_url={review.img_url}
+            view_count={review.view_count}
           />
         ))}
       </div>
