@@ -13,6 +13,7 @@
     "@hookform/resolvers": "^3.10.0",
     "@react-spring/web": "^9.7.5",
     "@reduxjs/toolkit": "^2.5.0",
+    "@types/aos": "^3.0.7",
     "@use-gesture/react": "^10.3.1",
     "aos": "3.0.0-beta.6",
     "class-variance-authority": "^0.7.1",
@@ -27,6 +28,7 @@
     "swiper": "^11.2.2",
     "tailwind-merge": "^2.6.0",
     "tailwind-scrollbar-hide": "^2.0.0",
+    "taos": "^1.0.5",
     "zod": "^3.24.1"
   },
   "devDependencies": {

@@ -1,3 +1,4 @@
+'use client';
 import TaroSwiper from '@/components/mainPage/taroSwiper';
 import moon from '@images/moon.svg';
 import logo from '@images/logo.svg';
@@ -8,12 +9,18 @@ import Button from '@common/button';
 import Link from 'next/link';
 import ReviewBox from '@/components/mainPage/reviewBox';
 import { mockReviews } from '@/components/reveiws/mockReviews';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import { useEffect } from 'react';
 
 const Home = () => {
   const bestReviews = mockReviews;
+  useEffect(() => {
+    AOS.init();
+  }, []);
   return (
     <div className=" flex flex-col items-center h-full w-full gap-20">
-      <div className="">
+      <div>
         <Image
           src={moon}
           alt="moon"
@@ -28,14 +35,20 @@ const Home = () => {
       <Image
         src={blueCloud}
         alt="blue-cloud"
-        className="absolute left-0 md:translate-y-[400px] translate-y-[700px] z-20 md:w-[700px] w-[300px]"
+        className="absolute left-0 md:translate-y-[400px] translate-y-[1200px] z-20 md:w-[700px] w-[300px]"
+        data-aos="fade-up"
+        data-aos-easing="200"
       />
       <Link href={'tarotReading'} className="z-50">
         <Button variant="startButton" className="md:text-2xl text-xl ">
           상담 시작 하기
         </Button>
       </Link>
-      <div className="flex flex-col h-full p-20 text-center text-purple font-gMedium">
+      <div
+        className="flex flex-col h-full p-20 text-center text-purple font-gMedium"
+        data-aos="fade-up"
+        data-aos-easing="200"
+      >
         <p>운명적인 사랑을 찾는 첫걸음, 당신만의 타로 이야기</p>
         <br />
         <p>사랑, 관계, 그리고 당신의 마음속 이야기를 타로를 통해 해석 해드립니다.</p>
@@ -52,8 +65,10 @@ const Home = () => {
         alt="pink-cloud"
         width={600}
         className="absolute right-0 translate-y-[1100px] md:w-[700px] w-[300px] "
+        data-aos="fade-up"
+        data-aos-easing="200"
       />
-      <div className="grid grid-cols-2 gap-4 mt-96 p-10">
+      <div className="grid grid-cols-2 gap-4 mt-96 p-10" data-aos="fade-up" data-aos-easing="200">
         {bestReviews.map(review => (
           <ReviewBox
             key={review.id}
