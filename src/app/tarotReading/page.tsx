@@ -20,7 +20,7 @@ const TarotReading = () => {
           >
             TATARO
           </div>
-          <div className="flex-grow overflow-hidden p-1 pt-5 text-purple">
+          <div className="flex-grow overflow-hidden text-purple">
             <TarotChatroom />
           </div>
         </div>
