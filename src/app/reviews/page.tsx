@@ -5,8 +5,8 @@ import useScreenWidth from '@/hooks/useScreenWidth';
 import { MobileTab, MobileTabs } from '@common/tabs/mobileTaps';
 import Button from '@common/button';
 import ContentBox from '@common/contentBox';
-import SUBMENUS from '@/components/reveiws/constants';
-import { ReviewsSubmenus } from '@/components/reveiws/types';
+import SUBMENUS from '@/components/reviews/constants';
+import { ReviewsSubmenus } from '@/components/reviews/types';
 
 const Reviews = () => {
   const { isInit, isCustomWidth } = useScreenWidth(1056);
