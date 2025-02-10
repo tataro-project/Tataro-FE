@@ -8,16 +8,16 @@ import Image from 'next/image';
 import Button from '@common/button';
 import Link from 'next/link';
 import ReviewBox from '@/components/mainPage/reviewBox';
-
-import AOS from 'aos';
+import Aos from 'aos';
 import 'aos/dist/aos.css';
-import { useEffect } from 'react';
+
 import { mockReviews } from '@/components/reviews/mockReviews';
+import { useEffect } from 'react';
 
 const Home = () => {
   const bestReviews = mockReviews;
   useEffect(() => {
-    AOS.init();
+    Aos.init();
   }, []);
   return (
     <div className=" flex flex-col items-center h-full w-full gap-20">
