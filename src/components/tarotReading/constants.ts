@@ -1,4 +1,6 @@
-export const chatbotMessages = [
+import { ChatBubbleProps } from '@common/chatBubble/types';
+
+export const initialChatbotMessages: ChatBubbleProps[] = [
   {
     message: '어서와~ 타타로를 만나러 와줘서 고마워',
     isChatbot: true,
