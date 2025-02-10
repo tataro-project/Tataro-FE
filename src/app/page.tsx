@@ -35,15 +35,15 @@ const Home = () => {
       </div>
       <div className="absolute left-0 md:translate-y-[400px] translate-y-[2000px] z-20 md:w-[700px] w-[300px]">
         <Image
-          src={blueCloud}
-          alt="blue-cloud"
+          src={pinkCloud}
+          alt="pink-cloud"
           data-aos="fade-right"
           data-aos-easing="400"
-          data-aos-offset="950"
-          data-aos-duration="1000"
+          data-aos-offset="800"
+          data-aos-duration="1200"
         />
       </div>
-      <Link href={'tarotReading'} className="z-50">
+      <Link href={'tarotReading'} className="z-50" tabIndex={-1}>
         <Button variant="startButton" className="md:text-2xl text-xl ">
           상담 시작 하기
         </Button>
@@ -68,8 +68,8 @@ const Home = () => {
       </div>
       <div className="absolute right-0 translate-y-[1100px] md:w-[600px] w-[300px] z-10">
         <Image
-          src={pinkCloud}
-          alt="pink-cloud"
+          src={blueCloud}
+          alt="blue-cloud"
           priority
           data-aos="fade-up"
           data-aos-offset="1400"
