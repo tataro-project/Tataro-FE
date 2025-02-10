@@ -1,6 +1,5 @@
-type ChatBubbleProps = {
+export type ChatBubbleProps = {
   message: string;
   isChatbot: boolean;
+  showButton?: boolean;
 };
-
-export default ChatBubbleProps;

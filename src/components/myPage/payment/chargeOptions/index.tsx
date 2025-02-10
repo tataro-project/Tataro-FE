@@ -1,7 +1,7 @@
 import { X } from 'lucide-react';
-import { NUMBER_OF_HEARTS_FOR_SALE } from '../../constants';
+import { NUMBER_OF_HEARTS_FOR_SALE } from '../constants';
 import HeartPriceTag from './HeartPriceTag';
-import { ChargeOptionsProps } from '../../types';
+import { ChargeOptionsProps } from '../types';
 import useScreenWidth from '@/hooks/useScreenWidth';
 import { useEffect } from 'react';
 import { FocusTrap } from 'focus-trap-react';
@@ -48,7 +48,7 @@ const ChargeOptions = ({ close }: ChargeOptionsProps) => {
         )}
 
         {isCustomWidth && (
-          <div className="flex flex-col items-center w-full bg-purple scrollable overflow-y-scroll">
+          <div className="flex flex-col items-center w-full bg-purple overflow-y-scroll scrollbar-hide">
             {NUMBER_OF_HEARTS_FOR_SALE.map(heart => (
               <HeartPriceTag key={`${heart}개 ${heart * 100}원`} heart={heart} />
             ))}

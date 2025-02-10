@@ -1,58 +1,48 @@
 'use client';
 
-import { useMemo } from 'react';
 import { ChevronsLeft, ChevronsRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import clsx from 'clsx';
-import { twMerge } from 'tailwind-merge';
+import { PaginationProps } from './types';
 import { DISABLED_PAGE_BUTTON_STYLES, PAGE_BUTTON_STYLES, PAGE_GROUP_SIZE } from './constants';
-
-interface PaginationProps {
-  totalResults: number;
-  currentPage: number;
-  setPage: (pageNumber: number) => void;
-  perPage?: number;
-}
 
 export default function Pagination({
   totalResults,
   currentPage,
   setPage,
-  perPage = 9,
+  perPage,
 }: PaginationProps) {
-  const pageGroup = Math.ceil(currentPage / PAGE_GROUP_SIZE);
+  const lastPage = Math.ceil(totalResults / perPage);
 
-  const totalPages = useMemo(() => Math.ceil(totalResults / perPage), [totalResults, perPage]);
-
-  const firstPageOfGroup = useMemo(() => (pageGroup - 1) * PAGE_GROUP_SIZE + 1, [pageGroup]);
-
-  const pages = useMemo(
-    () => Array.from({ length: PAGE_GROUP_SIZE }, (_, index) => firstPageOfGroup + index),
-    [firstPageOfGroup],
+  const startPage = Math.max(
+    1,
+    Math.min(currentPage - Math.floor(PAGE_GROUP_SIZE / 2), lastPage - PAGE_GROUP_SIZE + 1),
   );
+  const endPage = Math.min(lastPage, startPage + PAGE_GROUP_SIZE - 1);
 
-  const handlePageChange = (page: number) => {
-    if (page < 1 || page > totalPages) return;
-    if ((page === 1 && currentPage === 1) || (page === totalPages && currentPage === totalPages))
-      return;
+  const pages = Array.from({ length: endPage - startPage + 1 }, (_, index) => startPage + index);
+
+  const handlePageChange = (targetPage: number) => {
+    if (targetPage < 1 || targetPage > lastPage || targetPage === currentPage) return;
 
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    setPage(page);
+    setPage(targetPage);
   };
 
   const handleGroupChange = (direction: 'prev' | 'next') => {
     const newPage =
       direction === 'prev'
         ? Math.max(1, currentPage - PAGE_GROUP_SIZE)
-        : Math.min(totalPages, currentPage + PAGE_GROUP_SIZE);
+        : Math.min(lastPage, currentPage + PAGE_GROUP_SIZE);
     handlePageChange(newPage);
   };
 
   return (
-    <div className="flex justify-center items-center gap-4 py-3 text-purple">
+    <div className="flex justify-center items-center gap-4 py-3 text-purple select-none">
       <button onClick={() => handleGroupChange('prev')} disabled={currentPage === 1}>
         <ChevronsLeft
-          className={twMerge(
-            clsx(PAGE_BUTTON_STYLES, currentPage === 1 && DISABLED_PAGE_BUTTON_STYLES),
+          className={clsx(
+            PAGE_BUTTON_STYLES,
+            currentPage === 1 && DISABLED_PAGE_BUTTON_STYLES,
             'w-5 h-5',
           )}
         />
@@ -60,8 +50,9 @@ export default function Pagination({
 
       <button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>
         <ChevronLeft
-          className={twMerge(
-            clsx(PAGE_BUTTON_STYLES, currentPage === 1 && DISABLED_PAGE_BUTTON_STYLES),
+          className={clsx(
+            PAGE_BUTTON_STYLES,
+            currentPage === 1 && DISABLED_PAGE_BUTTON_STYLES,
             'w-5 h-5',
           )}
         />
@@ -74,7 +65,7 @@ export default function Pagination({
             className={clsx(
               PAGE_BUTTON_STYLES,
               currentPage === page && 'text-deepPink font-gBold',
-              page > totalPages && 'hidden',
+              page > lastPage && 'hidden',
             )}
             onClick={() => handlePageChange(page)}
           >
@@ -83,22 +74,21 @@ export default function Pagination({
         ))}
       </div>
 
-      <button
-        onClick={() => handlePageChange(currentPage + 1)}
-        disabled={currentPage === totalPages}
-      >
+      <button onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === lastPage}>
         <ChevronRight
-          className={twMerge(
-            clsx(PAGE_BUTTON_STYLES, totalPages === currentPage && DISABLED_PAGE_BUTTON_STYLES),
+          className={clsx(
+            PAGE_BUTTON_STYLES,
+            lastPage === currentPage && DISABLED_PAGE_BUTTON_STYLES,
             'w-5 h-5',
           )}
         />
       </button>
 
-      <button onClick={() => handleGroupChange('next')} disabled={currentPage === totalPages}>
+      <button onClick={() => handleGroupChange('next')} disabled={currentPage === lastPage}>
         <ChevronsRight
-          className={twMerge(
-            clsx(PAGE_BUTTON_STYLES, totalPages === currentPage && DISABLED_PAGE_BUTTON_STYLES),
+          className={clsx(
+            PAGE_BUTTON_STYLES,
+            lastPage === currentPage && DISABLED_PAGE_BUTTON_STYLES,
             'w-5 h-5',
           )}
         />

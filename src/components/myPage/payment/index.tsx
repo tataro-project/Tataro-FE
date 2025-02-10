@@ -3,20 +3,22 @@ import { PriceTab, PriceTabs } from '@common/tabs/priceTabs';
 import { Heart } from 'lucide-react';
 import HeartChargeHistory from './heartChargeHistory';
 import HeartUsageHistory from './heartUsageHistory';
-import { useState } from 'react';
-import ContentBox from '@common/contentBox';
 import ChargeOptions from './chargeOptions';
-import useOutsideClick from '@/hooks/useOutsideClick';
-import { createPortal } from 'react-dom';
+import { layerCard } from '@common/layerCard';
+import useLayerCardStore from '@/stores/layerCardStore';
 
 const REMAINING_HEARTS = 150;
 
 const Payment = () => {
-  const [showLayerCard, setShowLayerCard] = useState<boolean>(false);
+  const { hideLayerCard } = useLayerCardStore();
 
-  const ref = useOutsideClick(() => setShowLayerCard(false));
-
-  const main = document.querySelector('main') as HTMLElement;
+  const showLayerPopup = () => {
+    layerCard({
+      content: <ChargeOptions close={() => hideLayerCard()} />,
+      variant: 'price',
+      size: 'max-w-2xl h-[576px]',
+    });
+  };
 
   return (
     <section className="flex flex-col justify-between items-center gap-4 sm:gap-6 w-full h-full">
@@ -32,7 +34,7 @@ const Payment = () => {
             <span>개</span>
           </p>
         </div>
-        <Button variant="simple" className="sm:text-lg" onClick={() => setShowLayerCard(true)}>
+        <Button variant="simple" className="sm:text-lg" onClick={showLayerPopup}>
           충전하기
         </Button>
       </div>
@@ -45,16 +47,6 @@ const Payment = () => {
           <HeartUsageHistory />
         </PriceTab>
       </PriceTabs>
-
-      {showLayerCard &&
-        createPortal(
-          <div className="fixed top-1/2 left-1/2 z-30 w-full h-full max-w-2xl max-h-[576px] px-2 -translate-x-1/2 -translate-y-1/2">
-            <ContentBox variant="price" ref={ref}>
-              <ChargeOptions close={() => setShowLayerCard(false)} />
-            </ContentBox>
-          </div>,
-          main,
-        )}
     </section>
   );
 };
