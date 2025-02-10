@@ -8,10 +8,11 @@ import Image from 'next/image';
 import Button from '@common/button';
 import Link from 'next/link';
 import ReviewBox from '@/components/mainPage/reviewBox';
-import { mockReviews } from '@/components/reveiws/mockReviews';
+
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { useEffect } from 'react';
+import { mockReviews } from '@/components/reviews/mockReviews';
 
 const Home = () => {
   const bestReviews = mockReviews;
