@@ -16,7 +16,7 @@ const buttonStyles = cva(
           'w-56 md:w-60 h-9 md:h-10 bg-deepPink font-lilita text-2xl md:text-3xl text-cream stroke',
         submenuButton: 'w-64 h-12 px-7 text-3xl text-start hover:rotate-1 font-lilita stroke',
         priceTag: `w-20 md:w-28 h-8 md:h-9 bg-cream font-gBold text-sm md:text-base text-purple ${HOVER_AND_ACTIVE_STYLE}`,
-        chatroom: `h-7 md:h-9 px-3 md:px-4 bg-lightPink font-gMedium text-xm md:text-sm text-purple ${HOVER_AND_ACTIVE_STYLE}`,
+        chatroom: ` px-4 py-1 bg-lightPink font-gMedium text-sm md:text-base text-purple ${HOVER_AND_ACTIVE_STYLE}`,
         sendButton: `flex justify-center items-center size-10 md:size-11 border-blueGray bg-lightBlue ${HOVER_AND_ACTIVE_STYLE}`,
         editAndDeleteButton:
           'w-12 md:w-16 h-7 md:h-8 border-none bg-purple font-gMedium text-xs md:text-sm text-cream hover:text-white active:brightness-125',

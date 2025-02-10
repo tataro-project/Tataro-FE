@@ -102,7 +102,7 @@ const TarotChatroom = () => {
         <div ref={chatEndRef} />
       </div>
       {showOptions && (
-        <div className="flex justify-center gap-8 p-2">
+        <div className="flex justify-center gap-8 py-[13px]">
           <Button variant="chatroom" onClick={() => handleOptionClick('고민없어')}>
             고민없어
           </Button>
