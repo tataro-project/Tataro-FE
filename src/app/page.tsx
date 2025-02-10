@@ -43,7 +43,7 @@ const Home = () => {
           data-aos-duration="1200"
         />
       </div>
-      <Link href={'tarotReading'} className="z-50">
+      <Link href={'tarotReading'} className="z-50" tabIndex={-1}>
         <Button variant="startButton" className="md:text-2xl text-xl ">
           상담 시작 하기
         </Button>
