@@ -50,14 +50,14 @@ const TaroSwiper = () => {
             isActive || isNext || isPrev ? (
               <div
                 className={clsx(
-                  'w-60 h-96 bg-center bg-contain bg-no-repeat',
+                  'md:w-60 w-30 h-96 bg-center bg-contain bg-no-repeat',
                   img === 'Thefool' && 'bg-theFool',
                   img === 'Magician' && 'bg-magician',
                   img === 'Empress' && 'bg-empress',
                 )}
               />
             ) : (
-              <div className="w-52 h-96 bg-cardBack bg-center bg-contain bg-no-repeat" />
+              <div className="md:w-52 w-30 h-96 bg-cardBack bg-center bg-contain bg-no-repeat" />
             )
           }
         </SwiperSlide>
