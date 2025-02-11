@@ -28,12 +28,12 @@ const Home = () => {
           width={80}
           className="absolute -translate-x-[80px] translate-y-[25px] "
         />
-        <Image src={logo} alt="logo" width={320} />
+        <Image src={logo} alt="logo" className="max-w-[320px]" />
       </div>
       <div className="md:max-w-4xl max-w-md">
         <TaroSwiper />
       </div>
-      <div className="absolute left-0 md:translate-y-[400px] translate-y-[2000px] z-20 md:w-[700px] w-[300px]">
+      <div className="absolute left-0 md:translate-y-[400px] translate-y-[530px] z-20 max-w-[700px] ">
         <Image
           src={pinkCloud}
           alt="pink-cloud"
@@ -49,7 +49,7 @@ const Home = () => {
         </Button>
       </Link>
       <div
-        className="flex flex-col h-full p-20 text-center text-purple font-gMedium"
+        className="flex flex-col h-full p-20 text-center text-purple font-gMedium z-50 "
         data-aos="fade-up"
         data-aos-easing="200"
         data-aos-offset="300"
@@ -66,7 +66,7 @@ const Home = () => {
         <br />
         <p>하쿠나마타타로</p>
       </div>
-      <div className="absolute right-0 translate-y-[1100px] md:w-[600px] w-[300px] z-10">
+      <div className="absolute right-0 translate-y-[1100px] max-w-[600px]  z-10">
         <Image
           src={blueCloud}
           alt="blue-cloud"
@@ -77,7 +77,7 @@ const Home = () => {
         />
       </div>
       <div
-        className="grid grid-cols-2 gap-4 p-10"
+        className="grid grid-cols-2 md:gap-5 md:p-10 gap-10 "
         data-aos="fade-up"
         data-aos-easing="400"
         data-aos-offset="250"
