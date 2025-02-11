@@ -36,10 +36,10 @@ const ReviewBox: React.FC<ReviewCardProps> = ({
     <div>
       <button
         onClick={() => setIsOpenDetail(true)}
-        className="flex flex-col items-center gap-12 max-w-[500px]  md:h-[650px] h-[500px] px-6 py-4 border border-purple bg-lightPink hover:-translate-y-0.5 hover:shadow-md transition-all duration-200 hover:cursor-pointer"
+        className="flex flex-col items-center gap-12 max-w-[500px] h-[650px] px-6 py-4 border border-purple bg-lightPink hover:-translate-y-0.5 hover:shadow-md transition-all duration-200 hover:cursor-pointer"
         aria-label={`${title} 리뷰 상세보기`}
       >
-        <Image src={TheFool} alt="타로카드" className="mt-7 md:w-[160px] w-20" />
+        <Image src={TheFool} alt="타로카드" className="mt-7 w-[160px] " />
         <div className="flex flex-1 flex-col justify-center gap-10 h-full text-purple">
           <div className="flex justify-between">
             <h2 className="text-base font-gBold">{title}</h2>
