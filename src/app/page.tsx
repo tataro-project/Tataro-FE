@@ -1,5 +1,5 @@
 'use client';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import Aos from 'aos';
@@ -16,12 +16,25 @@ import moon from '@images/moon.svg';
 import pinkCloud from '@images/pinkCloud.svg';
 
 import 'aos/dist/aos.css';
+import LoadingSpinner from '@common/loadingSpinner';
 
 const Home = () => {
   const bestReviews = mockReviews;
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     Aos.init();
+
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+
+    return () => clearTimeout(timer);
   }, []);
+
+  // 로딩 중일 때는 로딩 스피너를 보여줍니다.
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
   return (
     <div className=" flex flex-col items-center h-full w-full gap-20">
       <div>

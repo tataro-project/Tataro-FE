@@ -1,6 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
-import tataroFace from '@images/tataroFace.svg';
+
+import tataroFace from '@images/tataroFace.gif';
 
 const LoadingSpinner = () => {
   return (
