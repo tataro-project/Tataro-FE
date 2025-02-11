@@ -1,9 +1,11 @@
 'use client';
 
+import { twMerge } from 'tailwind-merge';
+
 import TarotChatroom from '@/components/tarotReading/tarotChatroom';
 import useScreenWidth from '@/hooks/useScreenWidth';
+
 import ContentBox from '@common/contentBox';
-import { twMerge } from 'tailwind-merge';
 
 const TarotReading = () => {
   const { isMobile } = useScreenWidth();

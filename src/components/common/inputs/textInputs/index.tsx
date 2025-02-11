@@ -1,9 +1,12 @@
 import React from 'react';
 import { twMerge } from 'tailwind-merge';
+
 import useScreenWidth from '@/hooks/useScreenWidth';
-import TextInputProps from './types';
-import { textInputStyles } from './textInputStyles';
+
 import InputWrapper from '../inputWrapper';
+import { textInputStyles } from './textInputStyles';
+
+import TextInputProps from './types';
 
 const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
   ({ id, label, type = 'text', value, className, error, ...rest }, ref) => {

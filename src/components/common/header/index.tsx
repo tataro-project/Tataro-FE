@@ -1,12 +1,14 @@
 'use client';
 
-import useScreenWidth from '@/hooks/useScreenWidth';
-import { LogIn, Menu, UserRound, BellDot } from 'lucide-react';
-import Link from 'next/link';
-import clsx from 'clsx';
 import { useState } from 'react';
-import Sidebar from '@common/sidebar';
+import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import clsx from 'clsx';
+import { BellDot, LogIn, Menu, UserRound } from 'lucide-react';
+
+import useScreenWidth from '@/hooks/useScreenWidth';
+
+import Sidebar from '@common/sidebar';
 
 const Header = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);

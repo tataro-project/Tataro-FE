@@ -1,7 +1,9 @@
 import React from 'react';
-import CheckboxInputProps from './types';
 import { Check } from 'lucide-react';
+
 import useScreenWidth from '@/hooks/useScreenWidth';
+
+import CheckboxInputProps from './types';
 
 const CheckboxInput = React.forwardRef<HTMLInputElement, CheckboxInputProps>(
   ({ label, value, error, ...props }, ref) => {

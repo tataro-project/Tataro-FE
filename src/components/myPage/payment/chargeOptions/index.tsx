@@ -1,10 +1,13 @@
-import { X } from 'lucide-react';
-import { NUMBER_OF_HEARTS_FOR_SALE } from '../constants';
-import HeartPriceTag from './HeartPriceTag';
-import { ChargeOptionsProps } from '../types';
-import useScreenWidth from '@/hooks/useScreenWidth';
 import { useEffect } from 'react';
 import { FocusTrap } from 'focus-trap-react';
+import { X } from 'lucide-react';
+
+import useScreenWidth from '@/hooks/useScreenWidth';
+
+import HeartPriceTag from './HeartPriceTag';
+
+import { ChargeOptionsProps } from '../types';
+import { NUMBER_OF_HEARTS_FOR_SALE } from '../constants';
 
 const ChargeOptions = ({ close }: ChargeOptionsProps) => {
   const { isInit, isCustomWidth } = useScreenWidth(640);

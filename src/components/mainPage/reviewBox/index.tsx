@@ -1,14 +1,17 @@
 'use client';
-import Image from 'next/image';
-import TheFool from '@images/TheFool.svg';
-import { Eye } from 'lucide-react';
 import { useEffect, useState } from 'react';
-
 import { createPortal } from 'react-dom';
-import ContentBox from '@common/contentBox';
-import useOutsideClick from '@/hooks/useOutsideClick';
-import { ReviewCardProps } from '@/components/reviews/types';
+import Image from 'next/image';
+import { Eye } from 'lucide-react';
+
 import ReviewDetail from '@/components/reviews/reviewDetail';
+import useOutsideClick from '@/hooks/useOutsideClick';
+
+import ContentBox from '@common/contentBox';
+
+import TheFool from '@images/TheFool.svg';
+
+import { ReviewCardProps } from '@/components/reviews/types';
 
 const ReviewBox: React.FC<ReviewCardProps> = ({
   id,

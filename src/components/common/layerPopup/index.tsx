@@ -1,11 +1,14 @@
 'use client';
 
 import React, { useEffect } from 'react';
-import useLayerPopupStore from '@/stores/layerPopupStore';
-import Button from '@common/button';
-import ContentBox from '@common/contentBox';
 import { FocusTrap } from 'focus-trap-react';
 import { twMerge } from 'tailwind-merge';
+
+import useLayerPopupStore from '@/stores/layerPopupStore';
+
+import Button from '@common/button';
+import ContentBox from '@common/contentBox';
+
 import { LayerPopupType } from '@/components/common/layerPopup/types';
 
 export const layerPopup = ({ type = 'info', content, onConfirmClick }: LayerPopupType) => {

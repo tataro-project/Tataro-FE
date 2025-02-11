@@ -1,7 +1,8 @@
 'use client';
 
-import ContentBox from '@common/contentBox';
 import SocialLoginButton from '@/components/socialLoginButton';
+
+import ContentBox from '@common/contentBox';
 
 const Login = () => {
   return (

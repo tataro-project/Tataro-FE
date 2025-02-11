@@ -1,6 +1,8 @@
-import useScreenWidth from '@/hooks/useScreenWidth';
-import { ChatBubbleProps } from './types';
 import { twMerge } from 'tailwind-merge';
+
+import useScreenWidth from '@/hooks/useScreenWidth';
+
+import { ChatBubbleProps } from './types';
 
 const ChatBubble: React.FC<ChatBubbleProps> = ({ message, isChatbot }) => {
   const { isMobile } = useScreenWidth();

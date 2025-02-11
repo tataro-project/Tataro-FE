@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import clsx from 'clsx';
+
 import { TabProps } from '../types';
 
 const PriceTabs: React.FC<{ children: React.ReactElement<TabProps>[] }> = ({ children }) => {
@@ -37,4 +38,4 @@ const PriceTab: React.FC<TabProps> = ({ children }) => {
   return <div className="">{children}</div>;
 };
 
-export { PriceTabs, PriceTab };
+export { PriceTab, PriceTabs };

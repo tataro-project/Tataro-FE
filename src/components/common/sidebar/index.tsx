@@ -1,11 +1,14 @@
-import Button from '@common/button';
-import clsx from 'clsx';
-import { X } from 'lucide-react';
-import SIDEBAR_MENUS from './constants';
 import { useRouter } from 'next/navigation';
+import clsx from 'clsx';
 import { FocusTrap } from 'focus-trap-react';
+import { X } from 'lucide-react';
+
 import useOutsideClick from '@/hooks/useOutsideClick';
+
+import Button from '@common/button';
+
 import SidebarProps from './types';
+import SIDEBAR_MENUS from './constants';
 
 const Sidebar = ({ isOpen, close }: SidebarProps) => {
   const router = useRouter();

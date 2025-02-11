@@ -1,5 +1,6 @@
-import LayerCardType from '@common/layerCard/types';
 import { create } from 'zustand';
+
+import LayerCardType from '@common/layerCard/types';
 
 type LayerCardState = {
   layerCardData: LayerCardType;

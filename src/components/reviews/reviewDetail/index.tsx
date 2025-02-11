@@ -1,11 +1,14 @@
-import Image from 'next/image';
-import { X } from 'lucide-react';
 import { useEffect } from 'react';
+import Image from 'next/image';
 import { FocusTrap } from 'focus-trap-react';
-import Button from '@common/button';
-import { ReviewDetailProps } from '../types';
-import useScreenWidth from '@/hooks/useScreenWidth';
+import { X } from 'lucide-react';
+
 import useOutsideClick from '@/hooks/useOutsideClick';
+import useScreenWidth from '@/hooks/useScreenWidth';
+
+import Button from '@common/button';
+
+import { ReviewDetailProps } from '../types';
 
 const ReviewDetail: React.FC<ReviewDetailProps> = ({
   title,

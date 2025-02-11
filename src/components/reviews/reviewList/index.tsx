@@ -1,7 +1,10 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import ReviewCard from '../reviewCard';
+
 import Pagination from '@/components/common/pagination';
 import useScreenWidth from '@/hooks/useScreenWidth';
+
+import ReviewCard from '../reviewCard';
+
 import { Review } from '../types';
 
 type ReviewListProps = {

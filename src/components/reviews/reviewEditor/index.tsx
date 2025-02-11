@@ -1,9 +1,9 @@
 import Highlight from '@tiptap/extension-highlight';
+import Image from '@tiptap/extension-image';
 import TextStyle from '@tiptap/extension-text-style';
 import Underline from '@tiptap/extension-underline';
-import StarterKit from '@tiptap/starter-kit';
-import Image from '@tiptap/extension-image';
 import { EditorContent, useEditor } from '@tiptap/react';
+import StarterKit from '@tiptap/starter-kit';
 import {
   BoldIcon,
   Heading1Icon,
@@ -20,6 +20,7 @@ import {
   UnderlineIcon,
   Undo,
 } from 'lucide-react';
+
 const ReviewEditor = () => {
   const editor = useEditor({
     extensions: [

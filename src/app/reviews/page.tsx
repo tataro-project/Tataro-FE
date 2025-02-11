@@ -1,12 +1,15 @@
 'use client';
 
 import { useState } from 'react';
+
 import useScreenWidth from '@/hooks/useScreenWidth';
-import { MobileTab, MobileTabs } from '@common/tabs/mobileTaps';
+
 import Button from '@common/button';
 import ContentBox from '@common/contentBox';
-import SUBMENUS from '@/components/reviews/constants';
+import { MobileTab, MobileTabs } from '@common/tabs/mobileTaps';
+
 import { ReviewsSubmenus } from '@/components/reviews/types';
+import SUBMENUS from '@/components/reviews/constants';
 
 const Reviews = () => {
   const { isInit, isCustomWidth } = useScreenWidth(1056);

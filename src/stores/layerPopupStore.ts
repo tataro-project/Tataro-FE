@@ -1,5 +1,6 @@
-import { LayerPopupType } from '@/components/common/layerPopup/types';
 import { create } from 'zustand';
+
+import { LayerPopupType } from '@/components/common/layerPopup/types';
 
 type LayerPopupState = {
   layerPopupData: LayerPopupType;

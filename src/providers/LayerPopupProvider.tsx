@@ -1,7 +1,10 @@
-import { usePathname } from 'next/navigation';
 import { useEffect } from 'react';
+import { usePathname } from 'next/navigation';
+
 import useLayerPopupStore from '@/stores/layerPopupStore';
+
 import LayerPopup from '@common/layerPopup';
+
 import ProviderProps from './types';
 
 const LayerPopupProvider = ({ children }: ProviderProps) => {

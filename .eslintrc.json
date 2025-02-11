@@ -1,7 +1,26 @@
 {
   "extends": ["next/core-web-vitals", "next/typescript", "plugin:prettier/recommended"],
-  "plugins": ["prettier"],
+  "plugins": ["prettier", "simple-import-sort"],
   "rules": {
-    "prettier/prettier": "error"
+    "prettier/prettier": "error",
+    "simple-import-sort/imports": [
+      "error",
+      {
+        "groups": [
+          ["^react", "^next", "^@?\\w"],
+          ["^@/"],
+          ["^@common/"],
+          ["^@images/"],
+          ["^\\.\\.(?!/|$)", "^\\./(?=.*/)(?!/?$)", "^\\.(?!/?$)", "^\\./?$"],
+          ["^.+\\.?(css)$"],
+          ["^\\u0000"],
+          ["^.+\\.(types|constants)$", "^.+/types$", "^.+/constants$"]
+        ]
+      }
+    ],
+    "simple-import-sort/exports": "error",
+    "import/first": "error",
+    "import/newline-after-import": "error",
+    "import/no-duplicates": "error"
   }
 }

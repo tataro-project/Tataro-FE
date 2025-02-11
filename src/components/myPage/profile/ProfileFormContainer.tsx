@@ -1,12 +1,16 @@
-import Button from '@common/button';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { FormType } from './types';
-import { profileFormSchema, signUpFormSchema } from './schemas';
-import ProfileFormPresentation from './ProfileFormPresentation';
 import { usePathname } from 'next/navigation';
-import { DEFAULT_VALUES_PROFILE_FORM, DEFAULT_VALUES_SIGNUP_FORM } from './constants';
+import { zodResolver } from '@hookform/resolvers/zod';
+
 import formatPhoneNumber from '@/utils/formatPhoneNumber';
+
+import Button from '@common/button';
+
+import ProfileFormPresentation from './ProfileFormPresentation';
+import { profileFormSchema, signUpFormSchema } from './schemas';
+
+import { FormType } from './types';
+import { DEFAULT_VALUES_PROFILE_FORM, DEFAULT_VALUES_SIGNUP_FORM } from './constants';
 
 const ProfileFormContainer = () => {
   const pathname = usePathname();

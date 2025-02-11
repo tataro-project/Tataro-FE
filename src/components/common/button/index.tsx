@@ -1,8 +1,10 @@
 'use client';
 
 import { twMerge } from 'tailwind-merge';
-import ButtonProps from './types';
+
 import buttonStyles from './buttonStyles';
+
+import ButtonProps from './types';
 
 const Button: React.FC<ButtonProps> = ({
   children,

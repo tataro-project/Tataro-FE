@@ -1,6 +1,7 @@
-import { z } from 'zod';
-import { profileFormSchema, signUpFormSchema } from './schemas';
 import { UseFormReturn } from 'react-hook-form';
+import { z } from 'zod';
+
+import { profileFormSchema, signUpFormSchema } from './schemas';
 
 export type ProfileFormType = z.infer<typeof profileFormSchema>;
 
