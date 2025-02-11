@@ -110,11 +110,11 @@ const ReviewEditor = () => {
     {
       icon: Images,
       action: () => {
-        const input = document.createElement('input');
-        input.type = 'file';
-        input.accept = 'image/*';
-        input.onchange = e => handleImageUpload(e as any);
-        input.click();
+        // const input = document.createElement('input');
+        // input.type = 'file';
+        // input.accept = 'image/*';
+        // input.onchange = e => handleImageUpload(e as unknown);
+        // input.click();
       },
       isActive: () => false,
       title: 'Insert Image',
@@ -133,17 +133,17 @@ const ReviewEditor = () => {
     },
   ];
 
-  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = e => {
-        const imageUrl = e.target?.result as string;
-        editor?.chain().focus().setImage({ src: imageUrl }).run();
-      };
-      reader.readAsDataURL(file);
-    }
-  };
+  // const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   const file = event.target.files?.[0];
+  //   if (file) {
+  //     const reader = new FileReader();
+  //     reader.onload = e => {
+  //       const imageUrl = e.target?.result as string;
+  //       editor?.chain().focus().setImage({ src: imageUrl }).run();
+  //     };
+  //     reader.readAsDataURL(file);
+  //   }
+  // };
 
   return (
     <div className="w-full h-full border border-purple bg-cream font-gMedium text-purple">
