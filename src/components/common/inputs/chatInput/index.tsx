@@ -1,6 +1,8 @@
-import useScreenWidth from '@/hooks/useScreenWidth';
-import { twMerge } from 'tailwind-merge';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { twMerge } from 'tailwind-merge';
+
+import useScreenWidth from '@/hooks/useScreenWidth';
+
 import ChatInputProps from './types';
 
 const ChatInput: React.FC<ChatInputProps> = ({ value = '', onChange, onSend, className }) => {

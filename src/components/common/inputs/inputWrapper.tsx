@@ -1,6 +1,8 @@
 import { twMerge } from 'tailwind-merge';
-import { labelStyles } from './labelStyles';
+
 import useScreenWidth from '@/hooks/useScreenWidth';
+
+import { labelStyles } from './labelStyles';
 
 type InputWrapperProps = {
   id?: string;

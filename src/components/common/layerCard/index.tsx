@@ -1,10 +1,13 @@
 'use client';
 
-import useLayerCardStore from '@/stores/layerCardStore';
-import ContentBox from '@common/contentBox';
-import LayerCardType from './types';
 import clsx from 'clsx';
 import { twMerge } from 'tailwind-merge';
+
+import useLayerCardStore from '@/stores/layerCardStore';
+
+import ContentBox from '@common/contentBox';
+
+import LayerCardType from './types';
 
 export const layerCard = ({
   content,

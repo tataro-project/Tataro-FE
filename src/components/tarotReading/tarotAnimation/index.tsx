@@ -1,7 +1,8 @@
 import { useRef, useState } from 'react';
-import { CARD_ANGLE, RADIUS, TOTAL_CARDS } from '../constants';
-import { useSpring, animated } from '@react-spring/web';
+import { animated, useSpring } from '@react-spring/web';
 import { useDrag } from '@use-gesture/react';
+
+import { CARD_ANGLE, RADIUS, TOTAL_CARDS } from '../constants';
 
 const calculateCardPosition = (index: number) => {
   const angle = index * CARD_ANGLE;

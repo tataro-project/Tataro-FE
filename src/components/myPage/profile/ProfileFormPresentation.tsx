@@ -1,13 +1,16 @@
+import { useState } from 'react';
+import { FieldErrors, Path, PathValue } from 'react-hook-form';
+
+import useScreenWidth from '@/hooks/useScreenWidth';
+import formatPhoneNumber from '@/utils/formatPhoneNumber';
+
+import CheckboxInput from '@common/inputs/checkboxInput';
 import DateInput from '@common/inputs/dateInputs';
 import RadioInput from '@common/inputs/radioInput';
 import TextInput from '@common/inputs/textInputs';
-import CheckboxInput from '@common/inputs/checkboxInput';
-import { CONSENT_ITEMS } from './constants';
-import { useState } from 'react';
+
 import { FormType, ProfileFormPresentationProps, SignUpFormType } from './types';
-import { FieldErrors, Path, PathValue } from 'react-hook-form';
-import formatPhoneNumber from '@/utils/formatPhoneNumber';
-import useScreenWidth from '@/hooks/useScreenWidth';
+import { CONSENT_ITEMS } from './constants';
 
 const ProfileFormPresentation = <T extends boolean>({
   formMethods: {

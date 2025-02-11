@@ -1,10 +1,13 @@
 import React from 'react';
-import { twMerge } from 'tailwind-merge';
-import useScreenWidth from '@/hooks/useScreenWidth';
 import { Check } from 'lucide-react';
-import RadioInputProps from './types';
+import { twMerge } from 'tailwind-merge';
+
+import useScreenWidth from '@/hooks/useScreenWidth';
+
 import InputWrapper from '../inputWrapper';
 import { radioCheckboxStyles, radioGroupStyles, radioItemStyles } from './radioInputStyles';
+
+import RadioInputProps from './types';
 
 const RadioInput = React.forwardRef<HTMLInputElement, RadioInputProps>(
   ({ id, label, options, value, onChange, name, className, error, ...rest }, ref) => {

@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import clsx from 'clsx';
+
 import { TabProps } from '../types';
 
 const MobileTabs: React.FC<{ children: React.ReactElement<TabProps>[] }> = ({ children }) => {
@@ -45,4 +46,4 @@ const MobileTab: React.FC<TabProps> = ({ children }) => {
   return <div className="w-full h-full p-6">{children}</div>;
 };
 
-export { MobileTabs, MobileTab };
+export { MobileTab, MobileTabs };

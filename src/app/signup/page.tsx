@@ -1,6 +1,7 @@
 'use client';
 
 import ProfileFormContainer from '@/components/myPage/profile/ProfileFormContainer';
+
 import ContentBox from '@common/contentBox';
 
 const SignUp = () => {

@@ -1,6 +1,8 @@
 import { Heart } from 'lucide-react';
-import { HeartPriceTagProps } from '../types';
+
 import Button from '@common/button';
+
+import { HeartPriceTagProps } from '../types';
 
 const HeartPriceTag = ({ heart }: HeartPriceTagProps) => {
   return (

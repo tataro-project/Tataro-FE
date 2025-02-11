@@ -1,11 +1,16 @@
 import Image from 'next/image';
-import TheFool from '@images/TheFool.svg';
 import { Eye } from 'lucide-react';
-import ReviewDetail from '../reviewDetail';
-import { layerCard } from '@common/layerCard';
-import useLayerCardStore from '@/stores/layerCardStore';
-import { ReviewCardProps } from '../types';
+
 import useScreenWidth from '@/hooks/useScreenWidth';
+import useLayerCardStore from '@/stores/layerCardStore';
+
+import { layerCard } from '@common/layerCard';
+
+import TheFool from '@images/TheFool.svg';
+
+import ReviewDetail from '../reviewDetail';
+
+import { ReviewCardProps } from '../types';
 
 const ReviewCard: React.FC<ReviewCardProps> = ({
   id,

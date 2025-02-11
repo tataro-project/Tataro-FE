@@ -1,7 +1,10 @@
 import type { Metadata } from 'next';
-import '@/styles/globals.css';
-import Header from '@common/header';
+
 import Providers from '@/providers';
+
+import Header from '@common/header';
+
+import '@/styles/globals.css';
 
 export const metadata: Metadata = {
   title: '하쿠나마타타로',

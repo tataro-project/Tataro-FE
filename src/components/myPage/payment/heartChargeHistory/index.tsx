@@ -1,4 +1,5 @@
 import useScreenWidth from '@/hooks/useScreenWidth';
+
 import { mockPurchaseData } from '../mockData';
 
 const HeartChargeHistory = () => {

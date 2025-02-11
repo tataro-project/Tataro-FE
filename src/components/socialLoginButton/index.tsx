@@ -1,8 +1,9 @@
 import Image from 'next/image';
+import { twMerge } from 'tailwind-merge';
+
 import kakao from '@images/kakao.svg';
 import naver from '@images/naver.svg';
 
-import { twMerge } from 'tailwind-merge';
 import SocialLoginButtonProps from './types';
 
 const SocialLoginButton: React.FC<SocialLoginButtonProps> = ({ provider, ...props }) => {

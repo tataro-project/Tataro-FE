@@ -1,7 +1,9 @@
 import React from 'react';
 import { twMerge } from 'tailwind-merge';
-import DateInputProps from './types';
+
 import InputWrapper from '../inputWrapper';
+
+import DateInputProps from './types';
 
 const DateInput = React.forwardRef<HTMLInputElement, DateInputProps>(
   ({ id, label, value, onChange, className, error, ...rest }, ref) => {

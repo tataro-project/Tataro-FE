@@ -1,6 +1,7 @@
 import ChatHistory from './chatHistory';
 import Payment from './payment';
 import Profile from './profile';
+
 import { Submenus } from './types';
 
 const SUBMENUS: Submenus[] = [

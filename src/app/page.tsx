@@ -1,18 +1,21 @@
 'use client';
-import TaroSwiper from '@/components/mainPage/taroSwiper';
-import moon from '@images/moon.svg';
-import logo from '@images/logo.svg';
-import blueCloud from '@images/blueCloud.svg';
-import pinkCloud from '@images/pinkCloud.svg';
-import Image from 'next/image';
-import Button from '@common/button';
-import Link from 'next/link';
-import ReviewBox from '@/components/mainPage/reviewBox';
-import Aos from 'aos';
-import 'aos/dist/aos.css';
-
-import { mockReviews } from '@/components/reviews/mockReviews';
 import { useEffect } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import Aos from 'aos';
+
+import ReviewBox from '@/components/mainPage/reviewBox';
+import TaroSwiper from '@/components/mainPage/taroSwiper';
+import { mockReviews } from '@/components/reviews/mockReviews';
+
+import Button from '@common/button';
+
+import blueCloud from '@images/blueCloud.svg';
+import logo from '@images/logo.svg';
+import moon from '@images/moon.svg';
+import pinkCloud from '@images/pinkCloud.svg';
+
+import 'aos/dist/aos.css';
 
 const Home = () => {
   const bestReviews = mockReviews;

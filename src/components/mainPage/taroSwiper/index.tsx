@@ -6,11 +6,13 @@
 // import Empress from '@images/Empress.svg';
 // import CardBack from '@images/CardBack.svg';
 
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import 'swiper/css/pagination';
-import { Autoplay, EffectCoverflow } from 'swiper/modules';
 import clsx from 'clsx';
+import { Autoplay, EffectCoverflow } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+import 'swiper/css';
+
+import 'swiper/css/pagination';
 
 const TaroSwiper = () => {
   const cards = [

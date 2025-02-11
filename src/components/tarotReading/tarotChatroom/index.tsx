@@ -1,12 +1,15 @@
+import { useEffect, useRef, useState } from 'react';
+import { ArrowUp } from 'lucide-react';
+import { twMerge } from 'tailwind-merge';
+
 import useScreenWidth from '@/hooks/useScreenWidth';
+
 import Button from '@common/button';
 import ChatBubble from '@common/chatBubble';
 import ChatInput from '@common/inputs/chatInput';
-import { ArrowUp } from 'lucide-react';
-import { useEffect, useRef, useState } from 'react';
-import { initialChatbotMessages } from '../constants';
+
 import { ChatBubbleProps } from '@common/chatBubble/types';
-import { twMerge } from 'tailwind-merge';
+import { initialChatbotMessages } from '../constants';
 
 const TarotChatroom = () => {
   const { isMobile } = useScreenWidth();

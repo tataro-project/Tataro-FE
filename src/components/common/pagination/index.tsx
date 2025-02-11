@@ -1,7 +1,8 @@
 'use client';
 
-import { ChevronsLeft, ChevronsRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import clsx from 'clsx';
+import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from 'lucide-react';
+
 import { PaginationProps } from './types';
 import { DISABLED_PAGE_BUTTON_STYLES, PAGE_BUTTON_STYLES, PAGE_GROUP_SIZE } from './constants';
 

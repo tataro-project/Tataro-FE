@@ -1,7 +1,9 @@
 import React from 'react';
-import ContentBoxProps from './types';
 import { twMerge } from 'tailwind-merge';
+
 import { contentBoxBaseStyles, contentBoxShadowStyles } from './contentBoxStyles';
+
+import ContentBoxProps from './types';
 
 const ContentBox = React.forwardRef<HTMLDivElement, ContentBoxProps>(
   ({ children, variant = 'default', size, layout }, ref) => {
