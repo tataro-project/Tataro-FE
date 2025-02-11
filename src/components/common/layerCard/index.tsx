@@ -23,7 +23,7 @@ const LayerCard = () => {
 
   return (
     <div className="fixed top-0 left-0 z-40 w-screen h-screen px-4 bg-purple bg-opacity-10">
-      <div className={twMerge(clsx('fixed w-full h-full px-2', position, size))}>
+      <div className={twMerge(clsx('fixed w-full h-full p-2', position, size))}>
         <ContentBox variant={variant}>{content}</ContentBox>
       </div>
     </div>
