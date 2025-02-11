@@ -9,6 +9,7 @@ import TaroSwiper from '@/components/mainPage/taroSwiper';
 import { mockReviews } from '@/components/reviews/mockReviews';
 
 import Button from '@common/button';
+import LoadingSpinner from '@common/loadingSpinner';
 
 import blueCloud from '@images/blueCloud.svg';
 import logo from '@images/logo.svg';
@@ -16,7 +17,6 @@ import moon from '@images/moon.svg';
 import pinkCloud from '@images/pinkCloud.svg';
 
 import 'aos/dist/aos.css';
-import LoadingSpinner from '@common/loadingSpinner';
 
 const Home = () => {
   const bestReviews = mockReviews;
