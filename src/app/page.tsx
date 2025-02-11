@@ -36,7 +36,7 @@ const Home = () => {
       <div className="md:max-w-4xl max-w-md">
         <TaroSwiper />
       </div>
-      <div className="absolute left-0 md:translate-y-[400px] translate-y-[530px] z-20 max-w-[700px] ">
+      <div className="absolute left-0 md:translate-y-[400px] translate-y-[530px] z-20 md:max-w-[700px] max-w-[400px] ">
         <Image
           src={pinkCloud}
           alt="pink-cloud"
@@ -69,7 +69,7 @@ const Home = () => {
         <br />
         <p>하쿠나마타타로</p>
       </div>
-      <div className="absolute right-0 translate-y-[1100px] max-w-[600px]  z-10">
+      <div className="absolute right-0 md:translate-y-[1000px] translate-y-[1200px] md:max-w-[600px] max-w-[300px] ">
         <Image
           src={blueCloud}
           alt="blue-cloud"
@@ -80,10 +80,9 @@ const Home = () => {
         />
       </div>
       <div
-        className="grid grid-cols-2 md:gap-5 md:p-10 gap-10 "
+        className="grid md:grid-cols-2 grid-cols-1 md:gap-5 md:p-10 gap-10 mt-40 p-10 z-10"
         data-aos="fade-up"
         data-aos-easing="400"
-        data-aos-offset="250"
         data-aos-duration="1000"
       >
         {bestReviews.map(review => (
