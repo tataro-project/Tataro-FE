@@ -1,9 +1,11 @@
 'use client';
 
-import { useEffect } from 'react';
+import { Suspense, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 
 import useUserActions from '@/hooks/useUserActions';
+
+import LoadingSpinner from '@common/loadingSpinner';
 
 const KakaoCallback = () => {
   const searchParams = useSearchParams();
@@ -19,4 +21,12 @@ const KakaoCallback = () => {
   return <></>;
 };
 
-export default KakaoCallback;
+const KakaoCallbackWithSuspense = () => {
+  return (
+    <Suspense fallback={<LoadingSpinner />}>
+      <KakaoCallback />
+    </Suspense>
+  );
+};
+
+export default KakaoCallbackWithSuspense;
