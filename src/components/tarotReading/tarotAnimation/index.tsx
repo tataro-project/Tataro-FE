@@ -28,7 +28,13 @@ const TarotCard = ({ index }: { index: number }) => {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <Image src={CardBack} alt="Tarot Card Back" layout="fill" objectFit="contain" />
+      <Image
+        src={CardBack}
+        alt="Tarot Card Back"
+        layout="fill"
+        objectFit="contain"
+        draggable="false"
+      />
     </motion.div>
   );
 };
