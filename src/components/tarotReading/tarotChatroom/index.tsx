@@ -8,6 +8,8 @@ import Button from '@common/button';
 import ChatBubble from '@common/chatBubble';
 import ChatInput from '@common/inputs/chatInput';
 
+import TarotAnimation from '../tarotAnimation';
+
 import { ChatBubbleProps } from '@common/chatBubble/types';
 import { initialChatbotMessages } from '../constants';
 
@@ -18,6 +20,7 @@ const TarotChatroom = () => {
   const [chatHistory, setChatHistory] = useState<ChatBubbleProps[]>([]);
   const [showInput, setShowInput] = useState(false);
   const [showOptions, setShowOptions] = useState(false);
+  const [showAnimation, setShowAnimation] = useState(false);
 
   const chatEndRef = useRef<HTMLDivElement>(null);
   const hasMounted = useRef(false);
@@ -82,6 +85,7 @@ const TarotChatroom = () => {
         ...prev,
         { message: '고민을 생각하며 카드를 한장 뽑아봐', isChatbot: true },
       ]);
+      setShowAnimation(true);
     }, 1000);
   };
 
@@ -129,6 +133,7 @@ const TarotChatroom = () => {
           </Button>
         </div>
       )}
+      {showAnimation && <TarotAnimation />}
     </div>
   );
 };
