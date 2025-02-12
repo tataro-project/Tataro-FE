@@ -28,13 +28,7 @@ const TarotCard = ({ index }: { index: number }) => {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <Image
-        src={CardBack}
-        alt="Tarot Card Back"
-        layout="fill"
-        objectFit="contain"
-        draggable="false"
-      />
+      <Image src={CardBack} alt="Tarot Card Back" fill draggable="false" />
     </motion.div>
   );
 };
@@ -61,7 +55,7 @@ const TarotAnimation = () => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center">
+    <div className="flex items-center justify-center fixed inset-0 z-50">
       <div className="relative" style={{ width: `${RADIUS * 2}px`, height: `${RADIUS}px` }}>
         <motion.div
           ref={containerRef}

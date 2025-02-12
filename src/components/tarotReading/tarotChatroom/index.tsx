@@ -22,6 +22,8 @@ const TarotChatroom = () => {
   const [showOptions, setShowOptions] = useState(false);
   const [showAnimation, setShowAnimation] = useState(false);
 
+  const [userChat, setUserChat] = useState<string[]>([]);
+
   const chatEndRef = useRef<HTMLDivElement>(null);
   const hasMounted = useRef(false);
 
@@ -53,6 +55,7 @@ const TarotChatroom = () => {
         const updatedChatHistory = prev.map(msg => ({ ...msg, showButton: false }));
         return [...updatedChatHistory, { message, isChatbot: false, showButton: true }];
       });
+      setUserChat(prev => [...prev, message.trim()]);
       setMessage('');
     }
   };
@@ -68,12 +71,15 @@ const TarotChatroom = () => {
         ]);
       }, 1000);
     } else {
+      setChatHistory(prev => [...prev, { message: '나의 고민은...', isChatbot: false }]);
       setShowInput(true);
       setShowOptions(false);
     }
   };
 
   const handleCompleteInput = () => {
+    console.log('사용자 고민: ', userChat.join(' '));
+
     setChatHistory(prev => {
       const updatedHistory = prev.map(msg => ({ ...msg, showButton: false }));
       return updatedHistory;
@@ -85,7 +91,9 @@ const TarotChatroom = () => {
         ...prev,
         { message: '고민을 생각하며 카드를 한장 뽑아봐', isChatbot: true },
       ]);
-      setShowAnimation(true);
+      setTimeout(() => {
+        setShowAnimation(true);
+      }, 1000);
     }, 1000);
   };
 
