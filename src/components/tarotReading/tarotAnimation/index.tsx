@@ -21,8 +21,7 @@ const TarotCard = ({ index }: { index: number }) => {
       style={{
         left: `${RADIUS + x}px`,
         top: `${RADIUS + y}px`,
-        transform: `translate(-50%,-100%) rotate(${angle + Math.PI / 2}rad) ${isHovered ? 'scale(1.2)' : 'scale(1)'}`,
-        zIndex: isHovered ? 100 : index,
+        transform: `translate(-50%,-100%) rotate(${angle + Math.PI / 2}rad) ${isHovered ? 'scale(1.15)' : 'scale(1)'}`,
       }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -30,7 +29,7 @@ const TarotCard = ({ index }: { index: number }) => {
       <div
         className="absolute inset-0 w-full h-full"
         style={{
-          backgroundImage: 'url(/images/tarotBack.svg)',
+          backgroundImage: 'url(/images/CardBack.svg)',
           backgroundSize: 'contain',
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'center',
@@ -56,7 +55,7 @@ const TarotAnimation = () => {
   });
 
   return (
-    <div className="flex justify-center items-center w-full h-full">
+    <div className="fixed inset-0 z-50 flex items-center justify-center">
       <div className="relative" style={{ width: `${RADIUS * 2}px`, height: `${RADIUS}px` }}>
         <animated.div
           ref={containerRef}
