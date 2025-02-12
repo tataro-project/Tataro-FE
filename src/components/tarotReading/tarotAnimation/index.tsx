@@ -3,6 +3,9 @@ import { motion, useTransform, useSpring, PanInfo } from 'framer-motion';
 
 import { CARD_ANGLE, RADIUS, TOTAL_CARDS } from '../constants';
 
+import CardBack from '@images/CardBack.svg';
+import Image from 'next/image';
+
 const calculateCardPosition = (index: number) => {
   const angle = index * CARD_ANGLE;
   const x = Math.cos(angle) * RADIUS;
@@ -25,15 +28,7 @@ const TarotCard = ({ index }: { index: number }) => {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div
-        className="absolute inset-0 w-full h-full"
-        style={{
-          backgroundImage: 'url(/images/CardBack.svg)',
-          backgroundSize: 'contain',
-          backgroundRepeat: 'no-repeat',
-          backgroundPosition: 'center',
-        }}
-      />
+      <Image src={CardBack} alt="Tarot Card Back" layout="fill" objectFit="contain" />
     </motion.div>
   );
 };
