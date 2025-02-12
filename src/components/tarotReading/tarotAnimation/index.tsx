@@ -1,10 +1,10 @@
 import { useRef, useState } from 'react';
-import { motion, useTransform, useSpring, PanInfo } from 'framer-motion';
-
-import { CARD_ANGLE, RADIUS, TOTAL_CARDS } from '../constants';
+import Image from 'next/image';
+import { motion, PanInfo, useSpring, useTransform } from 'framer-motion';
 
 import CardBack from '@images/CardBack.svg';
-import Image from 'next/image';
+
+import { CARD_ANGLE, RADIUS, TOTAL_CARDS } from '../constants';
 
 const calculateCardPosition = (index: number) => {
   const angle = index * CARD_ANGLE;
