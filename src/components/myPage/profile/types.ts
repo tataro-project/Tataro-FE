@@ -1,7 +1,7 @@
 import { UseFormReturn } from 'react-hook-form';
 import { z } from 'zod';
 
-import { profileFormSchema, signUpFormSchema } from './schemas';
+import { getUserResponseSchema, profileFormSchema, signUpFormSchema } from './schemas';
 
 export type ProfileFormType = z.infer<typeof profileFormSchema>;
 
@@ -21,3 +21,5 @@ export type ConsentItem = {
   item: keyof FormType<false>;
   label: string;
 };
+
+export type GetUserResponseSchema = z.infer<typeof getUserResponseSchema>;

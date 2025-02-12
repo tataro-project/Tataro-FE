@@ -4,6 +4,8 @@ import { FocusTrap } from 'focus-trap-react';
 import { X } from 'lucide-react';
 
 import useOutsideClick from '@/hooks/useOutsideClick';
+import useUserActions from '@/hooks/useUserActions';
+import useUserStore from '@/stores/userStore';
 
 import Button from '@common/button';
 
@@ -11,6 +13,9 @@ import SidebarProps from './types';
 import SIDEBAR_MENUS from './constants';
 
 const Sidebar = ({ isOpen, close }: SidebarProps) => {
+  const { logout } = useUserActions();
+  const { user } = useUserStore();
+
   const router = useRouter();
 
   const ref = useOutsideClick(() => {
@@ -20,6 +25,13 @@ const Sidebar = ({ isOpen, close }: SidebarProps) => {
   const handleMenuClick = (path: string) => {
     router.push(path);
     close();
+  };
+
+  const toggleAuth = () => {
+    if (user) logout();
+
+    close();
+    router.push(user ? '/' : '/login');
   };
 
   return (
@@ -67,8 +79,9 @@ const Sidebar = ({ isOpen, close }: SidebarProps) => {
               tabIndex={isOpen ? 0 : -1}
               variant="simple"
               className="self-end font-lilita text-lg md:text-xl"
+              onClick={toggleAuth}
             >
-              Logout
+              {user ? 'Logout' : 'Login'}
             </Button>
           </div>
         </div>

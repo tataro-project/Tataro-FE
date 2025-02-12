@@ -1,5 +1,7 @@
+import { SocialLoginProviderType } from '@/app/login/types';
+
 type SocialLoginButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
-  provider: '카카오' | '네이버';
+  provider: SocialLoginProviderType;
   className?: string;
 };
 

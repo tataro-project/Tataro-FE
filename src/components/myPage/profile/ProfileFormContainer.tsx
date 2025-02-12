@@ -2,7 +2,8 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { usePathname } from 'next/navigation';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import formatPhoneNumber from '@/utils/formatPhoneNumber';
+import useUserActions from '@/hooks/useUserActions';
+import useUserStore from '@/stores/userStore';
 
 import Button from '@common/button';
 
@@ -10,19 +11,17 @@ import ProfileFormPresentation from './ProfileFormPresentation';
 import { profileFormSchema, signUpFormSchema } from './schemas';
 
 import { FormType } from './types';
-import { DEFAULT_VALUES_PROFILE_FORM, DEFAULT_VALUES_SIGNUP_FORM } from './constants';
+import { DEFAULT_VALUES_SIGNUP_FORM } from './constants';
 
 const ProfileFormContainer = () => {
   const pathname = usePathname();
   const isEditMode = pathname === '/mypage';
 
+  const { user } = useUserStore();
+  const { editProfile } = useUserActions();
+
   const formSchema = isEditMode ? profileFormSchema : signUpFormSchema;
-  const defaultValues = isEditMode
-    ? {
-        ...DEFAULT_VALUES_PROFILE_FORM,
-        phone: formatPhoneNumber(DEFAULT_VALUES_PROFILE_FORM.phone),
-      }
-    : DEFAULT_VALUES_SIGNUP_FORM;
+  const defaultValues = isEditMode && user ? user : DEFAULT_VALUES_SIGNUP_FORM;
 
   const { handleSubmit, ...formMethods } = useForm<FormType<typeof isEditMode>>({
     resolver: zodResolver(formSchema),
@@ -31,8 +30,7 @@ const ProfileFormContainer = () => {
   });
 
   const onSubmit: SubmitHandler<FormType<typeof isEditMode>> = data => {
-    // api 요청
-    console.log(data);
+    editProfile({ ...data, birthday: new Date(data.birthday).toISOString() });
   };
 
   return (
