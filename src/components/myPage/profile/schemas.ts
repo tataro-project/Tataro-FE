@@ -1,24 +1,6 @@
 import { z } from 'zod';
 
-export const profileFormSchema = z.object({
-  name: z
-    .string()
-    .transform(value => value.replace(/\s+/g, ''))
-    .superRefine((value, ctx) => {
-      if (!value) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          message: '이름을 입력해 주세요.',
-        });
-      }
-      if (value && !/^[가-힣]{2,5}$/.test(value)) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          message: '이름은 2~5자의 한글만 입력 가능합니다.',
-        });
-      }
-    }),
-
+export const userSchema = z.object({
   nickname: z
     .string()
     .transform(value => value.replace(/\s+/g, ''))
@@ -30,20 +12,6 @@ export const profileFormSchema = z.object({
     })
     .refine(value => /^[가-힣a-zA-Z0-9_-]+$/.test(value), {
       message: '닉네임은 한글, 영문, 숫자, _ , - 만 입력 가능합니다.',
-    }),
-
-  phone: z
-    .string()
-    .transform(value => value.replace(/\D/g, ''))
-    .superRefine((value, ctx) => {
-      if (!value) {
-        ctx.addIssue({ code: z.ZodIssueCode.custom, message: '휴대폰 번호를 입력해 주세요.' });
-        return;
-      }
-
-      if (!/^010\d{8}$/.test(value)) {
-        ctx.addIssue({ code: z.ZodIssueCode.custom, message: '올바른 휴대폰 번호가 아닙니다.' });
-      }
     }),
 
   birthday: z.string().superRefine((value, ctx) => {
@@ -63,12 +31,20 @@ export const profileFormSchema = z.object({
     }
   }),
 
-  gender: z
-    .enum(['male', 'female'], {
-      required_error: '성별을 선택해 주세요.',
-      invalid_type_error: '성별을 선택해 주세요.',
-    })
-    .optional(),
+  gender: z.enum(['male', 'female'], {
+    required_error: '성별을 선택해 주세요.',
+    invalid_type_error: '성별을 선택해 주세요.',
+  }),
+
+  id: z.number(),
+  email: z.string().email(),
+  social_type: z.enum(['KAKAO', 'NAVER']),
+});
+
+export const profileFormSchema = userSchema.pick({
+  nickname: true,
+  birthday: true,
+  gender: true,
 });
 
 const consentSchema = z.object({
@@ -91,3 +67,12 @@ const consentSchema = z.object({
 });
 
 export const signUpFormSchema = profileFormSchema.merge(consentSchema);
+
+export const getUserResponseSchema = userSchema.pick({
+  id: true,
+  email: true,
+  gender: true,
+  nickname: true,
+  birthday: true,
+  social_type: true,
+});
