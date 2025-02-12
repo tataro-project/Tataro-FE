@@ -1,6 +1,5 @@
 import { useRef, useState } from 'react';
-import { animated, useSpring } from '@react-spring/web';
-import { useDrag } from '@use-gesture/react';
+import { motion, useTransform, useSpring, PanInfo } from 'framer-motion';
 
 import { CARD_ANGLE, RADIUS, TOTAL_CARDS } from '../constants';
 
@@ -16,12 +15,12 @@ const TarotCard = ({ index }: { index: number }) => {
   const { x, y, angle } = calculateCardPosition(index);
 
   return (
-    <div
+    <motion.div
       className="flex justify-center items-center absolute w-24 h-40 rounded-lg shadow-md transition-all duration-300 ease-in-out origin-bottom overflow-hidden"
       style={{
         left: `${RADIUS + x}px`,
         top: `${RADIUS + y}px`,
-        transform: `translate(-50%,-100%) rotate(${angle + Math.PI / 2}rad) ${isHovered ? 'scale(1.15)' : 'scale(1)'}`,
+        transform: `translate(-50%,-100%) rotate(${angle + Math.PI / 2}rad) scale(${isHovered ? 1.15 : 1})`,
       }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -35,7 +34,7 @@ const TarotCard = ({ index }: { index: number }) => {
           backgroundPosition: 'center',
         }}
       />
-    </div>
+    </motion.div>
   );
 };
 
@@ -43,27 +42,34 @@ const TarotAnimation = () => {
   const [rotation, setRotation] = useState(Math.PI);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const [{ rotate }, api] = useSpring(() => ({ rotate: rotation }));
+  const rotateMotion = useSpring(rotation, {
+    stiffness: 300,
+    damping: 30,
+    mass: 1,
+  });
 
-  const bind = useDrag(({ delta: [dx] }) => {
+  const rotateTransform = useTransform(rotateMotion, r => `rotate(${r}rad)`);
+
+  const handleDrag = (_: never, info: PanInfo) => {
     if (containerRef.current) {
       const containerWidth = containerRef.current.clientWidth;
-      const newRotation = rotation + (dx / containerWidth) * Math.PI;
-      api.start({ rotate: newRotation });
+      const newRotation = rotation + (info.delta.x / containerWidth) * Math.PI;
+      rotateMotion.set(newRotation);
       setRotation(newRotation);
     }
-  });
+  };
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       <div className="relative" style={{ width: `${RADIUS * 2}px`, height: `${RADIUS}px` }}>
-        <animated.div
+        <motion.div
           ref={containerRef}
-          {...bind()}
-          className="cursor-grab active:cursor-grabbing"
+          drag="x"
+          dragConstraints={{ left: 0, right: 0 }}
+          onDrag={handleDrag}
           style={{
             touchAction: 'none',
-            transform: rotate.to(r => `rotate(${r}rad)`),
+            transform: rotateTransform,
             transformOrigin: `${RADIUS}px ${RADIUS}px`,
             position: 'absolute',
             top: 0,
@@ -71,11 +77,12 @@ const TarotAnimation = () => {
             width: '100%',
             height: '200%',
           }}
+          className="cursor-grab active:cursor-grabbing"
         >
           {Array.from({ length: TOTAL_CARDS }).map((_, index) => (
             <TarotCard key={index} index={index} />
           ))}
-        </animated.div>
+        </motion.div>
       </div>
     </div>
   );
