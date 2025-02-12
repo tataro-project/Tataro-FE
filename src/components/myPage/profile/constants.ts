@@ -1,4 +1,4 @@
-import { ConsentItem, ProfileFormType, SignUpFormType } from './types';
+import { ConsentItem, SignUpFormType } from './types';
 
 export const CONSENT_ITEMS: readonly ConsentItem[] = [
   { item: 'requiredTerms', label: '[필수] 이용약관 동의' },
@@ -7,18 +7,8 @@ export const CONSENT_ITEMS: readonly ConsentItem[] = [
   { item: 'optionalMarketing', label: '[선택] 마케팅 정보 수신 동의' },
 ] as const;
 
-export const DEFAULT_VALUES_PROFILE_FORM: ProfileFormType = {
-  name: '하건아',
-  nickname: 'matatarot',
-  phone: '01012345678',
-  birthday: '2025-02-06',
-  gender: 'male',
-};
-
 export const DEFAULT_VALUES_SIGNUP_FORM: SignUpFormType = {
-  name: '',
   nickname: '',
-  phone: '',
   birthday: '',
   gender: undefined,
   requiredTerms: false,

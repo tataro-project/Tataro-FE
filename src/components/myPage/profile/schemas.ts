@@ -31,10 +31,12 @@ export const userSchema = z.object({
     }
   }),
 
-  gender: z.enum(['male', 'female'], {
-    required_error: '성별을 선택해 주세요.',
-    invalid_type_error: '성별을 선택해 주세요.',
-  }),
+  gender: z
+    .enum(['male', 'female'], {
+      required_error: '성별을 선택해 주세요.',
+      invalid_type_error: '성별을 선택해 주세요.',
+    })
+    .optional(),
 
   id: z.number(),
   email: z.string().email(),
