@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { FieldErrors, Path, PathValue } from 'react-hook-form';
 
 import useScreenWidth from '@/hooks/useScreenWidth';
-import formatPhoneNumber from '@/utils/formatPhoneNumber';
 
 import CheckboxInput from '@common/inputs/checkboxInput';
 import DateInput from '@common/inputs/dateInputs';
@@ -18,7 +17,7 @@ const ProfileFormPresentation = <T extends boolean>({
     watch,
     setValue,
     trigger,
-    formState: { errors, isSubmitted },
+    formState: { errors },
   },
   isEditMode,
 }: ProfileFormPresentationProps<T>) => {
@@ -26,7 +25,6 @@ const ProfileFormPresentation = <T extends boolean>({
   const [consent, setConsent] = useState(false);
 
   const gender = watch('gender' as Path<FormType<T>>) as 'male' | 'female';
-  const phone = watch('phone' as Path<FormType<T>>) as string | undefined;
 
   if (!isInit) return <div className="grow"></div>;
 
@@ -34,34 +32,10 @@ const ProfileFormPresentation = <T extends boolean>({
     <div className="flex flex-col justify-center gap-6 grow w-full overflow-y-auto">
       <div className="flex flex-col items-start gap-2 w-full overflow-y-auto scrollbar-hide">
         <TextInput
-          {...register('name' as Path<FormType<T>>)}
-          id="name"
-          label="Name"
-          error={errors.name?.message as string}
-        />
-        <TextInput
           {...register('nickname' as Path<FormType<T>>)}
           id="nickname"
           label="Nickname"
           error={errors.nickname?.message as string}
-        />
-        <TextInput
-          {...register('phone' as Path<FormType<T>>)}
-          value={formatPhoneNumber(phone)}
-          onChange={async e => {
-            const formattedNumber = formatPhoneNumber(e.target.value);
-            setValue(
-              'phone' as Path<FormType<T>>,
-              formattedNumber as PathValue<FormType<T>, Path<FormType<T>>>,
-            );
-            if (isSubmitted) await trigger('phone' as Path<FormType<T>>);
-          }}
-          id="phone"
-          label="Mobile"
-          type="tel"
-          placeholder="010-0000-0000"
-          className="placeholder-lightPink"
-          error={errors.phone?.message as string}
         />
         <DateInput
           {...register('birthday' as Path<FormType<T>>)}
