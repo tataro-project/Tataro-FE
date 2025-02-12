@@ -13,6 +13,7 @@
     "@hookform/resolvers": "^3.10.0",
     "@react-spring/web": "^9.7.5",
     "@reduxjs/toolkit": "^2.5.0",
+    "@tanstack/react-query": "^5.66.0",
     "@tiptap/extension-highlight": "^2.11.5",
     "@tiptap/extension-image": "^2.11.5",
     "@tiptap/extension-text-style": "^2.11.5",
@@ -38,6 +39,7 @@
     "zustand": "^5.0.3"
   },
   "devDependencies": {
+    "@tanstack/eslint-plugin-query": "^5.66.1",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
