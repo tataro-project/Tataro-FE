@@ -15,6 +15,7 @@ const DEFAULT_LAYER_CARD_DATA: LayerCardType = {
   variant: undefined,
   position: undefined,
   size: '',
+  overlay: true,
 };
 
 const useLayerCardStore = create<LayerCardState>(set => ({
