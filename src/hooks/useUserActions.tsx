@@ -1,23 +1,23 @@
 import { useCallback } from 'react';
 import { useRouter } from 'next/navigation';
-import nookies from 'nookies';
 
 import useUserStore from '@/stores/userStore';
+import { getAccessToken } from '@/utils/auth';
 
 import { layerPopup } from '@common/layerPopup';
 
 import { LoginResponseType, SocialLoginProviderType } from '@/app/login/types';
 import { GetUserResponseSchema, ProfileFormType } from '@/components/myPage/profile/types';
-
-const BASE_URL = 'https://hakunamatatarot.com/api/v1/user';
-const ACCESS_TOKEN = nookies.get(null, 'accessToken').accessToken;
+import { API } from '@/api/constants';
 
 const useUserActions = () => {
   const { setUser, resetUser } = useUserStore();
   const router = useRouter();
 
+  const accessToken = getAccessToken();
+
   const redirectToSocialLogin = (provider: SocialLoginProviderType) => {
-    fetch(`${BASE_URL}/auth/${provider}/`, {
+    fetch(`${API.BASE_URL}${API.ENDPOINTS.USER.REDIRECT(provider)}`, {
       method: 'GET',
       headers: { Accept: 'application/json' },
     })
@@ -27,7 +27,7 @@ const useUserActions = () => {
 
   const login = useCallback(
     ({ provider, code }: { provider: SocialLoginProviderType; code: string }) => {
-      fetch(`${BASE_URL}/auth/${provider}/callback/?code=${code}`)
+      fetch(`${API.BASE_URL}${API.ENDPOINTS.USER.LOGIN(provider, code)}`)
         .then(res => res.json())
         .then(
           ({
@@ -59,7 +59,9 @@ const useUserActions = () => {
   const logout = () => resetUser();
 
   const getUser = () => {
-    fetch(BASE_URL, { headers: { Authorization: `Bearer ${ACCESS_TOKEN}` } })
+    fetch(`${API.BASE_URL}${API.ENDPOINTS.USER.BASE}`, {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    })
       .then(res => res.json())
       .then(({ nickname, gender, birthday }: GetUserResponseSchema) => {
         const user = { nickname, gender, birthday };
@@ -80,9 +82,9 @@ const useUserActions = () => {
   };
 
   const editProfile = (user: ProfileFormType) => {
-    fetch(BASE_URL, {
+    fetch(`${API.BASE_URL}${API.ENDPOINTS.USER.BASE}`, {
       method: 'PUT',
-      headers: { Authorization: `Bearer ${ACCESS_TOKEN}`, 'Content-Type': 'application/json' },
+      headers: { Authorization: `Bearer ${accessToken}`, 'Content-Type': 'application/json' },
       body: JSON.stringify(user),
     })
       .then(res => res.json())
