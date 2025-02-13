@@ -8,6 +8,7 @@ export type Submenus = {
 export type Review = {
   id: number;
   title: string;
+  chatlog_id: number;
   content: string;
   nickname: string;
   created_at: string;

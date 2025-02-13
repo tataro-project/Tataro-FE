@@ -15,6 +15,7 @@ import { ReviewCardProps } from '@/components/reviews/types';
 
 const ReviewBox: React.FC<ReviewCardProps> = ({
   id,
+  chatlog_id,
   title,
   content,
   nickname,
@@ -63,6 +64,7 @@ const ReviewBox: React.FC<ReviewCardProps> = ({
             <ContentBox variant="layerCard" ref={ref}>
               <ReviewDetail
                 id={id}
+                chatlog_id={chatlog_id}
                 title={title}
                 content={content}
                 nickname={nickname}

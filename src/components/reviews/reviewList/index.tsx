@@ -51,14 +51,15 @@ const ReviewList: React.FC<ReviewListProps> = ({
       </h1>
       <ul
         className={`
-          flex flex-col justify-between items-center
-          ${isCustomWidth ? 'min-h-[350px]' : 'min-h-[410px]'}
+          flex flex-col justify-start items-center  
+          ${isCustomWidth ? 'min-h-[350px] gap-3' : 'min-h-[410px] gap-6'}
         `}
       >
         {currentReviews.map(review => (
           <ReviewCard
-            id={review.id}
             key={review.id}
+            id={review.id}
+            chatlog_id={review.chatlog_id}
             title={review.title}
             content={review.content}
             nickname={review.nickname}
