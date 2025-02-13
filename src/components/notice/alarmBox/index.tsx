@@ -1,10 +1,11 @@
 'use client';
 
-import useOutsideClick from '@/hooks/useOutsideClick';
-import AlarmBoxProps from './types';
 import { X } from 'lucide-react';
-import { useEffect } from 'react';
+
+import useOutsideClick from '@/hooks/useOutsideClick';
 import useLayerCardStore from '@/stores/layerCardStore';
+
+import AlarmBoxProps from './types';
 
 const AlarmBox = ({ isOpen, close }: AlarmBoxProps) => {
   const ref = useOutsideClick(() => {

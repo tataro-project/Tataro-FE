@@ -6,11 +6,11 @@ import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
 import { BellDot, LogIn, Menu, UserRound } from 'lucide-react';
 
+import AlarmBox from '@/components/notice/alarmBox';
 import useScreenWidth from '@/hooks/useScreenWidth';
 
-import Sidebar from '@common/sidebar';
 import { layerCard } from '@common/layerCard';
-import AlarmBox from '@/components/notice/alarmBox';
+import Sidebar from '@common/sidebar';
 
 const Header = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
