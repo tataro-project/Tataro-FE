@@ -6,12 +6,15 @@ import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
 import { BellDot, LogIn, Menu, UserRound } from 'lucide-react';
 
+import AlarmBox from '@/components/notice/alarmBox';
 import useScreenWidth from '@/hooks/useScreenWidth';
 
+import { layerCard } from '@common/layerCard';
 import Sidebar from '@common/sidebar';
 
 const Header = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
+  const [isAlarmOpen, setIsAlarmOpen] = useState<boolean>(false);
   const { isInit, isMobile } = useScreenWidth();
   const pathname = usePathname();
 
@@ -46,14 +49,25 @@ const Header = () => {
               absoluteStrokeWidth
             />
           </Link>
+
           <BellDot
             className={clsx(' text-blueGray', isMobile ? 'w-5 h-5' : 'w-6 h-6')}
             strokeWidth={1.5}
             absoluteStrokeWidth
+            onClick={() => {
+              setIsAlarmOpen(true);
+              layerCard({
+                content: <AlarmBox isOpen={isAlarmOpen} close={() => setIsAlarmOpen(false)} />,
+                position: 'top-12 right-10',
+                size: 'max-w-[300px] h-[400px]',
+                overlay: false,
+              });
+            }}
           >
             {/* 알림 왔을 때 동그라미 색 표시 */}
             <circle cx="18" cy="8" r="4" className="fill-deepPink stroke-none" />
           </BellDot>
+
           <button onClick={() => setIsSidebarOpen(true)}>
             <Menu
               className={clsx('text-blueGray', isMobile ? 'w-5 h-5' : 'w-6 h-6')}
