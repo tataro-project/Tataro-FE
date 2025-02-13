@@ -1,7 +1,5 @@
 import { Heart } from 'lucide-react';
 
-import useLayerCardStore from '@/stores/layerCardStore';
-
 import Button from '@common/button';
 import { layerCard } from '@common/layerCard';
 import { PriceTab, PriceTabs } from '@common/tabs/priceTabs';
@@ -13,11 +11,9 @@ import HeartUsageHistory from './heartUsageHistory';
 const REMAINING_HEARTS = 150;
 
 const Payment = () => {
-  const { hideLayerCard } = useLayerCardStore();
-
   const showLayerPopup = () => {
     layerCard({
-      content: <ChargeOptions close={() => hideLayerCard()} />,
+      content: <ChargeOptions />,
       variant: 'price',
       size: 'max-w-2xl h-[576px]',
     });
