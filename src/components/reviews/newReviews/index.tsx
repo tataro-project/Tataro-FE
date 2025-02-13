@@ -1,4 +1,4 @@
-import { mockReviews } from '../mockReviews';
+import { mockReviews } from '../mockData';
 import ReviewList from '../reviewList';
 
 const NewReviews = () => {

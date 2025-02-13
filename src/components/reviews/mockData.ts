@@ -2,6 +2,7 @@ export const mockReviews = [
   {
     id: 1,
     user_id: 2,
+    chatlog_id: 1,
     nickname: '티몬과품바',
     title: '내돈내산 사용 후기 올린다',
     content:
@@ -15,6 +16,7 @@ export const mockReviews = [
   {
     id: 2,
     user_id: 3,
+    chatlog_id: 2,
     nickname: '행운의토끼발',
     title: '타로 상담 받고 인생이 바뀌었어요',
     content:
@@ -28,6 +30,7 @@ export const mockReviews = [
   {
     id: 3,
     user_id: 4,
+    chatlog_id: 3,
     nickname: '별빛타로',
     title: '직장운 타로 결과 공유합니다',
     content:
@@ -41,6 +44,21 @@ export const mockReviews = [
   {
     id: 4,
     user_id: 5,
+    chatlog_id: 4,
+    nickname: '운세마스터',
+    title: '연애운 타로, 놀라운 정확도!',
+    content:
+      '연애운 타로를 받아본 결과, 정말 현재 제 상황과 너무 일치해서 깜짝 놀랐어요. 사실 최근 연애 문제로 고민이 많았는데, 타로 카드에서 제가 겪고 있는 문제를 정확하게 짚어주더라고요. 그리고 조언해주신 대로 행동을 해봤더니 관계가 훨씬 좋아졌어요. 타로가 단순한 운세 예측이 아니라, 제 자신을 되돌아보고 더 나은 방향으로 나아가게 도와주는 도구라는 걸 알게 되었습니다. 정말 유익한 경험이었어요.',
+    on_main: true,
+    img_url: 'https://blog.kakaocdn.net/dn/bxapSC/btsIBVJnAdm/tDIQASFAMh5AzitaECGVK0/img.jpg',
+    created_at: '2024-02-09',
+    updated_at: '2024-11-20',
+    view_count: 20,
+  },
+  {
+    id: 5,
+    user_id: 5,
+    chatlog_id: 5,
     nickname: '운세마스터',
     title: '연애운 타로, 놀라운 정확도!',
     content:

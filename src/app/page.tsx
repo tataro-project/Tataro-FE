@@ -6,7 +6,7 @@ import Aos from 'aos';
 
 import ReviewBox from '@/components/mainPage/reviewBox';
 import TaroSwiper from '@/components/mainPage/taroSwiper';
-import { mockReviews } from '@/components/reviews/mockReviews';
+import { mockReviews } from '@/components/reviews/mockData';
 
 import Button from '@common/button';
 import LoadingSpinner from '@common/loadingSpinner';
