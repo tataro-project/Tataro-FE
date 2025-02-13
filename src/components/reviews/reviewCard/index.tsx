@@ -14,6 +14,7 @@ import { ReviewCardProps } from '../types';
 
 const ReviewCard: React.FC<ReviewCardProps> = ({
   id,
+  chatlog_id,
   title,
   content,
   nickname,
@@ -29,6 +30,7 @@ const ReviewCard: React.FC<ReviewCardProps> = ({
       content: (
         <ReviewDetail
           id={id}
+          chatlog_id={chatlog_id}
           title={title}
           content={content}
           nickname={nickname}
@@ -63,17 +65,25 @@ const ReviewCard: React.FC<ReviewCardProps> = ({
             </h2>
             <p className="text-xs line-clamp-1">{nickname}</p>
           </div>
-          <div className="px-2">
-            <p className={`text-left line-clamp-2 ${isCustomWidth ? 'text-xs' : 'text-sm'}`}>
-              {content}
+          <p className={`text-left line-clamp-2 ${isCustomWidth ? 'text-xs' : 'text-sm'}`}>
+            {content}
+          </p>
+          <div className="flex justify-between items-center text-xs">
+            <time
+              dateTime={
+                updated_at || created_at
+                  ? new Date(updated_at || created_at).toISOString()
+                  : undefined
+              }
+            >
+              {updated_at
+                ? new Date(updated_at).toLocaleDateString()
+                : new Date(created_at).toLocaleDateString()}
+            </time>
+            <p className="flex items-center gap-1">
+              <Eye className="w-4" />
+              {view_count}
             </p>
-            <div className="flex justify-between items-center text-xs">
-              <p>{updated_at ? updated_at : created_at}</p>
-              <p className="flex items-center gap-1">
-                <Eye className="w-4" />
-                {view_count}
-              </p>
-            </div>
           </div>
         </div>
       </button>
