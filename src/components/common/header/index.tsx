@@ -60,6 +60,7 @@ const Header = () => {
                 content: <AlarmBox isOpen={isAlarmOpen} close={() => setIsAlarmOpen(false)} />,
                 position: 'top-12 right-10',
                 size: 'max-w-[300px] h-[400px]',
+                overlay: false,
               });
             }}
           >
