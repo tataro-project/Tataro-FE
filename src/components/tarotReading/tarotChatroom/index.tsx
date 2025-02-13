@@ -20,11 +20,9 @@ const TarotChatroom = () => {
 
   const [message, setMessage] = useState('');
   const [chatHistory, setChatHistory] = useState<ChatBubbleProps[]>([]);
-  const [showInput, setShowInput] = useState(false);
-  const [showOptions, setShowOptions] = useState(false);
-  const [showAnimation, setShowAnimation] = useState(false);
-
-  const [userChat, setUserChat] = useState<string[]>([]);
+  const [isInputVisible, setIsInputVisible] = useState(false);
+  const [isOptionsVisible, setIsOptionsVisible] = useState(false);
+  const [isAnimationVisible, setIsAnimationVisible] = useState(false);
 
   const chatEndRef = useRef<HTMLDivElement>(null);
   const hasMounted = useRef(false);
@@ -43,7 +41,7 @@ const TarotChatroom = () => {
     });
 
     setTimeout(() => {
-      setShowOptions(true);
+      setIsOptionsVisible(true);
     }, 2500);
   }, []);
 
@@ -57,7 +55,6 @@ const TarotChatroom = () => {
         const updatedChatHistory = prev.map(msg => ({ ...msg, showButton: false }));
         return [...updatedChatHistory, { message, isChatbot: false, showButton: true }];
       });
-      setUserChat(prev => [...prev, message.trim()]);
       setMessage('');
     }
   };
@@ -72,7 +69,7 @@ const TarotChatroom = () => {
         { message: data.content || '고민을 생각하며 카드를 한장 뽑아봐', isChatbot: true },
       ]);
       setTimeout(() => {
-        setShowAnimation(true);
+        setIsAnimationVisible(true);
       }, 1000);
     },
     onError: error => {
@@ -87,7 +84,7 @@ const TarotChatroom = () => {
   const handleOptionClick = (option: string) => {
     if (option === '고민없어') {
       setChatHistory(prev => [...prev, { message: '고민없어', isChatbot: false }]);
-      setShowOptions(false);
+      setIsOptionsVisible(false);
       setTimeout(() => {
         setChatHistory(prev => [
           ...prev,
@@ -96,20 +93,24 @@ const TarotChatroom = () => {
       }, 1000);
     } else {
       setChatHistory(prev => [...prev, { message: '나의 고민은...', isChatbot: false }]);
-      setShowInput(true);
-      setShowOptions(false);
+      setIsInputVisible(true);
+      setIsOptionsVisible(false);
     }
   };
 
   const handleCompleteInput = () => {
-    const userInput = userChat.join(' ');
-    console.log('사용자 고민: ', userChat.join(' '));
+    const userInput = chatHistory
+      .filter(chat => !chat.isChatbot)
+      .map(chat => chat.message)
+      .slice(1)
+      .join(' ');
+    console.log('챗: ', userInput);
 
     setChatHistory(prev => {
       const updatedHistory = prev.map(msg => ({ ...msg, showButton: false }));
       return updatedHistory;
     });
-    setShowInput(false);
+    setIsInputVisible(false);
 
     initTarotMutation.mutate(userInput);
   };
@@ -133,7 +134,7 @@ const TarotChatroom = () => {
         </div>
         <div ref={chatEndRef} />
       </div>
-      {showOptions && (
+      {isOptionsVisible && (
         <div className="flex justify-center gap-8 py-[13px]">
           <Button variant="chatroom" onClick={() => handleOptionClick('고민없어')}>
             고민없어
@@ -143,10 +144,10 @@ const TarotChatroom = () => {
           </Button>
         </div>
       )}
-      {!showInput && !showOptions && (
+      {!isInputVisible && !isOptionsVisible && (
         <div className={twMerge('w-full', isMobile ? 'py-7' : 'py-[30px]')} />
       )}
-      {showInput && (
+      {isInputVisible && (
         <div className="flex items-end w-full gap-2 p-2">
           <ChatInput
             value={message}
@@ -158,7 +159,7 @@ const TarotChatroom = () => {
           </Button>
         </div>
       )}
-      {showAnimation && <TarotAnimation />}
+      {isAnimationVisible && <TarotAnimation />}
     </div>
   );
 };
