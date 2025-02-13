@@ -4,9 +4,10 @@ import LayerCardType from '@common/layerCard/types';
 
 type LayerCardState = {
   layerCardData: LayerCardType;
+  isVisible: boolean;
+
   showLayerCard: (layerCardData: LayerCardType) => void;
   hideLayerCard: () => void;
-  isVisible: boolean;
 };
 
 const DEFAULT_LAYER_CARD_DATA: LayerCardType = {
@@ -19,6 +20,7 @@ const DEFAULT_LAYER_CARD_DATA: LayerCardType = {
 const useLayerCardStore = create<LayerCardState>(set => ({
   layerCardData: DEFAULT_LAYER_CARD_DATA,
   isVisible: false,
+
   showLayerCard: (layerCardData: LayerCardType) => set({ layerCardData, isVisible: true }),
   hideLayerCard: () => set({ layerCardData: DEFAULT_LAYER_CARD_DATA, isVisible: false }),
 }));

@@ -3,6 +3,7 @@
 import clsx from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
+import useOutsideClick from '@/hooks/useOutsideClick';
 import useLayerCardStore from '@/stores/layerCardStore';
 
 import ContentBox from '@common/contentBox';
@@ -22,12 +23,17 @@ export const layerCard = ({
 const LayerCard = () => {
   const {
     layerCardData: { content, variant, position, size },
+    hideLayerCard,
   } = useLayerCardStore();
+
+  const ref = useOutsideClick(() => hideLayerCard());
 
   return (
     <div className="fixed top-0 left-0 z-40 w-screen h-screen px-4 bg-purple bg-opacity-10">
       <div className={twMerge(clsx('fixed w-full h-full p-2', position, size))}>
-        <ContentBox variant={variant}>{content}</ContentBox>
+        <ContentBox variant={variant} ref={ref}>
+          {content}
+        </ContentBox>
       </div>
     </div>
   );
