@@ -23,7 +23,8 @@ const useUserStore = create<UserState>(set => {
   return {
     user: initialUser,
 
-    setUser: ({ user, accessToken }) => {
+    setUser: ({ user: { nickname, gender, birthday }, accessToken }) => {
+      const user = { nickname, gender, birthday: birthday.split('T')[0] };
       set({ user });
 
       if (typeof window !== 'undefined') {

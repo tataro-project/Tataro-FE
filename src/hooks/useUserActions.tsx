@@ -9,16 +9,17 @@ import { layerPopup } from '@common/layerPopup';
 import { LoginResponseType, SocialLoginProviderType } from '@/app/login/types';
 import { GetUserResponseSchema, ProfileFormType } from '@/components/myPage/profile/types';
 
+const BASE_URL = 'https://hakunamatatarot.com/api/v1/user';
+const ACCESS_TOKEN = nookies.get(null, 'accessToken').accessToken;
+
 const useUserActions = () => {
   const { setUser, resetUser } = useUserStore();
   const router = useRouter();
 
   const redirectToSocialLogin = (provider: SocialLoginProviderType) => {
-    fetch(`https://hakunamatatarot.com/api/v1/user/auth/${provider}/`, {
+    fetch(`${BASE_URL}/auth/${provider}/`, {
       method: 'GET',
-      headers: {
-        Accept: 'application/json',
-      },
+      headers: { Accept: 'application/json' },
     })
       .then(res => res.json())
       .then(res => router.push(provider === 'kakao' ? res.auth_url : res.naver_login_url));
@@ -26,7 +27,7 @@ const useUserActions = () => {
 
   const login = useCallback(
     ({ provider, code }: { provider: SocialLoginProviderType; code: string }) => {
-      fetch(`https://hakunamatatarot.com/api/v1/user/auth/${provider}/callback/?code=${code}`)
+      fetch(`${BASE_URL}/auth/${provider}/callback/?code=${code}`)
         .then(res => res.json())
         .then(
           ({
@@ -35,9 +36,10 @@ const useUserActions = () => {
           }: LoginResponseType) => {
             const user = { nickname, gender, birthday };
             setUser({ user, accessToken });
+            router.push('/');
           },
         )
-        .catch(() =>
+        .catch(() => {
           layerPopup({
             type: 'alert',
             content: (
@@ -47,9 +49,9 @@ const useUserActions = () => {
                 다시 시도해 주세요.
               </>
             ),
-          }),
-        )
-        .finally(() => router.push('/'));
+            onConfirmClick: () => router.push('/login'),
+          });
+        });
     },
     [router, setUser],
   );
@@ -57,14 +59,10 @@ const useUserActions = () => {
   const logout = () => resetUser();
 
   const getUser = () => {
-    fetch(`https://hakunamatatarot.com/api/v1/user`, {
-      headers: {
-        Authorization: `Bearer ${nookies.get(null, 'accessToken')}`,
-      },
-    })
+    fetch(BASE_URL, { headers: { Authorization: `Bearer ${ACCESS_TOKEN}` } })
       .then(res => res.json())
-      .then(({ nickname, birthday, gender }: GetUserResponseSchema) => {
-        const user = { nickname, birthday, gender };
+      .then(({ nickname, gender, birthday }: GetUserResponseSchema) => {
+        const user = { nickname, gender, birthday };
         setUser({ user });
       })
       .catch(() =>
@@ -82,12 +80,9 @@ const useUserActions = () => {
   };
 
   const editProfile = (user: ProfileFormType) => {
-    fetch(`https://hakunamatatarot.com/api/v1/user`, {
+    fetch(BASE_URL, {
       method: 'PUT',
-      headers: {
-        Authorization: `Bearer ${nookies.get(null, 'accessToken')}`,
-        'Content-Type': 'application/json',
-      },
+      headers: { Authorization: `Bearer ${ACCESS_TOKEN}`, 'Content-Type': 'application/json' },
       body: JSON.stringify(user),
     })
       .then(res => res.json())
