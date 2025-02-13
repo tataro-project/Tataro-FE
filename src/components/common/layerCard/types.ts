@@ -5,6 +5,7 @@ type LayerCardType = {
   variant?: 'layerCard' | 'price';
   position?: string;
   size: string;
+  overlay?: boolean;
 };
 
 export default LayerCardType;
