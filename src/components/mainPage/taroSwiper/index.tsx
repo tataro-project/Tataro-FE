@@ -15,16 +15,16 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 
 const TaroSwiper = () => {
-  const cards = [
-    'Magician',
-    'Thefool',
-    'Empress',
-    'Magician',
-    'Thefool',
-    'Empress',
-    'Magician',
-    'Thefool',
-    'Empress',
+  const cardClassNameBg = [
+    'bg-magician',
+    'bg-theFool',
+    'bg-empress',
+    'bg-magician',
+    'bg-theFool',
+    'bg-empress',
+    'bg-magician',
+    'bg-theFool',
+    'bg-empress',
   ];
   return (
     <Swiper
@@ -46,18 +46,11 @@ const TaroSwiper = () => {
       }}
       loop
     >
-      {cards.map((img, index) => (
+      {cardClassNameBg.map((img, index) => (
         <SwiperSlide key={index}>
           {({ isActive, isNext, isPrev }) =>
             isActive || isNext || isPrev ? (
-              <div
-                className={clsx(
-                  'md:w-60 w-30 h-96 bg-center bg-contain bg-no-repeat',
-                  img === 'Thefool' && 'bg-theFool',
-                  img === 'Magician' && 'bg-magician',
-                  img === 'Empress' && 'bg-empress',
-                )}
-              />
+              <div className={clsx('md:w-60 w-30 h-96 bg-center bg-contain bg-no-repeat', img)} />
             ) : (
               <div className="md:w-52 w-30 h-96 bg-cardBack bg-center bg-contain bg-no-repeat" />
             )
