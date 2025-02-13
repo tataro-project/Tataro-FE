@@ -7,7 +7,7 @@ export const API = {
       BASE: '/user',
       REDIRECT: (provider: SocialLoginProviderType) => `/user/auth/${provider}`,
       LOGIN: (provider: SocialLoginProviderType, code: string) =>
-        `/user/auth/${provider}/callback/?${code}`,
+        `/user/auth/${provider}/callback/?code=${code}`,
     },
     TAROT: {
       INIT: '/tarot/init/',
