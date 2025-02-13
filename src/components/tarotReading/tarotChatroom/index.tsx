@@ -24,8 +24,6 @@ const TarotChatroom = () => {
   const [showOptions, setShowOptions] = useState(false);
   const [showAnimation, setShowAnimation] = useState(false);
 
-  const [userChat, setUserChat] = useState<string[]>([]);
-
   const chatEndRef = useRef<HTMLDivElement>(null);
   const hasMounted = useRef(false);
 
@@ -57,7 +55,6 @@ const TarotChatroom = () => {
         const updatedChatHistory = prev.map(msg => ({ ...msg, showButton: false }));
         return [...updatedChatHistory, { message, isChatbot: false, showButton: true }];
       });
-      setUserChat(prev => [...prev, message.trim()]);
       setMessage('');
     }
   };
@@ -102,8 +99,12 @@ const TarotChatroom = () => {
   };
 
   const handleCompleteInput = () => {
-    const userInput = userChat.join(' ');
-    console.log('사용자 고민: ', userChat.join(' '));
+    const userInput = chatHistory
+      .filter(chat => !chat.isChatbot)
+      .map(chat => chat.message)
+      .slice(1)
+      .join(' ');
+    console.log('챗: ', userInput);
 
     setChatHistory(prev => {
       const updatedHistory = prev.map(msg => ({ ...msg, showButton: false }));
