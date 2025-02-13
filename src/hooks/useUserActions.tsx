@@ -36,9 +36,10 @@ const useUserActions = () => {
           }: LoginResponseType) => {
             const user = { nickname, gender, birthday };
             setUser({ user, accessToken });
+            router.push('/');
           },
         )
-        .catch(() =>
+        .catch(() => {
           layerPopup({
             type: 'alert',
             content: (
@@ -48,9 +49,9 @@ const useUserActions = () => {
                 다시 시도해 주세요.
               </>
             ),
-          }),
-        )
-        .finally(() => router.push('/'));
+            onConfirmClick: () => router.push('/login'),
+          });
+        });
     },
     [router, setUser],
   );
@@ -60,8 +61,8 @@ const useUserActions = () => {
   const getUser = () => {
     fetch(BASE_URL, { headers: { Authorization: `Bearer ${ACCESS_TOKEN}` } })
       .then(res => res.json())
-      .then(({ nickname, birthday, gender }: GetUserResponseSchema) => {
-        const user = { nickname, birthday, gender };
+      .then(({ nickname, gender, birthday }: GetUserResponseSchema) => {
+        const user = { nickname, gender, birthday };
         setUser({ user });
       })
       .catch(() =>
