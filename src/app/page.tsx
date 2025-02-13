@@ -31,7 +31,6 @@ const Home = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  // 로딩 중일 때는 로딩 스피너를 보여줍니다.
   if (isLoading) {
     return <LoadingSpinner />;
   }
