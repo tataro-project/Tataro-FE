@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { FocusTrap } from 'focus-trap-react';
 import { X } from 'lucide-react';
 
@@ -11,6 +12,7 @@ import Button from '@common/button';
 import { ReviewDetailProps } from '../types';
 
 const ReviewDetail: React.FC<ReviewDetailProps> = ({
+  id,
   title,
   content,
   nickname,
@@ -20,8 +22,18 @@ const ReviewDetail: React.FC<ReviewDetailProps> = ({
   view_count,
   close,
 }) => {
+  const router = useRouter();
   const { isCustomWidth } = useScreenWidth(640);
   const ref = useOutsideClick(close);
+
+  const handleEdit = () => {
+    const queryParams = new URLSearchParams({
+      title: encodeURIComponent(title),
+      content: encodeURIComponent(content),
+    }).toString();
+
+    router.push(`/reviews/edit/${id}?${queryParams}`);
+  };
 
   useEffect(() => {
     const handleClose = (e: KeyboardEvent) => {
@@ -75,7 +87,7 @@ const ReviewDetail: React.FC<ReviewDetailProps> = ({
         </section>
 
         <footer className="flex justify-end items-center gap-4">
-          <Button variant="editAndDeleteButton" aria-label="수정">
+          <Button variant="editAndDeleteButton" aria-label="수정" onClick={handleEdit}>
             수정
           </Button>
           <Button variant="editAndDeleteButton" aria-label="삭제">

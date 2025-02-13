@@ -31,3 +31,39 @@ body {
 td {
   @apply text-center;
 }
+
+.ProseMirror-focused {
+  @apply outline-none;
+}
+.ProseMirror h1 {
+  @apply text-3xl max-sm:text-lg;
+}
+
+.ProseMirror h2 {
+  @apply text-2xl max-sm:text-base;
+}
+
+.ProseMirror h3 {
+  @apply text-xl max-sm:text-sm;
+}
+
+.ProseMirror p {
+  @apply max-sm:text-xs;
+}
+
+.ProseMirror strong {
+  @apply font-gBold;
+}
+
+.ProseMirror ol > li {
+  @apply list-decimal pl-2;
+}
+
+.ProseMirror ul > li {
+  @apply list-disc pl-2;
+}
+
+.ProseMirror ol,
+.ProseMirror ul {
+  @apply pl-5;
+}
