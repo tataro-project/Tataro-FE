@@ -13,7 +13,7 @@ import SUBMENUS from '@/components/myPage/constants';
 
 const MyPage = () => {
   const { isInit, isCustomWidth } = useScreenWidth(1056);
-  const [submenu, setSubmenu] = useState('Profile');
+  const [submenu, setSubmenu] = useState<MyPageSubmenus>('Profile');
 
   const handleClickSubmenu = (selectedSubmenu: MyPageSubmenus) =>
     selectedSubmenu !== submenu && setSubmenu(selectedSubmenu);
@@ -56,6 +56,7 @@ const MyPage = () => {
             )}
           </>
         )}
+
         {isCustomWidth && (
           <div className="flex justify-center items-center w-full h-full">
             <div className="w-full max-w-3xl h-full max-h-[672px]">

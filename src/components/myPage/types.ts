@@ -1,6 +1,8 @@
-export type MyPageSubmenus = 'Profile' | 'Assessment' | 'Payment' | 'Chat History';
+import { ReactNode } from 'react';
+
+export type MyPageSubmenus = 'Profile' | 'Payment' | 'Chat History';
 
 export type Submenus = {
   submenu: MyPageSubmenus;
-  content: () => JSX.Element | null;
+  content: () => ReactNode;
 };
