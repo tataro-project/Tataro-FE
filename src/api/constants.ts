@@ -3,7 +3,7 @@ export const API = {
   ENDPOINTS: {
     USER: {},
     TAROT: {
-      INIT: '/tarot/init',
+      INIT: '/tarot/init/',
       GENERATE: (id: string) => `/tarot/${id}`,
     },
     REVIEW: {},
