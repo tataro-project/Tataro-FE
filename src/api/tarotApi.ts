@@ -1,11 +1,6 @@
-import { parseCookies } from 'nookies';
+import { getAccessToken } from '@/utils/auth';
 
 import { API } from '@/api/constants';
-
-const getAccessToken = () => {
-  const cookies = parseCookies();
-  return cookies.accessToken;
-};
 
 export const initTarot = async (content: string) => {
   const accessToken = getAccessToken();
