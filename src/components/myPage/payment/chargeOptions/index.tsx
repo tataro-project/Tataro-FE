@@ -3,24 +3,27 @@ import { FocusTrap } from 'focus-trap-react';
 import { X } from 'lucide-react';
 
 import useScreenWidth from '@/hooks/useScreenWidth';
+import useLayerCardStore from '@/stores/layerCardStore';
 
 import HeartPriceTag from './HeartPriceTag';
 
-import { ChargeOptionsProps } from '../types';
 import { NUMBER_OF_HEARTS_FOR_SALE } from '../constants';
 
-const ChargeOptions = ({ close }: ChargeOptionsProps) => {
+const ChargeOptions = () => {
   const { isInit, isCustomWidth } = useScreenWidth(640);
+  const { hideLayerCard } = useLayerCardStore();
 
   useEffect(() => {
     const handleClose = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
-        close();
+        hideLayerCard();
       }
     };
+
     document.addEventListener('keydown', handleClose);
+
     return () => document.removeEventListener('keydown', handleClose);
-  }, [close]);
+  }, [hideLayerCard]);
 
   if (!isInit) return null;
 
@@ -32,7 +35,7 @@ const ChargeOptions = ({ close }: ChargeOptionsProps) => {
           strokeWidth={1.5}
           size={28}
           className="absolute top-2 right-2 text-purple cursor-pointer"
-          onClick={() => close()}
+          onClick={() => hideLayerCard()}
           tabIndex={0}
         />
         {!isCustomWidth && (
