@@ -15,7 +15,7 @@ const NaverCallback = () => {
   useEffect(() => {
     if (!code) return;
 
-    login({ provider: 'naver', code });
+    login({ OAuthProvider: 'naver', code });
   }, [code, login]);
 
   return <></>;

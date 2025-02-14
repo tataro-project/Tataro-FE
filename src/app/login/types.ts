@@ -9,4 +9,4 @@ export type LoginResponseType = {
   user_data: UserDataType;
 };
 
-export type SocialLoginProviderType = 'kakao' | 'naver';
+export type OAuthProviderType = 'kakao' | 'naver';

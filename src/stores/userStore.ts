@@ -1,11 +1,15 @@
 import nookies from 'nookies';
-import { z } from 'zod';
 import { createStore } from 'zustand';
 import { persist } from 'zustand/middleware';
 
-import { profileFormSchema } from '@/components/myPage/profile/schemas';
-
-export type UserDataType = z.infer<typeof profileFormSchema>;
+export type UserDataType = {
+  id?: string;
+  email: string;
+  nickname: string;
+  birthday: string;
+  gender: 'male' | 'female' | null;
+  social_type?: 'KAKAO' | 'NAVER';
+};
 
 type UserState = {
   user: UserDataType | null;
