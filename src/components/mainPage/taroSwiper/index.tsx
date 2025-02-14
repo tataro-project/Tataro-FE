@@ -1,11 +1,5 @@
 'use client';
 
-// import Image from 'next/image';
-// import Magician from '@images/Magician.svg';
-// import Thefool from '@images/TheFool.svg';
-// import Empress from '@images/Empress.svg';
-// import CardBack from '@images/CardBack.svg';
-
 import clsx from 'clsx';
 import { Autoplay, EffectCoverflow } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
