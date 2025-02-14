@@ -2,17 +2,13 @@
 
 import { X } from 'lucide-react';
 
-import useOutsideClick from '@/hooks/useOutsideClick';
 import useLayerCardStore from '@/stores/layerCardStore';
 
 const AlarmBox = () => {
   const { hideLayerCard } = useLayerCardStore();
-  const ref = useOutsideClick(() => {
-    hideLayerCard();
-  });
 
   return (
-    <div ref={ref}>
+    <div>
       <h1 className="absolute top-1 left-[106px] font-lilita text-lightBlue text-3xl stroke">
         alarm
       </h1>
