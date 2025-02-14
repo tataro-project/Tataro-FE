@@ -50,7 +50,7 @@ const Header = () => {
           </Link>
 
           <BellDot
-            className={clsx(' text-blueGray', isMobile ? 'w-5 h-5' : 'w-6 h-6')}
+            className={clsx('text-blueGray cursor-pointer', isMobile ? 'w-5 h-5' : 'w-6 h-6')}
             strokeWidth={1.5}
             absoluteStrokeWidth
             onClick={() => {
