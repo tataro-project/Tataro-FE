@@ -1,11 +1,5 @@
 'use client';
 
-// import Image from 'next/image';
-// import Magician from '@images/Magician.svg';
-// import Thefool from '@images/TheFool.svg';
-// import Empress from '@images/Empress.svg';
-// import CardBack from '@images/CardBack.svg';
-
 import clsx from 'clsx';
 import { Autoplay, EffectCoverflow } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -15,16 +9,16 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 
 const TaroSwiper = () => {
-  const cards = [
-    'Magician',
-    'Thefool',
-    'Empress',
-    'Magician',
-    'Thefool',
-    'Empress',
-    'Magician',
-    'Thefool',
-    'Empress',
+  const cardClassNameBg = [
+    'bg-magician',
+    'bg-theFool',
+    'bg-empress',
+    'bg-magician',
+    'bg-theFool',
+    'bg-empress',
+    'bg-magician',
+    'bg-theFool',
+    'bg-empress',
   ];
   return (
     <Swiper
@@ -46,18 +40,11 @@ const TaroSwiper = () => {
       }}
       loop
     >
-      {cards.map((img, index) => (
+      {cardClassNameBg.map((img, index) => (
         <SwiperSlide key={index}>
           {({ isActive, isNext, isPrev }) =>
             isActive || isNext || isPrev ? (
-              <div
-                className={clsx(
-                  'md:w-60 w-30 h-96 bg-center bg-contain bg-no-repeat',
-                  img === 'Thefool' && 'bg-theFool',
-                  img === 'Magician' && 'bg-magician',
-                  img === 'Empress' && 'bg-empress',
-                )}
-              />
+              <div className={clsx('md:w-60 w-30 h-96 bg-center bg-contain bg-no-repeat', img)} />
             ) : (
               <div className="md:w-52 w-30 h-96 bg-cardBack bg-center bg-contain bg-no-repeat" />
             )
