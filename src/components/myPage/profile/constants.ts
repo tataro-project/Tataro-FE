@@ -10,7 +10,7 @@ export const CONSENT_ITEMS: readonly ConsentItem[] = [
 export const DEFAULT_VALUES_SIGNUP_FORM: SignUpFormType = {
   nickname: '',
   birthday: '',
-  gender: undefined,
+  gender: null,
   requiredTerms: false,
   requiredPrivacy: false,
   optionalPrivacy: false,

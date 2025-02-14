@@ -1,12 +1,17 @@
 import nookies from 'nookies';
 import { create } from 'zustand';
 
-import { ProfileFormType as UserData } from '@/components/myPage/profile/types';
+export type UserDataType = {
+  email: string;
+  nickname: string;
+  birthday: string;
+  gender: 'male' | 'female' | null;
+};
 
 type UserState = {
-  user: UserData | null;
+  user: UserDataType | null;
 
-  setUser: (loginResponse: { user: UserData; accessToken?: string }) => void;
+  setUser: (loginResponse: { user: UserDataType; accessToken?: string }) => void;
   resetUser: () => void;
 };
 
@@ -23,9 +28,12 @@ const useUserStore = create<UserState>(set => {
   return {
     user: initialUser,
 
-    setUser: ({ user: { nickname, gender, birthday }, accessToken }) => {
-      const user = { nickname, gender, birthday: birthday ? birthday.split('T')[0] : birthday };
-      set({ user });
+    setUser: ({ user, accessToken }) => {
+      const formattedUser = {
+        ...user,
+        birthday: user.birthday ? user.birthday.split('T')[0] : user.birthday,
+      };
+      set({ user: formattedUser });
 
       if (typeof window !== 'undefined') {
         sessionStorage.setItem('user', JSON.stringify(user));

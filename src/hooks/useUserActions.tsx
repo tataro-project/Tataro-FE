@@ -1,17 +1,17 @@
 import { useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 
-import useUserStore from '@/stores/userStore';
+import useUserStore, { UserDataType } from '@/stores/userStore';
 import { getAccessToken } from '@/utils/auth';
 
 import { layerPopup } from '@common/layerPopup';
 
 import { LoginResponseType, SocialLoginProviderType } from '@/app/login/types';
-import { GetUserResponseSchema, ProfileFormType } from '@/components/myPage/profile/types';
+import { ProfileFormType } from '@/components/myPage/profile/types';
 import { API } from '@/api/constants';
 
 const useUserActions = () => {
-  const { setUser, resetUser } = useUserStore();
+  const { user, setUser, resetUser } = useUserStore();
   const router = useRouter();
 
   const accessToken = getAccessToken();
@@ -29,16 +29,11 @@ const useUserActions = () => {
     ({ provider, code }: { provider: SocialLoginProviderType; code: string }) => {
       fetch(`${API.BASE_URL}${API.ENDPOINTS.USER.LOGIN(provider, code)}`)
         .then(res => res.json())
-        .then(
-          ({
-            access_token: accessToken,
-            user_data: { nickname, gender, birthday },
-          }: LoginResponseType) => {
-            const user = { nickname, gender, birthday };
-            setUser({ user, accessToken });
-            router.push('/');
-          },
-        )
+        .then(({ access_token: accessToken, user_data: user }: LoginResponseType) => {
+          console.log(user);
+          setUser({ user, accessToken });
+          router.push('/');
+        })
         .catch(() => {
           layerPopup({
             type: 'alert',
@@ -63,10 +58,7 @@ const useUserActions = () => {
       headers: { Authorization: `Bearer ${accessToken}` },
     })
       .then(res => res.json())
-      .then(({ nickname, gender, birthday }: GetUserResponseSchema) => {
-        const user = { nickname, gender, birthday };
-        setUser({ user });
-      })
+      .then((user: UserDataType) => setUser({ user }))
       .catch(() =>
         layerPopup({
           type: 'alert',
@@ -81,16 +73,18 @@ const useUserActions = () => {
       );
   };
 
-  const editProfile = (user: ProfileFormType) => {
+  const editProfile = (userProfileData: ProfileFormType) => {
+    if (!user) return;
+
     fetch(`${API.BASE_URL}${API.ENDPOINTS.USER.BASE}`, {
       method: 'PUT',
       headers: { Authorization: `Bearer ${accessToken}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify(user),
+      body: JSON.stringify(userProfileData),
     })
       .then(res => res.json())
       .then(({ status }) => {
         if (status === 'success') {
-          setUser({ user });
+          setUser({ user: { ...user, ...userProfileData } });
           layerPopup({ content: '회원 정보가 성공적으로 수정되었습니다!' });
         }
       })

@@ -5,6 +5,7 @@ import kakao from '@images/kakao.svg';
 import naver from '@images/naver.svg';
 
 import SocialLoginButtonProps from './types';
+import { SOCIAL_LOGIN_PROVIDERS_KOR } from '@/app/login/constants';
 
 const SocialLoginButton: React.FC<SocialLoginButtonProps> = ({ provider, ...props }) => {
   return (
@@ -17,7 +18,7 @@ const SocialLoginButton: React.FC<SocialLoginButtonProps> = ({ provider, ...prop
       {...props}
     >
       <Image src={provider === 'kakao' ? kakao : naver} alt={`${provider} 로고`} width={20} />
-      <span className="grow">{provider === 'kakao' ? '카카오' : '네이버'} 로그인</span>
+      <span className="grow">{SOCIAL_LOGIN_PROVIDERS_KOR[provider]} 로그인</span>
     </button>
   );
 };
