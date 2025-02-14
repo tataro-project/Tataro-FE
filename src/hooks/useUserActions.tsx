@@ -11,7 +11,7 @@ import { ProfileFormType } from '@/components/myPage/profile/types';
 import { API } from '@/api/constants';
 
 const useUserActions = () => {
-  const { user, setUser, resetUser } = useUserStore();
+  const { user, setUser, resetUser } = useUserStore.getState();
   const router = useRouter();
 
   const accessToken = getAccessToken();
@@ -30,7 +30,6 @@ const useUserActions = () => {
       fetch(`${API.BASE_URL}${API.ENDPOINTS.USER.LOGIN(provider, code)}`)
         .then(res => res.json())
         .then(({ access_token: accessToken, user_data: user }: LoginResponseType) => {
-          console.log(user);
           setUser({ user, accessToken });
           router.push('/');
         })

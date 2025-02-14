@@ -14,7 +14,7 @@ import SIDEBAR_MENUS from './constants';
 
 const Sidebar = ({ isOpen, close }: SidebarProps) => {
   const { logout } = useUserActions();
-  const { user } = useUserStore();
+  const { user } = useUserStore.getState();
 
   const router = useRouter();
 

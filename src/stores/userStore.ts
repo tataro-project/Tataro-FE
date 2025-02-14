@@ -1,66 +1,76 @@
 import nookies from 'nookies';
-import { create } from 'zustand';
+import { z } from 'zod';
+import { createStore } from 'zustand';
+import { persist } from 'zustand/middleware';
 
-export type UserDataType = {
-  email: string;
-  nickname: string;
-  birthday: string;
-  gender: 'male' | 'female' | null;
-};
+import { profileFormSchema } from '@/components/myPage/profile/schemas';
+
+export type UserDataType = z.infer<typeof profileFormSchema>;
 
 type UserState = {
   user: UserDataType | null;
+  timer: NodeJS.Timeout | null;
 
   setUser: (loginResponse: { user: UserDataType; accessToken?: string }) => void;
   resetUser: () => void;
 };
 
-const useUserStore = create<UserState>(set => {
-  let initialUser = null;
+const useUserStore = createStore<UserState>()(
+  persist(
+    (set, get) => ({
+      user: null,
+      timer: null,
 
-  if (typeof window !== 'undefined') {
-    const userFromSessionStorage = sessionStorage.getItem('user');
-    initialUser = userFromSessionStorage ? JSON.parse(userFromSessionStorage) : null;
-  }
+      setUser: ({ user, accessToken }) => {
+        const formattedUser = {
+          ...user,
+          birthday: user.birthday ? user.birthday.split('T')[0] : user.birthday,
+        };
+        set({ user: formattedUser });
 
-  // 창 닫기 및 탭 닫기 시 accessToken 초기화 로직 구현 필요
+        if (typeof window !== 'undefined') {
+          if (accessToken) {
+            const expirationTime = 1000 * 60 * 60;
 
-  return {
-    user: initialUser,
+            nookies.set(null, 'accessToken', accessToken, {
+              maxAge: expirationTime / 1000,
+              path: '/',
+              secure: true,
+              sameSite: 'Lax',
+            });
 
-    setUser: ({ user, accessToken }) => {
-      const formattedUser = {
-        ...user,
-        birthday: user.birthday ? user.birthday.split('T')[0] : user.birthday,
-      };
-      set({ user: formattedUser });
+            if (get().timer) return;
 
-      if (typeof window !== 'undefined') {
-        sessionStorage.setItem('user', JSON.stringify(user));
+            const timer = setTimeout(() => {
+              set({ user: null });
+              localStorage.removeItem('user');
+            }, expirationTime);
 
-        if (accessToken) {
-          const expirationTime = 1000 * 60 * 60;
+            set({ timer });
+          }
+        }
+      },
 
-          nookies.set(null, 'accessToken', accessToken, {
-            maxAge: expirationTime / 1000,
+      resetUser: () => {
+        const timer = get().timer;
+        if (timer) clearTimeout(timer);
+
+        set({ user: null, timer: null });
+
+        if (typeof window !== 'undefined') {
+          nookies.destroy(null, 'accessToken', {
             path: '/',
             secure: true,
             sameSite: 'Lax',
           });
-          setTimeout(() => sessionStorage.removeItem('user'), expirationTime);
+          localStorage.removeItem('user');
         }
-      }
+      },
+    }),
+    {
+      name: 'user',
     },
-
-    resetUser: () => {
-      set({ user: null });
-
-      if (typeof window !== 'undefined') {
-        nookies.destroy(null, 'accessToken');
-        sessionStorage.removeItem('user');
-      }
-    },
-  };
-});
+  ),
+);
 
 export default useUserStore;
