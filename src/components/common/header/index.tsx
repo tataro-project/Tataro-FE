@@ -13,7 +13,7 @@ import { layerCard } from '@common/layerCard';
 import Sidebar from '@common/sidebar';
 
 const Header = () => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const { isInit, isMobile } = useScreenWidth();
   const pathname = usePathname();
 
