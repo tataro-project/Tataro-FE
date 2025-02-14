@@ -49,7 +49,7 @@ const Home = () => {
       <div className="md:max-w-4xl max-w-md">
         <TaroSwiper />
       </div>
-      <div className=" z-20 absolute left-0 md:translate-y-[400px] translate-y-[530px] md:max-w-[700px] max-w-[400px] ">
+      <div className="absolute md:translate-y-[400px] translate-y-[530px] left-0 z-20 md:max-w-[700px] max-w-[400px] ">
         <Image
           src={pinkCloud}
           alt="pink-cloud"
@@ -60,13 +60,13 @@ const Home = () => {
           data-aos-duration="2000"
         />
       </div>
-      <Link href={'tarotReading'} className="z-30" tabIndex={-1}>
+      <Link href="tarotReading" className="z-30" tabIndex={-1}>
         <Button variant="startButton" className="md:text-2xl text-xl ">
           상담 시작 하기
         </Button>
       </Link>
       <div
-        className="z-30 flex flex-col h-full p-20 text-center text-purple font-gMedium "
+        className="flex flex-col z-30 h-full  p-20 text-center text-purple font-gMedium "
         data-aos="fade-up"
         data-aos-easing="200"
         data-aos-offset="200"
@@ -94,7 +94,7 @@ const Home = () => {
         />
       </div>
       <div
-        className="z-10 grid md:grid-cols-2 grid-cols-1 md:gap-5 gap-1 md:p-10 mt-40 p-10 "
+        className="grid md:grid-cols-2 grid-cols-1 md:gap-5 gap-1 z-10 md:p-10 mt-40 p-10 "
         data-aos="fade-up"
         data-aos-easing="400"
         data-aos-duration="1000"
