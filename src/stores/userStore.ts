@@ -3,10 +3,12 @@ import { createStore } from 'zustand';
 import { persist } from 'zustand/middleware';
 
 export type UserDataType = {
+  id?: string;
   email: string;
   nickname: string;
   birthday: string;
   gender: 'male' | 'female' | null;
+  social_type?: 'KAKAO' | 'NAVER';
 };
 
 type UserState = {
