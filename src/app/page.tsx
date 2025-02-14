@@ -49,29 +49,30 @@ const Home = () => {
       <div className="md:max-w-4xl max-w-md">
         <TaroSwiper />
       </div>
-      <div className="absolute left-0 md:translate-y-[400px] translate-y-[530px] z-20 md:max-w-[700px] max-w-[400px] ">
+      <div className="absolute md:translate-y-[400px] translate-y-[530px] left-0 z-20 md:max-w-[700px] max-w-[400px] ">
         <Image
           src={pinkCloud}
           alt="pink-cloud"
+          priority
           data-aos="fade-right"
           data-aos-easing="400"
           data-aos-offset="800"
-          data-aos-duration="1200"
+          data-aos-duration="2000"
         />
       </div>
-      <Link href={'tarotReading'} className="z-50" tabIndex={-1}>
+      <Link href="tarotReading" className="z-30" tabIndex={-1}>
         <Button variant="startButton" className="md:text-2xl text-xl ">
           상담 시작 하기
         </Button>
       </Link>
       <div
-        className="flex flex-col h-full p-20 text-center text-purple font-gMedium z-50 "
+        className="flex flex-col z-30 h-full  p-20 text-center text-purple font-gMedium "
         data-aos="fade-up"
         data-aos-easing="200"
-        data-aos-offset="300"
-        data-aos-duration="1000"
+        data-aos-offset="200"
+        data-aos-duration="1500"
       >
-        <p>운명적인 사랑을 찾는 첫걸음, 당신만의 타로 이야기</p>
+        <p className="min-w-28">운명적인 사랑을 찾는 첫걸음, 당신만의 타로 이야기</p>
         <br />
         <p>사랑, 관계, 그리고 당신의 마음속 이야기를 타로를 통해 해석 해드립니다.</p>
         <p>연애 운, 재회 가능성, 상대의 속마음 등</p>
@@ -89,11 +90,11 @@ const Home = () => {
           priority
           data-aos="fade-up"
           data-aos-offset="1400"
-          data-aos-duration="1000"
+          data-aos-duration="2000"
         />
       </div>
       <div
-        className="grid md:grid-cols-2 grid-cols-1 md:gap-5 md:p-10 gap-10 mt-40 p-10 z-10"
+        className="grid md:grid-cols-2 grid-cols-1 md:gap-5 gap-1 z-10 md:p-10 mt-40 p-10 "
         data-aos="fade-up"
         data-aos-easing="400"
         data-aos-duration="1000"
