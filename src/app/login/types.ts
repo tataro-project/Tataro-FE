@@ -1,7 +1,12 @@
-import { z } from 'zod';
+import { UserDataType } from '@/stores/userStore';
 
-import { loginResponseSchema, socialLoginProviderSchema } from './schemas';
+export type LoginResponseType = {
+  access_token: string;
+  refresh_token: string;
+  created: boolean;
+  message: string;
+  user_id: number;
+  user_data: UserDataType;
+};
 
-export type LoginResponseType = z.infer<typeof loginResponseSchema>;
-
-export type SocialLoginProviderType = z.infer<typeof socialLoginProviderSchema>;
+export type SocialLoginProviderType = 'kakao' | 'naver';

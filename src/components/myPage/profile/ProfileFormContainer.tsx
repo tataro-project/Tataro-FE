@@ -17,11 +17,14 @@ const ProfileFormContainer = () => {
   const pathname = usePathname();
   const isEditMode = pathname === '/mypage';
 
-  const { user } = useUserStore();
+  const { user } = useUserStore.getState();
   const { editProfile } = useUserActions();
 
   const formSchema = isEditMode ? profileFormSchema : signUpFormSchema;
-  const defaultValues = isEditMode && user ? user : DEFAULT_VALUES_SIGNUP_FORM;
+  const defaultValues =
+    isEditMode && user
+      ? { nickname: user.nickname, birthday: user.birthday, gender: user.gender }
+      : DEFAULT_VALUES_SIGNUP_FORM;
 
   const { handleSubmit, ...formMethods } = useForm<FormType<typeof isEditMode>>({
     resolver: zodResolver(formSchema),
