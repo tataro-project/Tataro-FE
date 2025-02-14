@@ -15,7 +15,7 @@ const KakaoCallback = () => {
   useEffect(() => {
     if (!code) return;
 
-    login({ provider: 'kakao', code });
+    login({ OAuthProvider: 'kakao', code });
   }, [code, login]);
 
   return <></>;

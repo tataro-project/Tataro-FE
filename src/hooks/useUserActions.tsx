@@ -6,7 +6,7 @@ import { getAccessToken } from '@/utils/auth';
 
 import { layerPopup } from '@common/layerPopup';
 
-import { LoginResponseType, SocialLoginProviderType } from '@/app/login/types';
+import { LoginResponseType, OAuthProviderType } from '@/app/login/types';
 import { ProfileFormType } from '@/components/myPage/profile/types';
 import { API } from '@/api/constants';
 
@@ -16,18 +16,20 @@ const useUserActions = () => {
 
   const accessToken = getAccessToken();
 
-  const redirectToSocialLogin = (provider: SocialLoginProviderType) => {
-    fetch(`${API.BASE_URL}${API.ENDPOINTS.USER.REDIRECT(provider)}`, {
+  const redirectToSocialLogin = (OAuthProvider: OAuthProviderType) => {
+    fetch(`${API.BASE_URL}${API.ENDPOINTS.USER.REDIRECT(OAuthProvider)}`, {
       method: 'GET',
       headers: { Accept: 'application/json' },
     })
       .then(res => res.json())
-      .then(res => router.push(provider === 'kakao' ? res.auth_url : res.naver_login_url));
+      .then(res => router.push(OAuthProvider === 'kakao' ? res.auth_url : res.naver_login_url));
   };
 
   const login = useCallback(
-    ({ provider, code }: { provider: SocialLoginProviderType; code: string }) => {
-      fetch(`${API.BASE_URL}${API.ENDPOINTS.USER.LOGIN(provider, code)}`)
+    ({ OAuthProvider, code }: { OAuthProvider: OAuthProviderType; code: string }) => {
+      fetch(`${API.BASE_URL}${API.ENDPOINTS.USER.LOGIN(OAuthProvider, code)}`, {
+        headers: { 'Content-Type': 'application/json' },
+      })
         .then(res => res.json())
         .then(({ access_token: accessToken, user_data: user }: LoginResponseType) => {
           setUser({ user, accessToken });

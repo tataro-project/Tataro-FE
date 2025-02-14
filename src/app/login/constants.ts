@@ -1,5 +1,5 @@
-import { SocialLoginProviderType } from './types';
+import { OAuthProviderType } from './types';
 
-export const SOCIAL_LOGIN_PROVIDERS: SocialLoginProviderType[] = ['kakao', 'naver'];
+export const OAUTH_PROVIDERS: OAuthProviderType[] = ['kakao', 'naver'];
 
-export const SOCIAL_LOGIN_PROVIDERS_KOR = { kakao: '카카오', naver: '네이버' };
+export const OAUTH_PROVIDERS_KOR = { kakao: '카카오', naver: '네이버' };

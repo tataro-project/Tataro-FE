@@ -1,7 +1,7 @@
-import { SocialLoginProviderType } from '@/app/login/types';
+import { OAuthProviderType } from '@/app/login/types';
 
 type SocialLoginButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
-  provider: SocialLoginProviderType;
+  OAuthProvider: OAuthProviderType;
   className?: string;
 };
 
