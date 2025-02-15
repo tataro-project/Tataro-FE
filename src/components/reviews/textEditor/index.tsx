@@ -11,7 +11,7 @@ import Toolbar from './toolbar';
 
 type TextEditorProps = {
   value?: string;
-  onChange?: (html: string) => void;
+  onChange: (html: string) => void;
 };
 
 const TextEditor = ({ value, onChange }: TextEditorProps) => {
