@@ -13,7 +13,7 @@ import SUBMENUS from '@/components/reviews/constants';
 
 const Reviews = () => {
   const { isInit, isCustomWidth } = useScreenWidth(1056);
-  const [submenu, setSubmenu] = useState('Best');
+  const [submenu, setSubmenu] = useState<ReviewsSubmenus>('Best');
 
   const handleClickSubmenu = (selectedSubmenu: ReviewsSubmenus) =>
     selectedSubmenu !== submenu && setSubmenu(selectedSubmenu);
