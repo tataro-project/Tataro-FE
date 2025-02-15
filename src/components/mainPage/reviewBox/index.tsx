@@ -61,7 +61,7 @@ const ReviewBox: React.FC<ReviewCardProps> = ({
       {isOpenDetail &&
         mainEl &&
         createPortal(
-          <div className="fixed z-20 h-full w-full max-w-[1000px] max-h-[750px] p-2">
+          <div className="fixed z-40 h-full w-full max-w-[1000px] max-h-[750px] p-2">
             <ContentBox variant="layerCard" ref={ref}>
               <ReviewDetail
                 id={id}
