@@ -29,7 +29,7 @@ const ReviewEdit = () => {
   return (
     <div className="flex justify-center items-center w-full h-full font-gMedium text-purple">
       <ContentBox size="max-w-3xl max-h-[800px]" layout="w-full h-full">
-        <ReviewForm mode="edit" initialData={initialData || undefined} />
+        <ReviewForm mode="edit" initialData={initialData || null} />
       </ContentBox>
     </div>
   );

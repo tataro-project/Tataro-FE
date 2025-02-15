@@ -15,7 +15,7 @@ type ReviewFormProps = {
   initialData?: {
     title: string;
     content: string;
-  };
+  } | null;
 };
 
 const ReviewForm = ({ mode = 'create', initialData }: ReviewFormProps) => {
@@ -41,8 +41,6 @@ const ReviewForm = ({ mode = 'create', initialData }: ReviewFormProps) => {
     },
     mode: 'onSubmit',
   });
-
-  if (!isInit) return null;
 
   const onSubmit = (data: ReviewFormData) => {
     layerPopup({
@@ -74,6 +72,8 @@ const ReviewForm = ({ mode = 'create', initialData }: ReviewFormProps) => {
   const handleEditorChange = (html: string) => {
     setValue('content', html);
   };
+
+  if (!isInit) return null;
 
   return (
     <div
