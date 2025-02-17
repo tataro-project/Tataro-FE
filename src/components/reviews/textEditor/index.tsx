@@ -35,12 +35,6 @@ const TextEditor = ({ value, onChange }: TextEditorProps) => {
     immediatelyRender: false,
   });
 
-  useEffect(() => {
-    if (editor && value !== editor.getHTML()) {
-      editor.commands.setContent(value || '');
-    }
-  }, [value, editor]);
-
   if (!editor) {
     return null;
   }
