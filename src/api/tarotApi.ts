@@ -20,3 +20,40 @@ export const initTarot = async (content: string) => {
 
   return response.json();
 };
+
+export const reinitTarot = async (roomId: string, content: string) => {
+  const accessToken = getAccessToken();
+
+  const response = await fetch(`${API.BASE_URL}${API.ENDPOINTS.TAROT.REINIT(roomId)}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`,
+    },
+    body: JSON.stringify({ content }),
+  });
+
+  if (!response.ok) {
+    throw new Error('Failed to consult tarot');
+  }
+
+  return response.json();
+};
+
+export const consultTarot = async (roomId: string) => {
+  const accessToken = getAccessToken();
+
+  const response = await fetch(`${API.BASE_URL}${API.ENDPOINTS.TAROT.CONSULT(roomId)}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error('Failed to consult tarot');
+  }
+
+  return response.json();
+};

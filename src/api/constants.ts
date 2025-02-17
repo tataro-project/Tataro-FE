@@ -11,7 +11,11 @@ export const API = {
     },
     TAROT: {
       INIT: '/tarot/init/',
-      GENERATE: (id: string) => `/tarot/${id}`,
+      REINIT: (roomId: string) => `/tarot/init/${roomId}/`,
+      CONSULT: (roomId: string) => `/tarot/${roomId}/`,
+      RECENT_TAROT: `/tarot/logs/first/`,
+      PREVIOUS_TAROT: (roomId: string) => `/tarot/logs/${roomId}/`,
+      ALL_TAROT: `/tarot/logs/`,
     },
     REVIEW: {},
     NOTICE: {},
