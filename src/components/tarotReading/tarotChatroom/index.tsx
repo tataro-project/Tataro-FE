@@ -103,11 +103,9 @@ const TarotChatroom = () => {
           ...prev,
           { message: data.content || '고민을 생각하며 카드를 한장 뽑아봐', isChatbot: true },
         ]);
-        console.log('Zustand 설정 직후: ', useTarotStore.getState().roomId);
-        setTimeout(() => {
-          console.log('Zustand 1초 후: ', useTarotStore.getState().roomId);
-          handleConsultTarot();
-        }, 1000);
+        console.log('Zustand 룸 저장: ', useTarotStore.getState().roomId);
+        handleConsultTarot();
+
         // setTimeout(() => {
         //   setIsAnimationVisible(true);
         // }, 1000);
@@ -123,7 +121,7 @@ const TarotChatroom = () => {
   };
 
   const handleConsultTarot = () => {
-    const roomId = useTarotStore.getState().roomId;
+    const { roomId } = useTarotStore.getState();
 
     if (!roomId) return;
 

@@ -16,7 +16,7 @@ const addLineBreaks = (text: string) => {
 };
 
 const TarotChatDetail = () => {
-  const tarotResult = useTarotStore.getState().tarotResult;
+  const { tarotResult } = useTarotStore.getState();
 
   return (
     <main className="w-full h-full p-4 pt-6 md:p-8 md:pt-10">
