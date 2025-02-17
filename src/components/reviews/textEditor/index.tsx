@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import Color from '@tiptap/extension-color';
 import Highlight from '@tiptap/extension-highlight';
 import Image from '@tiptap/extension-image';
