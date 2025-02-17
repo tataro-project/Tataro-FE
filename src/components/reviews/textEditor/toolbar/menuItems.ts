@@ -124,9 +124,7 @@ export const createMenuItems = (): MenuItem[] => [
     action: editor => editor.chain().focus().undo().run(),
     isActive: () => false,
     title: '실행 취소',
-    disabled: editor => {
-      return editor.state.doc.content.size <= 2;
-    },
+    disabled: editor => !editor.can().undo(),
   },
   {
     icon: Redo,
