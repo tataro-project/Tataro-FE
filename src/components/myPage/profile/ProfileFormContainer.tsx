@@ -1,4 +1,4 @@
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import { usePathname } from 'next/navigation';
 import { zodResolver } from '@hookform/resolvers/zod';
 
@@ -26,24 +26,28 @@ const ProfileFormContainer = () => {
       ? { nickname: user.nickname, birthday: user.birthday, gender: user.gender }
       : DEFAULT_VALUES_SIGNUP_FORM;
 
-  const { handleSubmit, ...formMethods } = useForm<FormType<typeof isEditMode>>({
+  const methods = useForm<FormType<typeof isEditMode>>({
     resolver: zodResolver(formSchema),
     defaultValues,
     mode: 'onSubmit',
   });
+
+  const { handleSubmit } = methods;
 
   const onSubmit: SubmitHandler<FormType<typeof isEditMode>> = data => {
     editProfile({ ...data, birthday: new Date(data.birthday).toISOString() });
   };
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col justify-center items-center gap-4 grow w-full pb-2 overflow-y-auto"
-    >
-      <ProfileFormPresentation formMethods={formMethods} isEditMode={isEditMode} />
-      <Button type="submit">{isEditMode ? '저장' : '가입하기'}</Button>
-    </form>
+    <FormProvider {...methods}>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex flex-col justify-center items-center gap-4 grow w-full pb-2 overflow-y-auto"
+      >
+        <ProfileFormPresentation isEditMode={isEditMode} />
+        <Button type="submit">{isEditMode ? '저장' : '가입하기'}</Button>
+      </form>
+    </FormProvider>
   );
 };
 
