@@ -57,3 +57,24 @@ export const consultTarot = async (roomId: string) => {
 
   return response.json();
 };
+
+export const paginatedTarotChatHistory = async (page: number, perPage: number) => {
+  const accessToken = getAccessToken();
+
+  const response = await fetch(
+    `${API.BASE_URL}${API.ENDPOINTS.TAROT.ALL_TAROT}?page=${page}&size=${perPage}`,
+    {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${accessToken}`,
+      },
+    },
+  );
+
+  if (!response.ok) {
+    throw new Error('Failed to fetch chatlogs');
+  }
+
+  return response.json();
+};

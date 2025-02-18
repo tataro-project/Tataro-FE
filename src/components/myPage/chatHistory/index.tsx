@@ -1,28 +1,19 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
+import { paginatedTarotChatHistory } from '@/api/tarotApi';
 import Pagination from '@/components/common/pagination';
 import useScreenWidth from '@/hooks/useScreenWidth';
 
 import ChatlogCard from './chatlogCard';
-import { mockChatlogs } from './mockData';
-import { Chatlog } from './type';
+import { TarotChatlogs } from './type';
 
 const ChatHistory = () => {
   const [currentPage, setCurrentPage] = useState(1);
+  const [tarotChatlogs, setTarotChatlogs] = useState<TarotChatlogs[]>([]);
+  const [totalTarotChatlogs, setTotalTarotChatlogs] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const { isCustomWidth } = useScreenWidth(640);
-  const chatlogs: Chatlog[] = mockChatlogs;
   const perPage = 3;
-
-  const sortedChatlogs = useMemo(() => {
-    return [...chatlogs].sort((a, b) => {
-      return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
-    });
-  }, [chatlogs]);
-
-  const currentChatlogs = useMemo(() => {
-    return sortedChatlogs.slice((currentPage - 1) * perPage, currentPage * perPage);
-  }, [sortedChatlogs, currentPage, perPage]);
 
   const handlePageChange = (newPage: number) => {
     setCurrentPage(newPage);
@@ -30,8 +21,19 @@ const ChatHistory = () => {
   };
 
   useEffect(() => {
-    //API 호출
+    const fetchData = async () => {
+      try {
+        const data = await paginatedTarotChatHistory(currentPage, perPage);
+        console.log(data);
+        setTarotChatlogs(data.chat_contents);
+        setTotalTarotChatlogs(data.total_count);
+      } catch (error) {
+        console.error('Failed to fetch tarotChatlogs', error);
+      }
+    };
+    fetchData();
   }, [currentPage]);
+
   return (
     <div
       ref={containerRef}
@@ -43,22 +45,22 @@ const ChatHistory = () => {
       </h1>
       <ul
         className={`
-          flex flex-col justify-start items-center
+          flex flex-col justify-start items-center w-full
           ${isCustomWidth ? 'min-h-[350px] gap-3' : 'min-h-[410px] gap-6'}
         `}
       >
-        {currentChatlogs.map(chatlog => (
+        {tarotChatlogs.map(chatlog => (
           <ChatlogCard
-            key={chatlog.id}
-            id={chatlog.id}
-            content={chatlog.content}
+            key={chatlog.room_id}
+            room_id={chatlog.room_id}
+            chat_log={chatlog.chat_log}
             created_at={chatlog.created_at}
-            isReviewed={chatlog.isReviewed}
+            is_review={chatlog.is_review}
           />
         ))}
       </ul>
       <Pagination
-        totalResults={chatlogs.length}
+        totalResults={totalTarotChatlogs}
         currentPage={currentPage}
         setPage={handlePageChange}
         perPage={perPage}
