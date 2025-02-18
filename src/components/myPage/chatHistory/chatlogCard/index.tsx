@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 // import ReviewDetail from '@/components/reviews/reviewDetail';
 import useScreenWidth from '@/hooks/useScreenWidth';
@@ -13,6 +13,7 @@ import { TarotChatlogs } from '../type';
 const ChatlogCard = ({ chat_log, room_id, created_at, is_review }: TarotChatlogs) => {
   // const { hideLayerCard } = useLayerCardStore();
   const { isCustomWidth } = useScreenWidth(640);
+  const router = useRouter();
 
   // const showLayerCard = () => {
   //   if (review) {
@@ -36,6 +37,13 @@ const ChatlogCard = ({ chat_log, room_id, created_at, is_review }: TarotChatlogs
   //   }
   // };
 
+  const handleReviewButtonClick = () => {
+    if (is_review) {
+      //   showLayerCard();
+    } else {
+      router.push(`/reviews/create/${room_id}`);
+    }
+  };
   return (
     <li className="w-full">
       <div
@@ -70,22 +78,14 @@ const ChatlogCard = ({ chat_log, room_id, created_at, is_review }: TarotChatlogs
               <p className="text-left line-clamp-2 text-xs">{chat_log[0].question}</p>
             </div>
             <div className="flex items-center justify-end w-full">
-              {is_review ? (
-                <Button
-                  variant="simple"
-                  isReviewed={true}
-                  className="w-[85px] h-6 text-xs"
-                  // onClick={showLayerCard}
-                >
-                  리뷰보기
-                </Button>
-              ) : (
-                <Link href={`/reviews/create/${room_id}`}>
-                  <Button variant="simple" className="w-[85px] h-6 text-xs">
-                    리뷰작성
-                  </Button>
-                </Link>
-              )}
+              <Button
+                variant="simple"
+                isReviewed={is_review}
+                className="w-[85px] h-6 text-xs"
+                onClick={handleReviewButtonClick}
+              >
+                {is_review ? '리뷰보기' : '리뷰작성'}
+              </Button>
             </div>
           </div>
         )}
@@ -103,15 +103,9 @@ const ChatlogCard = ({ chat_log, room_id, created_at, is_review }: TarotChatlogs
                 </time>
               </div>
             </div>
-            {is_review ? (
-              <Button variant="simple" isReviewed={true}>
-                리뷰보기
-              </Button>
-            ) : (
-              <Link href={`/reviews/create/${room_id}`}>
-                <Button variant="simple">리뷰작성</Button>
-              </Link>
-            )}
+            <Button variant="simple" isReviewed={is_review} onClick={handleReviewButtonClick}>
+              {is_review ? '리뷰보기' : '리뷰작성'}
+            </Button>
           </>
         )}
       </div>
