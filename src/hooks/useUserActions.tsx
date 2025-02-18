@@ -1,18 +1,40 @@
-import { useCallback } from 'react';
+import { ReactNode, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 
-import useUserStore, { UserDataType } from '@/stores/userStore';
-import { getAccessToken } from '@/utils/auth';
+import useUserStore, { EXPIRATION_TIME, UserDataType } from '@/stores/userStore';
+import { fetchWithAccessToken, getAccessToken, reissueAccessToken } from '@/utils/auth';
 
 import { layerPopup } from '@common/layerPopup';
 
 import { LoginResponseType, OAuthProviderType } from '@/app/login/types';
 import { ProfileFormType } from '@/components/myPage/profile/types';
+import { ERROR_MESSAGES, INFO_MESSAGES } from './constants';
 import { API } from '@/api/constants';
 
 const useUserActions = () => {
-  const { setUser, resetUser } = useUserStore.getState();
+  const { setUser, resetUser, setAccessToken, setRefreshToken } = useUserStore.getState();
   const router = useRouter();
+
+  const handleError = useCallback(
+    (error: unknown, errorMessage: ReactNode, redirectToLogin = true) => {
+      const isRefreshTokenMissing =
+        error instanceof Error && error.message === 'No refresh token found';
+
+      layerPopup({
+        type: 'alert',
+        content: isRefreshTokenMissing ? ERROR_MESSAGES.NO_REFRESH_TOKEN : errorMessage,
+        onConfirmClick: () => {
+          if (isRefreshTokenMissing) {
+            resetUser();
+            router.push('/login');
+            return;
+          }
+          if (redirectToLogin) router.push('/login');
+        },
+      });
+    },
+    [router, resetUser],
+  );
 
   const redirectToSocialLogin = async (OAuthProvider: OAuthProviderType) => {
     try {
@@ -27,19 +49,7 @@ const useUserActions = () => {
 
       router.push(data.auth_url);
     } catch (error) {
-      console.error(error);
-
-      layerPopup({
-        type: 'alert',
-        content: (
-          <>
-            오류가 발생하였습니다.
-            <br />
-            잠시 후 다시 시도해 주세요.
-          </>
-        ),
-        onConfirmClick: () => router.push('/login'),
-      });
+      handleError(error, ERROR_MESSAGES.GENERAL_ERROR);
     }
   };
 
@@ -55,89 +65,72 @@ const useUserActions = () => {
 
         if (!response.ok) throw new Error('Failed to login');
 
-        const { access_token: accessToken, user_data: user }: LoginResponseType =
-          await response.json();
-        setUser({ user, accessToken });
+        const {
+          user_data: user,
+          access_token: accessToken,
+          kakao_refresh_token: kakaoRefreshToken,
+          naver_refresh_token: naverRefreshToken,
+        }: LoginResponseType = await response.json();
+
+        setUser({ user });
+        setAccessToken({ accessToken });
+        setRefreshToken({ kakaoRefreshToken, naverRefreshToken });
+
+        setTimeout(async () => await reissueAccessToken(), EXPIRATION_TIME - 1000 * 60 * 5);
 
         router.push('/');
       } catch (error) {
-        console.error(error);
-
-        layerPopup({
-          type: 'alert',
-          content: (
-            <>
-              로그인에 실패하였습니다.
-              <br />
-              다시 시도해 주세요.
-            </>
-          ),
-          onConfirmClick: () => router.push('/login'),
-        });
+        handleError(error, ERROR_MESSAGES.LOGIN_FAILED);
       }
     },
-    [router, setUser],
+    [router, setUser, setAccessToken, setRefreshToken, handleError],
   );
 
   const logout = () => resetUser();
 
   const getUser = async () => {
-    const accessToken = getAccessToken();
+    const requestGetUser = () => {
+      const accessToken = getAccessToken();
 
-    try {
-      const response = await fetch(`${API.BASE_URL}${API.ENDPOINTS.USER.BASE}`, {
+      return fetch(`${API.BASE_URL}${API.ENDPOINTS.USER.BASE}`, {
         headers: { Authorization: `Bearer ${accessToken}` },
       });
+    };
+
+    try {
+      const response = await fetchWithAccessToken(requestGetUser);
 
       if (!response.ok) throw new Error('Failed to fetch user information');
 
       const user: UserDataType = await response.json();
       setUser({ user });
-    } catch (error) {
-      console.error(error);
-
-      layerPopup({
-        type: 'alert',
-        content: (
-          <>
-            회원 정보를 가져오는 데 실패하였습니다.
-            <br />
-            잠시 후 다시 시도해 주세요.
-          </>
-        ),
-      });
+    } catch (error: unknown) {
+      handleError(error, ERROR_MESSAGES.FETCH_USER_FAILED, false);
     }
   };
 
   const editProfile = async (userProfileData: ProfileFormType) => {
-    const accessToken = getAccessToken();
+    const requestEditProfile = () => {
+      const accessToken = getAccessToken();
 
-    try {
-      const response = await fetch(`${API.BASE_URL}${API.ENDPOINTS.USER.BASE}`, {
+      return fetch(`${API.BASE_URL}${API.ENDPOINTS.USER.BASE}`, {
         method: 'PUT',
         headers: { Authorization: `Bearer ${accessToken}`, 'Content-Type': 'application/json' },
         body: JSON.stringify(userProfileData),
       });
+    };
+
+    try {
+      const response = await fetchWithAccessToken(requestEditProfile);
 
       if (!response.ok) throw new Error('Failed to edit the profile');
 
-      const user: UserDataType = await response.json();
-      setUser({ user });
+      const userData: UserDataType = await response.json();
+      setUser({ user: userData });
 
-      layerPopup({ content: '회원 정보가 성공적으로 수정되었습니다!' });
+      layerPopup({ content: INFO_MESSAGES.EDIT_PROFILE_SUCCEEDED });
     } catch (error) {
-      console.error(error);
-
-      layerPopup({
-        type: 'alert',
-        content: (
-          <>
-            회원 정보를 수정하는 데 실패하였습니다.
-            <br />
-            잠시 후 다시 시도해 주세요.
-          </>
-        ),
-      });
+      handleError(error, ERROR_MESSAGES.EDIT_PROFILE_FAILED, false);
     }
   };
 
