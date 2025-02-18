@@ -20,5 +20,5 @@ export const middleware = (request: NextRequest) => {
 };
 
 export const config = {
-  matcher: [...membersOnlyRoutes, ...guestsOnlyRoutes],
+  matcher: ['/mypage', '/tarotReading', '/login'],
 };
