@@ -2,7 +2,8 @@ import { UserDataType } from '@/stores/userStore';
 
 export type LoginResponseType = {
   access_token: string;
-  refresh_token: string;
+  kakao_refresh_token: string;
+  naver_refresh_token: string;
   created: boolean;
   message: string;
   user_id: number;
