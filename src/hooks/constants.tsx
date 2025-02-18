@@ -34,8 +34,16 @@ export const ERROR_MESSAGES = {
       잠시 후 다시 시도해 주세요.
     </>
   ),
+  DELETE_USER_FAILED: (
+    <>
+      회원 탈퇴를 실패하였습니다.
+      <br />
+      잠시 후 다시 시도해 주세요.
+    </>
+  ),
 };
 
 export const INFO_MESSAGES = {
   EDIT_PROFILE_SUCCEEDED: '회원 정보가 성공적으로 수정되었습니다!',
+  DELETE_USER_SUCCEEDED: '회원 탈퇴가 완료되었습니다!',
 };

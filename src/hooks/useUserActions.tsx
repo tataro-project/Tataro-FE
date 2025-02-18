@@ -2,7 +2,12 @@ import { ReactNode, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 
 import useUserStore, { EXPIRATION_TIME, UserDataType } from '@/stores/userStore';
-import { fetchWithAccessToken, getAccessToken, reissueAccessToken } from '@/utils/auth';
+import {
+  fetchWithAccessToken,
+  getAccessToken,
+  getRefreshToken,
+  reissueAccessToken,
+} from '@/utils/auth';
 
 import { layerPopup } from '@common/layerPopup';
 
@@ -134,7 +139,39 @@ const useUserActions = () => {
     }
   };
 
-  return { redirectToSocialLogin, login, logout, getUser, editProfile };
+  const deleteUser = async () => {
+    const requestDeleteUser = () => {
+      const accessToken = getAccessToken();
+      const refreshToken = getRefreshToken();
+
+      return fetch(`${API.BASE_URL}${API.ENDPOINTS.USER.BASE}`, {
+        method: 'DELETE',
+        headers: { Authorization: `Bearer ${accessToken}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ refresh_token: refreshToken }),
+      });
+    };
+
+    try {
+      const response = await fetchWithAccessToken(requestDeleteUser);
+
+      if (!response.ok) throw new Error('Failed to delete the user');
+
+      const { status } = await response.json();
+
+      if (status === 'success') {
+        resetUser();
+
+        layerPopup({
+          content: INFO_MESSAGES.DELETE_USER_SUCCEEDED,
+          onConfirmClick: () => router.push('/'),
+        });
+      }
+    } catch (error) {
+      handleError(error, ERROR_MESSAGES.DELETE_USER_FAILED, false);
+    }
+  };
+
+  return { redirectToSocialLogin, login, logout, getUser, editProfile, deleteUser };
 };
 
 export default useUserActions;
