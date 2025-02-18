@@ -25,12 +25,12 @@ const MobileTabs: React.FC<{ children: React.ReactElement<TabProps>[] }> = ({ ch
               (child.props.onClick as () => void)?.();
             }}
             className={clsx(
-              'flex justify-center flex-grow py-4 border border-t-0 border-purple font-lilita text-sm text-cream stroke',
+              'flex justify-center flex-grow py-3 border border-t-0 border-purple font-lilita text-lg sm:text-2xl text-cream stroke',
               activeTab === index
                 ? 'relative -left-[7px] bottom-2 z-30 bg-softPink'
                 : 'bg-deepPink',
               activeTab === children.length - 1 ? '-left-[9px]' : '',
-              activeTab === 0 && 'last:border-l-0',
+              activeTab === 0 && children.length > 2 && 'last:border-l-0',
               activeTab === children.length - 1 && 'first:border-r-0',
             )}
           >
@@ -43,7 +43,7 @@ const MobileTabs: React.FC<{ children: React.ReactElement<TabProps>[] }> = ({ ch
 };
 
 const MobileTab: React.FC<TabProps> = ({ children }) => {
-  return <div className="w-full h-full p-6">{children}</div>;
+  return <div className="w-full h-full p-4 sm:p-6">{children}</div>;
 };
 
 export { MobileTab, MobileTabs };
