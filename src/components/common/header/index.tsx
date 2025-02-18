@@ -8,14 +8,18 @@ import { BellDot, LogIn, Menu, UserRound } from 'lucide-react';
 
 import AlarmBox from '@/components/notice/alarmBox';
 import useScreenWidth from '@/hooks/useScreenWidth';
+import useUserStore from '@/stores/userStore';
 
 import { layerCard } from '@common/layerCard';
 import Sidebar from '@common/sidebar';
 
 const Header = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const { isInit, isMobile } = useScreenWidth();
   const pathname = usePathname();
+
+  const { user } = useUserStore.getState();
+
+  const { isInit, isMobile } = useScreenWidth();
 
   if (!isInit) return null;
 
@@ -34,37 +38,42 @@ const Header = () => {
           </Link>
         )}
         <div className={clsx('flex gap-8', pathname === '/' && 'ml-auto')}>
-          <Link href="/login">
-            <LogIn
-              className={clsx('text-blueGray', isMobile ? 'w-5 h-5' : 'w-6 h-6')}
-              strokeWidth={1.5}
-              absoluteStrokeWidth
-            />
-          </Link>
-          <Link href="/mypage">
-            <UserRound
-              className={clsx(' text-blueGray', isMobile ? 'w-5 h-5' : 'w-6 h-6')}
-              strokeWidth={1.5}
-              absoluteStrokeWidth
-            />
-          </Link>
+          {user ? (
+            <>
+              <Link href="/mypage">
+                <UserRound
+                  className={clsx(' text-blueGray', isMobile ? 'w-5 h-5' : 'w-6 h-6')}
+                  strokeWidth={1.5}
+                  absoluteStrokeWidth
+                />
+              </Link>
 
-          <BellDot
-            className={clsx('text-blueGray cursor-pointer', isMobile ? 'w-5 h-5' : 'w-6 h-6')}
-            strokeWidth={1.5}
-            absoluteStrokeWidth
-            onClick={() => {
-              layerCard({
-                content: <AlarmBox />,
-                position: 'top-12 right-10',
-                size: 'max-w-[300px] h-[400px]',
-                overlay: false,
-              });
-            }}
-          >
-            {/* 알림 왔을 때 동그라미 색 표시 */}
-            <circle cx="18" cy="8" r="4" className="fill-deepPink stroke-none" />
-          </BellDot>
+              <BellDot
+                className={clsx('text-blueGray cursor-pointer', isMobile ? 'w-5 h-5' : 'w-6 h-6')}
+                strokeWidth={1.5}
+                absoluteStrokeWidth
+                onClick={() => {
+                  layerCard({
+                    content: <AlarmBox />,
+                    position: 'top-12 right-10',
+                    size: 'max-w-[300px] h-[400px]',
+                    overlay: false,
+                  });
+                }}
+              >
+                {/* 알림 왔을 때 동그라미 색 표시 */}
+                <circle cx="18" cy="8" r="4" className="fill-deepPink stroke-none" />
+              </BellDot>
+            </>
+          ) : (
+            <Link href="/login">
+              <LogIn
+                className={clsx('text-blueGray', isMobile ? 'w-5 h-5' : 'w-6 h-6')}
+                strokeWidth={1.5}
+                absoluteStrokeWidth
+              />
+            </Link>
+          )}
 
           <button onClick={() => setIsSidebarOpen(true)}>
             <Menu
