@@ -8,6 +8,7 @@ export const API = {
       REDIRECT: (OAuthProvider: OAuthProviderType) => `/user/auth/${OAuthProvider}`,
       LOGIN: (OAuthProvider: OAuthProviderType, code: string) =>
         `/user/auth/${OAuthProvider}/callback/?code=${code}`,
+      REISSUE: (OAuthProvider: OAuthProviderType) => `/user/auth/${OAuthProvider}/reissue/`,
     },
     TAROT: {
       INIT: '/tarot/init/',

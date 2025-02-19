@@ -28,8 +28,8 @@ const ProfileFormPresentation = ({ isEditMode }: ProfileFormPresentationProps) =
   if (!isInit) return <div className="grow"></div>;
 
   return (
-    <div className="flex flex-col justify-center gap-6 grow w-full overflow-y-auto">
-      <div className="flex flex-col items-start gap-2 w-full overflow-y-auto scrollbar-hide">
+    <div className="flex flex-col justify-center gap-6 w-full overflow-y-auto">
+      <div className="flex flex-col items-start gap-4 w-full overflow-y-auto scrollbar-hide">
         <TextInput
           {...register('nickname')}
           id="nickname"

@@ -14,22 +14,25 @@ export const profileFormSchema = z.object({
       message: '닉네임은 한글, 영문, 숫자, _ , - 만 입력 가능합니다.',
     }),
 
-  birthday: z.string().superRefine((value, ctx) => {
-    if (!value) {
-      ctx.addIssue({ code: z.ZodIssueCode.custom, message: '생년월일을 입력해 주세요.' });
-      return;
-    }
+  birthday: z
+    .string()
+    .nullable()
+    .superRefine((value, ctx) => {
+      if (!value) {
+        ctx.addIssue({ code: z.ZodIssueCode.custom, message: '생년월일을 입력해 주세요.' });
+        return;
+      }
 
-    const date = new Date(value);
-    const today = new Date();
+      const date = new Date(value);
+      const today = new Date();
 
-    if (date >= today) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
-        message: '생년월일은 오늘보다 이전 날짜여야 합니다.',
-      });
-    }
-  }),
+      if (date >= today) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: '생년월일은 오늘보다 이전 날짜여야 합니다.',
+        });
+      }
+    }),
 
   gender: z
     .enum(['male', 'female'], {

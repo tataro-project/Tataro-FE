@@ -17,7 +17,7 @@ const Header = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const pathname = usePathname();
 
-  const { user } = useUserStore.getState();
+  const user = useUserStore(state => state.user);
 
   const { isInit, isMobile } = useScreenWidth();
 
