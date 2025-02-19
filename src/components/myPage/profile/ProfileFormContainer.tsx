@@ -18,7 +18,7 @@ const ProfileFormContainer = () => {
   const pathname = usePathname();
   const isEditMode = pathname === '/mypage';
 
-  const { user } = useUserStore.getState();
+  const user = useUserStore(state => state.user);
   const { editProfile, deleteUser } = useUserActions();
 
   const formSchema = isEditMode ? profileFormSchema : signUpFormSchema;
