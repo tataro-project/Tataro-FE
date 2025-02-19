@@ -2,6 +2,7 @@ import { useRouter } from 'next/navigation';
 import clsx from 'clsx';
 import { FocusTrap } from 'focus-trap-react';
 import { X } from 'lucide-react';
+import { useShallow } from 'zustand/react/shallow';
 
 import useOutsideClick from '@/hooks/useOutsideClick';
 import useUserActions from '@/hooks/useUserActions';
@@ -14,7 +15,7 @@ import SIDEBAR_MENUS from './constants';
 
 const Sidebar = ({ isOpen, close }: SidebarProps) => {
   const { logout } = useUserActions();
-  const { user } = useUserStore.getState();
+  const user = useUserStore(useShallow(state => state.user));
 
   const router = useRouter();
 

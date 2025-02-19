@@ -1,5 +1,6 @@
 import { ReactNode, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
+import { useShallow } from 'zustand/react/shallow';
 
 import useUserStore, { EXPIRATION_TIME, UserDataType } from '@/stores/userStore';
 import {
@@ -17,12 +18,14 @@ import { ERROR_MESSAGES, INFO_MESSAGES } from './constants';
 import { API } from '@/api/constants';
 
 const useUserActions = () => {
-  const { setUser, resetUser, setAccessToken, setRefreshToken } = useUserStore(state => ({
-    setUser: state.setUser,
-    resetUser: state.resetUser,
-    setAccessToken: state.setAccessToken,
-    setRefreshToken: state.setRefreshToken,
-  }));
+  const { setUser, resetUser, setAccessToken, setRefreshToken } = useUserStore(
+    useShallow(state => ({
+      setUser: state.setUser,
+      resetUser: state.resetUser,
+      setAccessToken: state.setAccessToken,
+      setRefreshToken: state.setRefreshToken,
+    })),
+  );
   const router = useRouter();
 
   const handleError = useCallback(

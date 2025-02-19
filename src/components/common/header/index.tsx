@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
 import { BellDot, LogIn, Menu, UserRound } from 'lucide-react';
+import { useShallow } from 'zustand/react/shallow';
 
 import AlarmBox from '@/components/notice/alarmBox';
 import useScreenWidth from '@/hooks/useScreenWidth';
@@ -17,7 +18,7 @@ const Header = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const pathname = usePathname();
 
-  const user = useUserStore(state => state.user);
+  const user = useUserStore(useShallow(state => state.user));
 
   const { isInit, isMobile } = useScreenWidth();
 
