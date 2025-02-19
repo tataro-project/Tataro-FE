@@ -1,6 +1,7 @@
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import { usePathname } from 'next/navigation';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useShallow } from 'zustand/react/shallow';
 
 import useUserActions from '@/hooks/useUserActions';
 import useUserStore from '@/stores/userStore';
@@ -18,7 +19,7 @@ const ProfileFormContainer = () => {
   const pathname = usePathname();
   const isEditMode = pathname === '/mypage';
 
-  const user = useUserStore(state => state.user);
+  const user = useUserStore(useShallow(state => state.user));
   const { editProfile, deleteUser } = useUserActions();
 
   const formSchema = isEditMode ? profileFormSchema : signUpFormSchema;
