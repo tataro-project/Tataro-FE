@@ -1,5 +1,5 @@
 import nookies from 'nookies';
-import { createStore } from 'zustand';
+import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
 import { OAuthProviderType } from '@/app/login/types';
@@ -28,7 +28,7 @@ type UserState = {
 
 export const EXPIRATION_TIME = 1000 * 60 * 60;
 
-const useUserStore = createStore<UserState>()(
+const useUserStore = create<UserState>()(
   persist(
     set => ({
       user: null,
