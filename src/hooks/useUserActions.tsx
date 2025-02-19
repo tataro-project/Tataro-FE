@@ -2,13 +2,8 @@ import { ReactNode, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { useShallow } from 'zustand/react/shallow';
 
-import useUserStore, { EXPIRATION_TIME, UserDataType } from '@/stores/userStore';
-import {
-  fetchWithAccessToken,
-  getAccessToken,
-  getRefreshToken,
-  reissueAccessToken,
-} from '@/utils/auth';
+import useUserStore, { UserDataType } from '@/stores/userStore';
+import { fetchWithAccessToken, getAccessToken, getRefreshToken } from '@/utils/auth';
 
 import { layerPopup } from '@common/layerPopup';
 
@@ -88,8 +83,6 @@ const useUserActions = () => {
         setUser({ user });
         setAccessToken({ accessToken });
         setRefreshToken({ kakaoRefreshToken, naverRefreshToken });
-
-        setTimeout(async () => await reissueAccessToken(), EXPIRATION_TIME - 1000 * 60 * 5);
 
         router.push('/');
       } catch (error) {

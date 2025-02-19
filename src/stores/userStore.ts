@@ -2,6 +2,8 @@ import nookies from 'nookies';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
+import { reissueAccessToken } from '@/utils/auth';
+
 import { OAuthProviderType } from '@/app/login/types';
 
 export type UserDataType = {
@@ -26,7 +28,7 @@ type UserState = {
   }) => void;
 };
 
-export const EXPIRATION_TIME = 1000 * 60 * 60;
+const EXPIRATION_TIME = 1000 * 60 * 60;
 
 const useUserStore = create<UserState>()(
   persist(
@@ -70,6 +72,8 @@ const useUserStore = create<UserState>()(
               secure: true,
               sameSite: 'Lax',
             });
+
+            setTimeout(() => reissueAccessToken(), EXPIRATION_TIME - 1000 * 60 * 5);
           }
         }
       },
