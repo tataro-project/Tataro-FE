@@ -4,8 +4,8 @@ export const API = {
   BASE_URL: 'https://hakunamatatarot.com/api/v1',
   ENDPOINTS: {
     USER: {
-      BASE: '/user',
-      REDIRECT: (OAuthProvider: OAuthProviderType) => `/user/auth/${OAuthProvider}`,
+      BASE: '/user/',
+      REDIRECT: (OAuthProvider: OAuthProviderType) => `/user/auth/${OAuthProvider}/`,
       LOGIN: (OAuthProvider: OAuthProviderType, code: string) =>
         `/user/auth/${OAuthProvider}/callback/?code=${code}`,
       REISSUE: (OAuthProvider: OAuthProviderType) => `/user/auth/${OAuthProvider}/reissue/`,
