@@ -2,8 +2,9 @@ import { useEffect, useRef, useState } from 'react';
 import { ArrowUp } from 'lucide-react';
 import { twMerge } from 'tailwind-merge';
 
+import { useBeforeUnload } from '@/hooks/useBeforeUnload';
 import useScreenWidth from '@/hooks/useScreenWidth';
-import { useTarotQueries } from '@/hooks/useTarotQuries';
+import { useTarotQueries } from '@/hooks/useTarotQueries';
 import { useTarotStore } from '@/stores/tarotStore';
 
 import Button from '@common/button';
@@ -30,6 +31,8 @@ const TarotChatroom = () => {
 
   const chatEndRef = useRef<HTMLDivElement>(null);
   const hasMounted = useRef(false);
+
+  useBeforeUnload();
 
   useEffect(() => {
     if (hasMounted.current) return;
