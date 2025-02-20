@@ -4,6 +4,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import LayerCardProvider from './LayerCardProvider';
 import LayerPopupProvider from './LayerPopupProvider';
+import TokenRefreshProvider from './TokenRefreshProvider';
 
 import ProviderProps from './types';
 
@@ -13,9 +14,11 @@ const Providers = ({ children }: ProviderProps) => {
   return (
     <>
       <QueryClientProvider client={queryClient}>
-        <LayerPopupProvider>
-          <LayerCardProvider>{children}</LayerCardProvider>
-        </LayerPopupProvider>
+        <TokenRefreshProvider>
+          <LayerPopupProvider>
+            <LayerCardProvider>{children}</LayerCardProvider>
+          </LayerPopupProvider>
+        </TokenRefreshProvider>
       </QueryClientProvider>
     </>
   );
