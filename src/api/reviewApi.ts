@@ -62,7 +62,11 @@ export const getReviewDetail = async (reviewId: number) => {
   return response.json();
 };
 
-export const updateReview = async (data: { title: string; content: string; reviewId: number }) => {
+export const updateReview = async (data: {
+  title: string;
+  content: string;
+  reviewId: number | string;
+}) => {
   const accessToken = getAccessToken();
 
   const response = await fetch(
@@ -82,7 +86,7 @@ export const updateReview = async (data: { title: string; content: string; revie
   return response.json();
 };
 
-export const deleteReview = async (reviewId: number) => {
+export const deleteReview = async (reviewId: number | string) => {
   const accessToken = getAccessToken();
 
   const response = await fetch(`${API.BASE_URL}${API.ENDPOINTS.REVIEW.DELETE_REVIEW(reviewId)}`, {
