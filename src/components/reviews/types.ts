@@ -6,7 +6,7 @@ export type Submenus = {
 };
 
 export type Review = {
-  id: string | number;
+  id: number;
   title: string;
   chatlog_id: number;
   content: string;
@@ -19,6 +19,7 @@ export type Review = {
 
 export type ReviewCardProps = Review;
 
-export type ReviewDetailProps = Review & {
+export type ReviewDetailProps = {
+  review_id: number;
   close: () => void;
 };

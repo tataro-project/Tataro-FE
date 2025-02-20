@@ -4,5 +4,5 @@ export type TarotChatlogs = {
   room_id: number;
   chat_log: TarotCard[];
   created_at: string;
-  review_id: string | null;
+  review_id: number | null;
 };
