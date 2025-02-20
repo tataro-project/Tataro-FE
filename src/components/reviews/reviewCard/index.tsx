@@ -2,16 +2,18 @@ import Image from 'next/image';
 import { Eye } from 'lucide-react';
 
 import useScreenWidth from '@/hooks/useScreenWidth';
+import useLayerCardStore from '@/stores/layerCardStore';
 
-// import useLayerCardStore from '@/stores/layerCardStore';
-// import { layerCard } from '@common/layerCard';
+import { layerCard } from '@common/layerCard';
+
 import TheFool from '@images/TheFool.svg';
 
-// import ReviewDetail from '../reviewDetail';
+import ReviewDetail from '../reviewDetail';
+
 import { ReviewCardProps } from '../types';
 
 const ReviewCard: React.FC<ReviewCardProps> = ({
-  // id,
+  id,
   title,
   content,
   user_nickname,
@@ -19,14 +21,14 @@ const ReviewCard: React.FC<ReviewCardProps> = ({
   updated_at,
   view_count,
 }) => {
-  // const { hideLayerCard } = useLayerCardStore();
+  const { hideLayerCard } = useLayerCardStore();
   const { isCustomWidth } = useScreenWidth(640);
 
   const showLayerCard = () => {
-    // layerCard({
-    //   content: <ReviewDetail review_id={id} close={() => hideLayerCard()} />,
-    //   size: 'max-w-5xl max-h-[768px]',
-    // });
+    layerCard({
+      content: <ReviewDetail review_id={id} close={() => hideLayerCard()} />,
+      size: 'max-w-5xl max-h-[768px]',
+    });
   };
 
   return (

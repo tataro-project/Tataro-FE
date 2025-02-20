@@ -1,7 +1,8 @@
 import { useForm } from 'react-hook-form';
-import { useParams, useSearchParams } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import { zodResolver } from '@hookform/resolvers/zod';
 
+import { useReviewMutations } from '@/hooks/useReviewMutations';
 import useScreenWidth from '@/hooks/useScreenWidth';
 
 import Button from '@common/button';
@@ -16,16 +17,15 @@ type ReviewFormProps = {
     title: string;
     content: string;
   } | null;
+  reviewId?: number;
 };
 
-const ReviewForm = ({ mode = 'create', initialData }: ReviewFormProps) => {
+const ReviewForm = ({ mode = 'create', initialData, reviewId }: ReviewFormProps) => {
   const params = useParams();
-  const searchParams = useSearchParams();
-  const chatLogId = params.id as string;
+  const roomId = params.chatlogId as string;
   const { isInit, isCustomWidth } = useScreenWidth(640);
-
-  const initialTitle = initialData?.title || searchParams.get('title') || '';
-  const initialContent = initialData?.content || searchParams.get('content') || '';
+  const { createReviewMutation, updateReviewMutation, deleteReviewMutation } = useReviewMutations();
+  console.log(typeof roomId);
 
   const {
     register,
@@ -36,8 +36,8 @@ const ReviewForm = ({ mode = 'create', initialData }: ReviewFormProps) => {
   } = useForm<ReviewFormData>({
     resolver: zodResolver(reviewFormSchema),
     defaultValues: {
-      title: decodeURIComponent(initialTitle),
-      content: decodeURIComponent(initialContent),
+      title: initialData?.title || '',
+      content: initialData?.content || '',
     },
     mode: 'onSubmit',
   });
@@ -47,10 +47,11 @@ const ReviewForm = ({ mode = 'create', initialData }: ReviewFormProps) => {
       type: 'confirm',
       content: mode === 'create' ? '리뷰를 등록하시겠습니까?' : '리뷰를 수정하시겠습니까?',
       onConfirmClick: () => {
-        console.log('Form Data:', {
-          id: chatLogId,
-          ...data,
-        });
+        if (mode === 'create') {
+          createReviewMutation.mutate({ ...data, roomId });
+        } else if (mode === 'edit' && reviewId) {
+          updateReviewMutation.mutate({ ...data, reviewId });
+        }
       },
     });
   };
@@ -71,6 +72,16 @@ const ReviewForm = ({ mode = 'create', initialData }: ReviewFormProps) => {
 
   const handleEditorChange = (html: string) => {
     setValue('content', html);
+  };
+
+  const handleDeletebuttonClick = () => {
+    if (!reviewId) return;
+
+    layerPopup({
+      type: 'confirm',
+      content: '리뷰를 삭제하시겠습니까?',
+      onConfirmClick: () => deleteReviewMutation.mutate(reviewId),
+    });
   };
 
   if (!isInit) return null;
@@ -100,7 +111,9 @@ const ReviewForm = ({ mode = 'create', initialData }: ReviewFormProps) => {
         {mode === 'edit' && (
           <div className="flex gap-4">
             <Button type="submit">수정</Button>
-            <Button type="button">삭제</Button>
+            <Button type="button" onClick={handleDeletebuttonClick}>
+              삭제
+            </Button>
           </div>
         )}
       </form>
