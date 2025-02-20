@@ -46,7 +46,7 @@ export const createReview = async (data: { title: string; content: string; roomI
   return response.json();
 };
 
-export const getReviewDetail = async (reviewId: string) => {
+export const getReviewDetail = async (reviewId: number) => {
   const accessToken = getAccessToken();
 
   const response = await fetch(`${API.BASE_URL}${API.ENDPOINTS.REVIEW.REVIEW_DETAIL(reviewId)}`, {
@@ -62,7 +62,7 @@ export const getReviewDetail = async (reviewId: string) => {
   return response.json();
 };
 
-export const updateReview = async (data: { title: string; content: string; reviewId: string }) => {
+export const updateReview = async (data: { title: string; content: string; reviewId: number }) => {
   const accessToken = getAccessToken();
 
   const response = await fetch(
@@ -82,7 +82,7 @@ export const updateReview = async (data: { title: string; content: string; revie
   return response.json();
 };
 
-export const deleteReview = async (reviewId: string) => {
+export const deleteReview = async (reviewId: number) => {
   const accessToken = getAccessToken();
 
   const response = await fetch(`${API.BASE_URL}${API.ENDPOINTS.REVIEW.DELETE_REVIEW(reviewId)}`, {
