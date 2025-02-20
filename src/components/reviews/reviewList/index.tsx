@@ -1,5 +1,6 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
+import { paginatedReviewList } from '@/api/reviewApi';
 import Pagination from '@/components/common/pagination';
 import useScreenWidth from '@/hooks/useScreenWidth';
 
@@ -9,27 +10,16 @@ import { Review } from '../types';
 
 type ReviewListProps = {
   title: string;
-  reviews: Review[];
-  sortFunction?: (a: Review, b: Review) => number;
+  sortType: string;
 };
 
-const ReviewList: React.FC<ReviewListProps> = ({
-  title,
-  reviews,
-  sortFunction = (a, b) => b.view_count - a.view_count,
-}) => {
+const ReviewList = ({ title, sortType }: ReviewListProps) => {
   const [currentPage, setCurrentPage] = useState(1);
+  const [reviews, setReviews] = useState<Review[]>([]);
+  const [totalReviews, setTotalReviews] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const { isCustomWidth } = useScreenWidth(640);
   const perPage = 3;
-
-  const sortedReviews = useMemo(() => {
-    return [...reviews].sort(sortFunction);
-  }, [reviews, sortFunction]);
-
-  const currentReviews = useMemo(() => {
-    return sortedReviews.slice((currentPage - 1) * perPage, currentPage * perPage);
-  }, [sortedReviews, currentPage, perPage]);
 
   const handlePageChange = (newPage: number) => {
     setCurrentPage(newPage);
@@ -37,8 +27,17 @@ const ReviewList: React.FC<ReviewListProps> = ({
   };
 
   useEffect(() => {
-    //API 호출
-  }, [currentPage]);
+    const fetchData = async () => {
+      try {
+        const data = await paginatedReviewList(sortType, currentPage, perPage);
+        setReviews(data.results);
+        setTotalReviews(data.total_count);
+      } catch (error) {
+        console.error('Failed to fetch tarotChatlogs', error);
+      }
+    };
+    fetchData();
+  }, [title, sortType, currentPage]);
 
   return (
     <div
@@ -51,18 +50,18 @@ const ReviewList: React.FC<ReviewListProps> = ({
       </h1>
       <ul
         className={`
-          flex flex-col justify-start items-center  
+          flex flex-col justify-start items-center w-full 
           ${isCustomWidth ? 'min-h-[350px] gap-3' : 'min-h-[410px] gap-6'}
         `}
       >
-        {currentReviews.map(review => (
+        {reviews.map(review => (
           <ReviewCard
             key={review.id}
             id={review.id}
             chatlog_id={review.chatlog_id}
             title={review.title}
             content={review.content}
-            nickname={review.nickname}
+            user_nickname={review.user_nickname}
             created_at={review.created_at}
             updated_at={review.updated_at}
             img_url={review.img_url}
@@ -71,7 +70,7 @@ const ReviewList: React.FC<ReviewListProps> = ({
         ))}
       </ul>
       <Pagination
-        totalResults={reviews.length}
+        totalResults={totalReviews}
         currentPage={currentPage}
         setPage={handlePageChange}
         perPage={perPage}

@@ -1,14 +1,7 @@
-import { mockReviews } from '../mockData';
 import ReviewList from '../reviewList';
 
 const BestReviews = () => {
-  return (
-    <ReviewList
-      title="Best Review"
-      reviews={mockReviews}
-      sortFunction={(a, b) => b.view_count - a.view_count}
-    />
-  );
+  return <ReviewList title="Best Review" sortType="best" />;
 };
 
 export default BestReviews;
