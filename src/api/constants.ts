@@ -21,9 +21,9 @@ export const API = {
     REVIEW: {
       ALL_REVIEW: `/review/`,
       CREATE_REVIEW: `/review/`,
-      REVIEW_DETAIL: (reviewId: string) => `/review/${reviewId}/`,
-      UPDATE_REVIEW: (reviewId: string) => `/review/${reviewId}/`,
-      DELETE_REVIEW: (reviewId: string) => `/review/${reviewId}/`,
+      REVIEW_DETAIL: (reviewId: number) => `/review/${reviewId}/`,
+      UPDATE_REVIEW: (reviewId: number | string) => `/review/${reviewId}/`,
+      DELETE_REVIEW: (reviewId: number | string) => `/review/${reviewId}/`,
     },
     NOTICE: {},
     FAQ: {},

@@ -1,26 +1,26 @@
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
-// import ReviewDetail from '@/components/reviews/reviewDetail';
+import ReviewDetail from '@/components/reviews/reviewDetail';
 import useScreenWidth from '@/hooks/useScreenWidth';
+import useLayerCardStore from '@/stores/layerCardStore';
 
-// import useLayerCardStore from '@/stores/layerCardStore';
 import Button from '@common/button';
+import { layerCard } from '@common/layerCard';
 
-// import { layerCard } from '@common/layerCard';
 import { TarotChatlogs } from '../type';
 
 const ChatlogCard = ({ chat_log, room_id, created_at, review_id }: TarotChatlogs) => {
-  // const { hideLayerCard } = useLayerCardStore();
+  const { hideLayerCard } = useLayerCardStore();
   const { isCustomWidth } = useScreenWidth(640);
   const router = useRouter();
 
   const handleReviewButtonClick = () => {
     if (review_id) {
-      // layerCard({
-      //   content: <ReviewDetail review_id={review_id} close={() => hideLayerCard()} />,
-      //   size: 'max-w-5xl max-h-[768px]',
-      // });
+      layerCard({
+        content: <ReviewDetail review_id={review_id} close={() => hideLayerCard()} />,
+        size: 'max-w-5xl max-h-[768px]',
+      });
     } else {
       router.push(`/reviews/create/${room_id}`);
     }

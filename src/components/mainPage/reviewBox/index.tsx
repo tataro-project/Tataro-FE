@@ -5,18 +5,16 @@ import { createPortal } from 'react-dom';
 import Image from 'next/image';
 import { Eye } from 'lucide-react';
 
-import ReviewDetail from '@/components/reviews/reviewDetail';
-import useOutsideClick from '@/hooks/useOutsideClick';
-
-import ContentBox from '@common/contentBox';
-
+// import ReviewDetail from '@/components/reviews/reviewDetail';
+// import useOutsideClick from '@/hooks/useOutsideClick';
+// import ContentBox from '@common/contentBox';
 import TheFool from '@images/TheFool.svg';
 
 import { ReviewCardProps } from '@/components/reviews/types';
 
 const ReviewBox: React.FC<ReviewCardProps> = ({
-  id,
-  chatlog_id,
+  // id,
+  // chatlog_id,
   title,
   content,
   user_nickname,
@@ -32,7 +30,7 @@ const ReviewBox: React.FC<ReviewCardProps> = ({
     setMainEl(main);
   }, []);
 
-  const ref = useOutsideClick(() => setIsOpenDetail(false));
+  // const ref = useOutsideClick(() => setIsOpenDetail(false));
 
   return (
     <div>
@@ -62,7 +60,7 @@ const ReviewBox: React.FC<ReviewCardProps> = ({
         mainEl &&
         createPortal(
           <div className="fixed z-40 h-full w-full max-w-[1000px] max-h-[750px] p-2">
-            <ContentBox variant="layerCard" ref={ref}>
+            {/* <ContentBox variant="layerCard" ref={ref}>
               <ReviewDetail
                 id={id}
                 chatlog_id={chatlog_id}
@@ -75,7 +73,7 @@ const ReviewBox: React.FC<ReviewCardProps> = ({
                 view_count={view_count}
                 close={() => setIsOpenDetail(false)}
               />
-            </ContentBox>
+            </ContentBox> */}
           </div>,
           mainEl,
         )}
