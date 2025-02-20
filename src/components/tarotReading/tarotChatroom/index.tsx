@@ -4,7 +4,7 @@ import { twMerge } from 'tailwind-merge';
 
 import { useBeforeUnload } from '@/hooks/useBeforeUnload';
 import useScreenWidth from '@/hooks/useScreenWidth';
-import { useTarotQueries } from '@/hooks/useTarotQuries';
+import { useTarotQueries } from '@/hooks/useTarotQueries';
 import { useTarotStore } from '@/stores/tarotStore';
 
 import Button from '@common/button';
