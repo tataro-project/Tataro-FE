@@ -17,7 +17,7 @@ type ReviewFormProps = {
     title: string;
     content: string;
   } | null;
-  reviewId?: number;
+  reviewId?: string | number;
 };
 
 const ReviewForm = ({ mode = 'create', initialData, reviewId }: ReviewFormProps) => {
