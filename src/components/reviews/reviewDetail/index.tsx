@@ -15,7 +15,7 @@ const ReviewDetail: React.FC<ReviewDetailProps> = ({
   id,
   title,
   content,
-  nickname,
+  user_nickname,
   img_url,
   created_at,
   updated_at,
@@ -67,7 +67,7 @@ const ReviewDetail: React.FC<ReviewDetailProps> = ({
         </header>
 
         <div className={`flex items-center justify-between ${isCustomWidth ? 'px-4' : 'px-8'}`}>
-          <p>{nickname}</p>
+          <p>{user_nickname}</p>
           <time
             dateTime={
               updated_at || created_at

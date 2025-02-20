@@ -10,36 +10,17 @@ import Button from '@common/button';
 // import { layerCard } from '@common/layerCard';
 import { TarotChatlogs } from '../type';
 
-const ChatlogCard = ({ chat_log, room_id, created_at, is_review }: TarotChatlogs) => {
+const ChatlogCard = ({ chat_log, room_id, created_at, review_id }: TarotChatlogs) => {
   // const { hideLayerCard } = useLayerCardStore();
   const { isCustomWidth } = useScreenWidth(640);
   const router = useRouter();
 
-  // const showLayerCard = () => {
-  //   if (review) {
-  //     layerCard({
-  //       content: (
-  //         <ReviewDetail
-  //           id={review.id}
-  //           chatlog_id={id}
-  //           title={review.title}
-  //           content={review.content}
-  //           nickname={review.nickname}
-  //           img_url={TheFool}
-  //           created_at={review.created_at}
-  //           updated_at={review.updated_at}
-  //           view_count={review.view_count}
-  //           close={() => hideLayerCard()}
-  //         />
-  //       ),
-  //       size: 'max-w-5xl max-h-[768px]',
-  //     });
-  //   }
-  // };
-
   const handleReviewButtonClick = () => {
-    if (is_review) {
-      //   showLayerCard();
+    if (review_id) {
+      // layerCard({
+      //   content: <ReviewDetail review_id={review_id} close={() => hideLayerCard()} />,
+      //   size: 'max-w-5xl max-h-[768px]',
+      // });
     } else {
       router.push(`/reviews/create/${room_id}`);
     }
@@ -59,10 +40,10 @@ const ChatlogCard = ({ chat_log, room_id, created_at, is_review }: TarotChatlogs
               src={log.card_url}
               alt={log.card_name}
               width={50}
-              height={50}
+              height={87}
               className={`absolute
                 ${index === 0 ? 'left-0' : index === 1 ? 'left-4' : 'left-8'}`}
-              style={{ zIndex: index }}
+              style={{ zIndex: index, width: 'auto', height: '90%' }}
             />
           ))}
         </div>
@@ -80,11 +61,11 @@ const ChatlogCard = ({ chat_log, room_id, created_at, is_review }: TarotChatlogs
             <div className="flex items-center justify-end w-full">
               <Button
                 variant="simple"
-                isReviewed={is_review}
+                isReviewed={review_id !== null}
                 className="w-[85px] h-6 text-xs"
                 onClick={handleReviewButtonClick}
               >
-                {is_review ? '리뷰보기' : '리뷰작성'}
+                {review_id ? '리뷰보기' : '리뷰작성'}
               </Button>
             </div>
           </div>
@@ -94,7 +75,7 @@ const ChatlogCard = ({ chat_log, room_id, created_at, is_review }: TarotChatlogs
           <>
             <div className="flex flex-1 flex-col items-start justify-center h-full text-purple">
               <h2 className="font-gBold truncate text-base">챗봇 상담</h2>
-              <div className="flex flex-col items-start px-2">
+              <div className="flex flex-col items-start">
                 <p className="text-left line-clamp-2 text-sm w-full min-h-10">
                   {chat_log[0].question}
                 </p>
@@ -103,8 +84,12 @@ const ChatlogCard = ({ chat_log, room_id, created_at, is_review }: TarotChatlogs
                 </time>
               </div>
             </div>
-            <Button variant="simple" isReviewed={is_review} onClick={handleReviewButtonClick}>
-              {is_review ? '리뷰보기' : '리뷰작성'}
+            <Button
+              variant="simple"
+              isReviewed={review_id !== null}
+              onClick={handleReviewButtonClick}
+            >
+              {review_id ? '리뷰보기' : '리뷰작성'}
             </Button>
           </>
         )}

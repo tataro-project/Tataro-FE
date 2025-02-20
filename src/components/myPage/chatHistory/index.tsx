@@ -24,7 +24,6 @@ const ChatHistory = () => {
     const fetchData = async () => {
       try {
         const data = await paginatedTarotChatHistory(currentPage, perPage);
-        console.log(data);
         setTarotChatlogs(data.chat_contents);
         setTotalTarotChatlogs(data.total_count);
       } catch (error) {
@@ -55,7 +54,7 @@ const ChatHistory = () => {
             room_id={chatlog.room_id}
             chat_log={chatlog.chat_log}
             created_at={chatlog.created_at}
-            is_review={chatlog.is_review}
+            review_id={chatlog.review_id}
           />
         ))}
       </ul>

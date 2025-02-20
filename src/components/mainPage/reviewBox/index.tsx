@@ -19,7 +19,7 @@ const ReviewBox: React.FC<ReviewCardProps> = ({
   chatlog_id,
   title,
   content,
-  nickname,
+  user_nickname,
   created_at,
   updated_at,
   view_count,
@@ -45,7 +45,7 @@ const ReviewBox: React.FC<ReviewCardProps> = ({
         <div className="flex flex-1 flex-col justify-center gap-10 h-full text-purple">
           <div className="flex justify-between">
             <h2 className="text-base font-gBold">{title}</h2>
-            <p className="text-xs">{nickname}</p>
+            <p className="text-xs">{user_nickname}</p>
           </div>
 
           <p className="text-sm text-left line-clamp-2">{content}</p>
@@ -68,7 +68,7 @@ const ReviewBox: React.FC<ReviewCardProps> = ({
                 chatlog_id={chatlog_id}
                 title={title}
                 content={content}
-                nickname={nickname}
+                user_nickname={user_nickname}
                 img_url={TheFool}
                 created_at={created_at}
                 updated_at={updated_at}

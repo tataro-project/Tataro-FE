@@ -106,7 +106,7 @@ const Home = () => {
             chatlog_id={review.chatlog_id}
             title={review.title}
             content={review.content}
-            nickname={review.nickname}
+            user_nickname={review.nickname}
             created_at={review.created_at}
             updated_at={review.updated_at}
             img_url={review.img_url}

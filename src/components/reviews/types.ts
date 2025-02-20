@@ -6,11 +6,11 @@ export type Submenus = {
 };
 
 export type Review = {
-  id: number;
+  id: string | number;
   title: string;
   chatlog_id: number;
   content: string;
-  nickname: string;
+  user_nickname: string;
   created_at: string;
   updated_at: string | null;
   img_url: string;
